@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.jobtype",
+        "fields": {
+            "business_part": 1,
+            "name": "job-1",
+            "local_name": "شغل۱",
+            "description": ""
+        }
+    }
+]

@@ -1,0 +1,240 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load compress %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% compress css %}
+        <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+
+        <link href="{% static "bootstrap/css/bootstrap-theme.min.yeti.css" %}" rel="stylesheet">
+        <link href="{% static "bootstrap/css/bootstrap-rtl.css" %}" rel="stylesheet">
+        <link href="{% static "css/persianDatepicker-default.css" %}" rel="stylesheet">
+
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link href="{% static "datatables/css/demo_table.css" %}" rel="stylesheet">
+        <link href="{% static "datatables/css/demo_page.css" %}" rel="stylesheet">
+        <link href="{% static "datatables/css/datatables-rtl.css" %}" rel="stylesheet">
+        <link href="{% static "font-farsi/fonts.css" %}" rel="stylesheet">
+        <link href="{% static 'UI/alertBar/alertBar.css' %}" rel="stylesheet">
+
+        {% block css %}{% endblock %}
+    {% endcompress %}
+    {% block nocompress_css %} {% endblock %}
+</head>
+
+<body>
+<div id="body" class="row" style="margin:0px;">
+    <div class="col-lg-2 " style=" padding-right:0px; padding-left:0px; border-left: solid 1px #bbbbbb;height: 100%;
+            background: url('{% static "image/base/sidebar.png" %}') repeat scroll 0 0 #E0E0E3;"
+         id="right-panel">
+        <div class="row"
+             style="padding-top: 6px; padding-right: 10px; margin:0px; padding-bottom: 10px; padding-top: 10px; background-color: #626262;">
+            <div class="col-xs-8" style="color: #cccccc;">
+                {{ user.get_full_name }}
+            </div>
+            <div class="col-xs-4 left" style="text-align: left; padding-left: 10px;">
+                <span class="badge">3</span>
+                <img style="margin-right: 2px;" src="{% static "image/base/message.png" %}"/>
+            </div>
+        </div>
+        <div style="padding-left: 10px; padding-top: 10px; ">
+            <form class="quick_search" style="padding-right: 10px;">
+                <div class="input-group">
+                    <span class="glyphicon glyphicon-search input-group-addon">
+{#                        <span class="" />#}
+                    </span>
+                    <input class="form-control" type="text" name="search" id="search"
+                           onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"
+                           value="Quick Search">
+
+
+                </div>
+            </form>
+
+
+            <hr style="background: url('{% static "image/base/sidebar_divider.png" %}') repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+                    border: medium none;
+                    display: block;
+                    height: 2px;
+                    outline: medium none;
+                    width: 100%;"/>
+            <div class="panel-group" id="menu" style="padding-right: 10px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div id="menu-header" class="panel-title">
+                            <span>
+                            منوی کاربری
+                            </span>
+                            <span style="float:left; padding-top: 3px; ">
+                                <span id="arrow" class="glyphicon glyphicon-chevron-down"
+                                      style="font-size: 10pt;"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="menu-body" class="panel-body">
+                        <div class="row">
+                            <a href="{% url 'grant:start' %}">
+                                ثبت درخواست وام جدید
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'grant:track' %}">
+                                پیگیری درخواستها
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a>
+                                تنظیمات
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'user:logout' %}">
+                                خروج
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr style="background: url('{% static "image/base/sidebar_divider.png" %}') repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+                border: medium none;
+                display: block;
+                height: 2px;
+                outline: medium none;
+                width: 100%;"/>
+        <div style="position: absolute; bottom: 20px; width: 100%; padding-right: 0px; padding-left: 0px;"
+             class="bottom container">
+            <hr style="background: url('{% static "image/base/icn_search.png" %}') repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+                    border: medium none;
+                    display: block;
+                    height: 2px;
+                    outline: medium none;
+                    width: 100%;"/>
+            <div style="padding-right: 15px;">
+                شزکت ثامن ارتباط عصر
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-xs-10" id="content" style="direction: ltr; overflow: auto; padding-top: 10px; ">
+        <div style="direction: rtl;">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+
+
+<script src="{% static 'js/jquery-1.11.0.js' %}"></script>
+<script src="{% static 'datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/persianDatepicker.js' %}"></script>
+<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+<script>
+    $(window).ready(function () {
+        $('#content').css({'height': $(window).height()});
+        $('#right-panel').css({'height': $(window).height() + 'px'});
+
+        $(window).resize(function () {
+            $('#content').css({'height': $(window).height()});
+            $('#right-panel').css({'height': $(window).height() + 'px'});
+        })
+
+        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(
+                {
+                    autoAdd: {helpBlocks: false},
+                    submitError: function ($form, event, errors) {
+                        $(".has-error input").tooltip('show');
+                    }
+
+                }
+        );
+        $("input,select,textarea").not("[type=submit]").not('#search').each(function (obj) {
+                    if ($(this).jqBootstrapValidation("hasErrors")) {
+                        var errors = $(this).jqBootstrapValidation("collectErrors");
+
+                        var txt = new String();
+                        txt = txt.concat('<ul style="list-style:none;padding-right:1px">');
+                        for (var value in errors) {
+                            for (var i = 0; i < errors[value].length; i++) {
+                                txt = txt.concat('<li>', errors[value][i], '</li>');
+
+                            }
+
+                        }
+                        txt = txt.concat('</ul>');
+
+                        $(this).parent().addClass('has-error');
+                        $(this).tooltip({title: txt, placement: 'left', html: true});
+
+
+                    }
+                    else {
+                        $(this).parent().addClass('has-success');
+
+                    }
+                }
+        );
+
+        $("input,select,textarea").not("[type=submit]").not('#search').blur(function () {
+            $(this).parent().removeClass('has-error').removeClass('has-success');
+            $(this).tooltip('destroy');
+
+            if ($(this).jqBootstrapValidation("hasErrors")) {
+                var errors = $(this).jqBootstrapValidation("collectErrors");
+
+                var txt = new String();
+                txt = txt.concat('<ul style="list-style:none;padding-right:1px">');
+                for (var value in errors) {
+                    for (var i = 0; i < errors[value].length; i++) {
+                        txt = txt.concat('<li>', errors[value][i], '</li>');
+
+                    }
+
+                }
+                txt = txt.concat('</ul>');
+                $(this).parent().addClass('has-error');
+                $(this).tooltip({title: txt, placement: 'left', html: true});
+            }
+            else {
+                $(this).parent().addClass('has-success');
+
+            }
+        });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(window).ready(function () {
+        $('#menu-header').click(function () {
+            if ($('#menu-body').css('display') == 'none') {
+                $(this).find('#arrow').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+                $('#menu-body').show('slow');
+            }
+            else {
+                $(this).find('#arrow').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+                $('#menu-body').hide('slow');
+            }
+        });
+    });
+</script>
+{% block js %}
+{% endblock %}
+
+</html>

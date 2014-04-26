@@ -1,0 +1,54 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "melki",
+            "local_name": "ملکی"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "safte",
+            "local_name": "سفته"
+        }
+
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "cheque",
+            "local_name": "چک"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "sepordeh-boland-moddat",
+            "local_name": "سپرده بلند مدت"
+        }
+
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "govahi-sepordeh",
+            "local_name": "گواهی سپرده"
+
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "name": "saham",
+            "local_name": "سهام"
+        }
+
+    }
+]

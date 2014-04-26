@@ -1,0 +1,81 @@
+{% extends 'base_simple.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+    <div class="row form-group" style="padding-top: 10%;">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+            <div class="panel-group">
+                <div id="login_panel" class="panel panel-default panel-success">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            ورود به داشبورد رز
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="login-form" action="{% url 'user:login' %}" method="post" novalidate="">
+                            {% csrf_token %}
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="form-label col-xs-2">
+                                            نام کاربری
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input type="text" class="form-control" name="username" id="username"
+                                                   required
+                                                   maxlength="30"
+                                                   minlength="5"
+                                                   data-validation-required-message="وارد کردن نام کاربری الزامی است"
+                                                   data-validation-maxlength-message="بیش از اندازه بلند است"
+                                                   data-validation-minlength-message="بیش از اندازه کوتاه است"
+                                                    />
+                                        </div>
+                                        <div class="error-plate col-xs-2"></div>
+                                    </div>
+                                </div>
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="form-label col-xs-2">
+                                            گذر واژه
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input type="text" class="form-control" name="password" id="password"
+                                                   required
+                                                   minlength="5"
+                                                   data-validation-minlength-message="حداقل پنج کاراکتر لازم است"
+                                                   data-validation-required-message="وارد کردن این فیلد ضروری است"
+
+                                                    />
+                                        </div>
+                                    </div>
+
+                                    <div class="error-plate col-xs-3"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="row" style="text-align: center;">
+                                <button type="submit" class="btn btn-success" style="width: 90%;">
+                                    ورود
+                                </button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+  {% endblock %}

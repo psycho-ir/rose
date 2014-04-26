@@ -1,0 +1,23 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.town",
+        "fields": {
+            "name": "Tehran",
+            "local_name": "تهران",
+            "province": 1
+
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.town",
+        "fields": {
+            "name": "Karaj",
+            "local_name": "کرج",
+            "province": 2
+
+        }
+
+    }
+]

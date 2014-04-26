@@ -1,0 +1,83 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "tolid",
+            "local_name": "تولید"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "bazargani-dakheli",
+            "local_name": "بازرگانی داخلی"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "bazargani-saderat",
+            "local_name": "بازرگانی صادرات"
+        }
+    },
+
+    {
+        "pk": 4,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "bazargani-saderat",
+            "local_name": "بازرگانی واردات"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "sakhteman",
+            "local_name": "ساختمان"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "keshavarzi",
+            "local_name": "کشاورزی"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "khadamat",
+            "local_name": "خدمات"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "sanat",
+            "local_name": "صنعت"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "madan",
+            "local_name": "معدن"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "rose_config.businesspart",
+        "fields": {
+            "name": "niaz-shakhsi",
+            "local_name": "نیازهای شخصی"
+        }
+    }
+]

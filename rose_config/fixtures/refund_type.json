@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.refundtype",
+        "fields": {
+            "name": "yek-ja",
+            "local_name": "یکجا پرداخت"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.refundtype",
+        "fields": {
+            "name": "aghsati",
+            "local_name": "اقساطی"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.refundtype",
+        "fields": {
+            "name": "tadriji",
+            "local_name": "تدریجی"
+        }
+    }
+]

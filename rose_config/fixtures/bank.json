@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "saderat",
+            "local_name": "بانک صادرات"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "tejarat",
+            "local_name": "بانک تجارت"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "melli",
+            "local_name": "بانک ملی"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "mellat",
+            "local_name": "بانک ملت"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "maskan",
+            "local_name": "بانک مسکن"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "kar-afarin",
+            "local_name": "بانک کارآفرین"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "eghtesad-novin",
+            "local_name": "بانک اقتصاد نوین"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "pasargad",
+            "local_name": "بانک پاسارگاد"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "sarmaye",
+            "local_name": "بانک سرمایه"
+        }
+    }
+]

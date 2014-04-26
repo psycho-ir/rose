@@ -1,0 +1,89 @@
+import json
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.template import loader
+from django.template.context import RequestContext
+from django.utils.decorators import method_decorator
+from django.views.generic import View
+from customer.models import CustomerInformation
+from rose_config.models import config, JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
+    VasigheType, BusinessPlace
+from start_grant.models import Request, BusinessPart, RequestDescription, RequestCompleteInformation
+
+
+class StartView(View):
+    def get(self, request):
+        haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
+        hoghooghi_max_loan_amount = config.objects.get(pk='HOGHOOGHI_MAX_LOAN_AMOUNT')
+        business_parts = BusinessPart.objects.all()
+        request_descriptions = RequestDescription.objects.filter(business_parts=business_parts.first().id)
+
+        template = loader.get_template("start.html")
+        context = RequestContext(request,
+                                 {
+                                     'business_parts': business_parts, 'request_descriptions': request_descriptions,
+                                     'haghighi_max_loan_amount': haghighi_max_loan_amount,
+                                     'hoghooghi_max_loan_amount':
+                                         hoghooghi_max_loan_amount})
+        return HttpResponse(template.render(context))
+
+    def post(self, request):
+        haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
+        hoghooghi_max_loan_amount = config.objects.get(pk='HOGHOOGHI_MAX_LOAN_AMOUNT')
+
+        request = Request.from_dic(request.POST, request.user)
+        request.save()
+        return HttpResponseRedirect(reverse('grant:submit', args=(request.id,)))
+
+
+class SubmitDataView(View):
+    def get(self, request, request_id):
+        customer_request = Request.objects.get(id=request_id)
+        customer_information = CustomerInformation.objects.filter(pk=customer_request.cif).first()
+        job_types = JobType.objects.all()
+        certificate_types = JobCertificateType.objects.all()
+        provinces = Province.objects.all()
+        towns = Town.objects.filter(province_id=provinces.first().id)
+        loan_types = LoanType.objects.all()
+        refund_types = RefundType.objects.all()
+        banks = Bank.objects.all()
+        business_places = BusinessPlace.objects.all()
+        vasighe_types = VasigheType.objects.all()
+        template = loader.get_template('submit_data.html')
+        context = RequestContext(request,
+                                 {'customer_info': customer_information,
+                                  'customer_request': customer_request,
+                                  'provinces': provinces,
+                                  'towns': towns,
+                                  'job_types': job_types,
+                                  'certificate_types': certificate_types,
+                                  'loan_types': loan_types,
+                                  'refund_types': refund_types,
+                                  'banks': banks,
+                                  'vasighe_types': vasighe_types,
+                                  'business_places': business_places})
+        return HttpResponse(template.render(context))
+
+
+from django.core import serializers
+
+
+class ReqCompleteView(View):
+    def post(self, request):
+        try:
+            complete_info = RequestCompleteInformation.from_dic(request.POST)
+            complete_info.save()
+            return HttpResponse("True")
+        except Exception as e:
+            print e
+            return HttpResponse("False")
+
+
+class RequestDescriptionsView(View):
+    def get(self, request):
+        if request.GET["business_part"] is not None:
+            request_descriptions = RequestDescription.objects.filter(business_parts=request.GET["business_part"])
+            encoded = serializers.serialize('json', request_descriptions)
+            return HttpResponse(encoded)
+

@@ -1,0 +1,103 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            اطلاعات تسهیلات
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="loan_info_form" name="loan_info_form" method="post"
+              action="{% url 'grant:complete_request' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="request_id" value="{{ customer_request.id }}">
+
+            <div class="control-group">
+                <div class="row">
+                    <div class="col-xs-2">
+                        مبلغ تسهیلات
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" value="{{ customer_request.request_amount }}"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="col-xs-2">
+                        نوع تسهیلات
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="loan_type_id">
+                            {% for loan_type in loan_types %}
+                                <option value="{{ loan_type.id }}">{{ loan_type.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        مدت بازپرداخت
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="refund_duration">
+                            <option value="1">۳۶ ماه</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        مبلغ پیش پرداخت / سهم الشرکه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="prepayed_amount"
+                               value="{{ customer_request.complete_information.prepayed_amount }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        محل مصرف
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" value="{{ customer_request.business_part.local_name }}"
+                               readonly="readonly"/>
+                    </div>
+                    <div class="col-xs-2">
+                        هدف از دریافت تسهیلات
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control"
+                               value="{{ customer_request.request_description.local_name }}" readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        تعداد اقساط
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="number_of_installments"
+                               value="{{ customer_request.complete_information.number_of_installments }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                    <div class="col-xs-2">
+                        نحوه بازپرداخت
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="refund_type_id" id="refund_type_id"
+                                value="{{ customer_request.complete_information.refund_type_id }}">
+                            {% for refund_type in refund_types %}
+                                <option value="{{ refund_type.id }}">{{ refund_type.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="loan_info_button" class="btn btn-success">ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

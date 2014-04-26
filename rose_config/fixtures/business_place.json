@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.businessplace",
+        "fields": {
+            "name": "melki",
+            "local_name": "ملکی"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.businessplace",
+        "fields": {
+            "name": "estijari",
+            "local_name": "استجاری"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.businessplace",
+        "fields": {
+            "name": "sarghofli",
+            "local_name": "سر قفلی"
+        }
+    }
+]

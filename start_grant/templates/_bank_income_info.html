@@ -1,0 +1,116 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            بانک ها و درآمد
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="bank_income_form" name="bank_income_form" method="post"
+              action="{% url 'customer:bank_income_info' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
+
+            <div class="control-group">
+                <div class="row">
+                    <div class="col-xs-2">
+                        بانکهای طرف معامله
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            {% for bank in banks %}
+                                <div class="col-xs-3">
+                                    <input type="checkbox" name="banks" value="{{ bank.id }}">
+                                    {{ bank.local_name }}
+                                    </input>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        درآمد ماهیانه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="income"
+                               value="{{ customer_info.bank_income_info.income }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        وثایق پیشنهادی
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            {% for vasighe in vasighe_types %}
+                                <div class="col-xs-3">
+                                    <input type="checkbox" name="vasighe_types" value="{{ vasighe.id }}">
+                                    {{ vasighe.local_name }}
+                                    </input>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5" style="font-weight: bold;">
+                        سند ملکی
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        شماره سند
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="sanad_no"
+                               value="{{ customer_info.bank_income_info.sanad_melki_info.sanad_no }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+                    <div class="col-xs-2">
+                        نام مالک
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="owner_name"
+                               value="{{ customer_info.bank_income_info.sanad_melki_info.owner_name }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        ارزش فعلی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" name="current_value" class="form-control"
+                               value="{{ customer_info.bank_income_info.sanad_melki_info.current_value }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                    <div class="col-xs-2">
+                        آدرس
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" name="address" class="form-control"
+                               value="{{ customer_info.bank_income_info.sanad_melki_info.address }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="bank_income_info_button" class="btn btn-success">
+                        ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

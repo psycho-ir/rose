@@ -1,0 +1,82 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "gharzolhasane",
+            "local_name": "قرض الحسنه"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "foroosh-aghsati",
+            "local_name": "فروش اقساطی"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "jaale",
+            "local_name": "جعاله"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "mosharekat-madani",
+            "local_name": "مشارکت مدنی"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "mozarebe",
+            "local_name": "مضاربه"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "ejare-be-shart-tamlik",
+            "local_name": "اجاره به شرط تملیک"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "kharid-dein",
+            "local_name": "خرید دین"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "salaf",
+            "local_name": "سلف"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "mozare",
+            "local_name": "مزارعه"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "mosaghat",
+            "local_name": "مساقات"
+        }
+    }
+]

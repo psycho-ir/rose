@@ -1,0 +1,19 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.province",
+        "fields": {
+            "name": "Tehran",
+            "local_name": "تهران"
+
+        },
+        "pk": 2,
+        "model": "rose_config.province",
+        "fields": {
+            "name": "Alborz",
+            "local_name": "البرز"
+
+        }
+
+    }
+]

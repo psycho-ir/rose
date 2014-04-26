@@ -1,0 +1,9 @@
+django
+cx_oracle
+South
+djangorestframework
+django-filter
+django_compressor
+jdatetime
+
+

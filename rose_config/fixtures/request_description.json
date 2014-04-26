@@ -1,0 +1,47 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.requestdescription",
+        "fields": {
+            "name": "Sarmaye-Gardesh",
+            "local_name": "سرمایه در گردش",
+            "business_parts": [1, 2, 3]
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.requestdescription",
+        "fields": {
+            "name": "Sarmaye-Sabet",
+            "local_name": "سرمایه ثابت",
+            "business_parts": [1, 2, 3]
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.requestdescription",
+        "fields": {
+            "name": "Tamin-Lavazem-Manzel",
+            "local_name": "تامین لوازم منزل",
+            "business_parts": [1, 2, 3]
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.requestdescription",
+        "fields": {
+            "name": "Kharid-Khodro",
+            "local_name": "خرید خودرو",
+            "business_parts": [1, 2, 3]
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.requestdescription",
+        "fields": {
+            "name": "Ehdas-Sakhteman",
+            "local_name": "احداث ساختمان",
+            "business_parts": [1, 2, 3]
+        }
+    }
+]

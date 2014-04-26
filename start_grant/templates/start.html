@@ -1,0 +1,309 @@
+{% extends 'base_dashboard.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading ">
+                <div class="panel-title">
+                    درخواست تسهیلات جدید
+                </div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="{% url 'grant:start' %}" novalidate>
+                    {% csrf_token %}
+                    {#                    <div class="form-group">#}
+                    <div class="form-group control-group">
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                نوع مشتری
+                            </div>
+                            <div class="col-xs-4">
+                                <select id="customer_type" name="type" style="width:100%;" class="dropdown">
+                                    <option value="haghighi">حقیقی</option>
+                                    <option value="hoghooghi">حقوقی</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4"></div>
+                        </div>
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                کد ملی / شناسه حقوقی
+                            </div>
+                            <div class="col-xs-4">
+                                <input class="form-control" name="cif" id="cif"
+                                       pattern="^[0-9]*$"
+                                       maxlength="12"
+                                       minlength="8"
+                                       data-validation-required-message="وارد کردن نام الزامی است"
+                                       data-validation-maxlength-message="بیش از اندازه بلند است"
+                                       data-validation-minlength-message="بیش از اندازه کوتاه است"
+                                       required/>
+                            </div>
+                            <div class="col-xs-1" style="padding-top: 10px; padding-right: 0px;padding-left: 15px;">
+                                <span id="check_cif" class="glyphicon glyphicon-check has-error"></span>
+                            </div>
+                            <div class="col-xs-1" style="padding-top: 10px; padding-right: 0px;"
+                                 id="check_cif_loader"></div>
+                        </div>
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                شماره حساب
+                            </div>
+                            <div class="col-xs-4">
+                                <input class="form-control" name="deposit_number" id="deposit_number"
+                                       pattern="^[0-9]*[.][0-9]*$"
+                                       maxlength="16"
+                                       minlength="10"
+                                       data-validation-pattern-message="فرمت شماره حساب صحیح نمی باشد"
+                                       data-validation-required-message="وارد کردن شماره حساب الزامی است"
+                                       data-validation-maxlength-message="بیش از اندازه بلند است"
+                                       data-validation-minlength-message="بیش از اندازه کوتاه است"
+                                       required/>
+                            </div>
+                            <div class="col-xs-1" style="padding-top: 10px; padding-right: 0px; padding-left:0;">
+                                <span id="check_deposit_number" class="glyphicon glyphicon-check has-error"></span>
+                            </div>
+                            <div id="check_deposit_loader" class="col-xs-1"
+                                 style="padding-top: 10px; padding-right: 0px;">
+
+                            </div>
+                        </div>
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                آیا تا کنون تسهیلات از این موسسه دریافت نموده اید؟
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="btn-group btn-group-lg ">
+                                    <button type="button" id="yes" value="True" class="btn btn-default">بله</button>
+                                    <button type="button" id="no" value="False" class="btn btn-default">خیر</button>
+                                    <input type="hidden" id="has_loan_from_current_bank"
+                                           name="has_loan_from_current_bank"
+                                           value="False"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                نوع درخواست بخش اقتصادی
+
+                            </div>
+                            <div class="col-xs-4">
+                                <select style="width:100%;" class="dropdown" name="business_part" id="business_part">
+                                    {% for business_part in business_parts %}
+                                        <option value="{{ business_part.id }}">{{ business_part.local_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                شرح درخواست
+                            </div>
+                            <div class="col-xs-4">
+                                <select style="width:100%;" class="dropdown" name="request_description"
+                                        id="request_description">
+                                    {% for request_description in request_descriptions %}
+                                        <option value="{{ request_description.id }}">{{ request_description.local_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div id="request_description_loader" class="col-xs-1">
+
+                            </div>
+                        </div>
+                        <div class="row controls">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-5">
+                                مبلغ درخواستی
+                            </div>
+                            <div class="col-xs-4">
+                                <input type="number" class="form-control" name="request_amount" id="request_amount"
+                                       pattern="^[0-9]+$"
+                                       maxlength="20"
+                                       minlength="6"
+                                       data-validation-pattern-message="فرمت مبلغ صحیح نمی باشد"
+                                       data-validation-required-message="وارد کردن مبلغ الزامی است"
+                                       data-validation-maxlength-message="بیش از اندازه بلند است"
+                                       data-validation-minlength-message="بیش از اندازه کوتاه است"
+                                       required
+                                        />
+                            </div>
+                        </div>
+
+                        {# todo: if it is about current user we don't need to show them here! #}
+                        <div class="row">
+                            <div class="col-xs-5">
+
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="submit" id="submit" class="btn btn-success form-control">
+                                    ادامه
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+            </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+
+        function load_request_descriptions(business_part_id) {
+            var result = null;
+            $('#request_description_loader').html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
+            $.ajax({
+                url: function () {
+                    return '{% url 'grant:request_description' %}/?business_part=' + business_part_id;
+                }(),
+                complete: function () {
+                    $('#request_description_loader').empty();
+                }
+
+            }).done(function (data) {
+                result = JSON.parse(data);
+                $('#request_description').empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $('#request_description').append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
+                }
+            });
+        }
+        ;
+
+        $('#business_part').change(function () {
+            load_request_descriptions($(this).val());
+        })
+
+        function create_cif_check_url() {
+            var url = '{% url 'core:is_customer_valid' 0 %}';
+            return url.substr(0, url.length - 1) + $('#cif').val();
+        }
+
+
+        function create_deposit_check_url() {
+            var url = '{% url "core:is_deposit_valid"  0 0 0 %}';
+            return url.substr(0, url.length - 5) + parseInt($('#cif').val()).toString() + '-' + $('#deposit_number').val().replace('.', '-');
+        }
+        function check_cif() {
+            $('#check_cif_loader').html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
+            $.ajax({
+                url: create_cif_check_url(),
+                complete: function () {
+                    $('#check_cif_loader').empty();
+                }
+
+            }).done(function (data) {
+                showResult('#check_cif', data);
+                $('#check_cif_loader').empty();
+            });
+        }
+
+        function showResult(element, data) {
+            if (data == 'True') {
+                $(element).css({'color': '#00ff00'}).removeClass('has-error');
+            }
+            else {
+                $(element).css({'color': '#ff0000'}).addClass('has-error');
+            }
+        }
+
+        function check_deposit_number() {
+            $('#check_deposit_loader').html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
+            $.ajax({
+                url: create_deposit_check_url(),
+                complete: function () {
+                    $('#check_deposit_loader').empty();
+                }
+
+            }).done(function (data) {
+                showResult('#check_deposit_number', data);
+                $('#check_deposit_loader').empty();
+            })
+        }
+
+        $(window).ready(function () {
+            $('.btn').not('[type=submit]').click(function () {
+                $(this).siblings().each(function (obj) {
+                    $(this).css({'color': '#000000'});
+                });
+                $(this).css({'color': '#ff0000'});
+                $('#has_loan_from_current_bank').val($(this).val());
+            });
+
+            $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}')
+
+            $('#cif').focusout(function () {
+                check_cif();
+            });
+
+            $('#deposit_number').focusout(function () {
+                check_deposit_number();
+            });
+
+            $('#check_cif').click(function () {
+                check_cif();
+            });
+
+
+            $('#check_deposit_number').click(function () {
+                check_deposit_number();
+            });
+
+
+            $('[type=submit]').click(function () {
+                if ($('#check_deposit_number').hasClass('has-error') || $('#check_cif').hasClass('has-error')) {
+                    window.alert("ابتدا میبایست شماره حساب و کد ملی صحیح وارد نمایید");
+                    return false;
+                }
+                var req_amount = $('#request_amount');
+
+                if (parseFloat(req_amount.val()) > parseFloat(req_amount.attr('max'))) {
+                    window.alert('حد اکثر مبلغ درخواستی قابل قبول ' + req_amount.attr('max') + ' میباشد.');
+                    return false;
+                }
+                return true;
+            });
+
+            $('#customer_type').change(function (v, y) {
+                type = $(this).val();
+                if (type == "haghighi") {
+                    $('#request_amount').attr('max', '{{ haghighi_max_loan_amount.value }}');
+                }
+                else {
+                    $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}');
+                }
+
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,70 @@
+[
+    {
+        "pk": "HAGHIGHI_MAX_LOAN_AMOUNT",
+        "model": "rose_config.config",
+        "fields": {
+            "name": "HAGHIGHI_MAX_LOAN_AMOUNT",
+            "description": "",
+            "value": "2000000000"
+        }
+
+    },
+    {
+        "pk": "HOGHOOGHI_MAX_LOAN_AMOUNT",
+        "model": "rose_config.config",
+        "fields": {
+            "name": "HOGHOOGHI_MAX_LOAN_AMOUNT",
+            "description": "",
+            "value": "20000000000"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "rose_config.Province",
+        "fields": {
+            "name": "Tehran",
+            "local_name": "تهران",
+            "description": "",
+            "enable": true
+
+        }
+    },
+    {
+        "pk": 1,
+        "model": "rose_config.Town",
+        "fields": {
+            "name": "Tehran",
+            "local_name": "تهران",
+            "description": "",
+            "enable": true,
+            "province": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "name": "Javaz",
+            "local_name": "جواز کسب",
+            "description": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "name": "Govahi",
+            "local_name": "گواهینامه فنی حرفه ای",
+            "description": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "name": "Eshteghal-be-kar",
+            "local_name": "نامه اشتغال به کار",
+            "description": ""
+        }
+    }
+]
