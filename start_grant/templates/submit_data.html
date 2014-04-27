@@ -246,6 +246,29 @@
 
             });
 
+            $('#loan_type').change(function () {
+                alert('called');
+                var depend_id = '#' + $(this).attr('depend');
+                var loan_type_id = $(this).val();
+                $.ajax({
+                    url: function () {
+                        return '{% url 'config:refund_type' '' %}' + loan_type_id
+                    }(),
+                }).done(function (data) {
+                    var result = JSON.parse(data);
+                    $(depend_id).empty();
+                    for (var _item in result) {
+                        var item = result[_item]
+                        if ((typeof (item) == 'object')) {
+                            $(depend_id).append($('<option>', {
+                                value: item.pk,
+                                text: item.fields.local_name
+                            }));
+                        }
+                    }
+                })
+            })
+
             $('.province').change(function () {
                 var depend_id = '#' + $(this).attr('depend');
                 var province_id = $(this).val();
@@ -272,7 +295,7 @@
                 });
             });
 
-            $('.province').each(function () {
+            $('select').each(function () {
                 var value = $(this).attr('value');
                 if (value) {
                     $(this).val(value);
