@@ -4,7 +4,8 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "gharzolhasane",
-            "local_name": "قرض الحسنه"
+            "local_name": "قرض الحسنه",
+            "refund_types":[1,2]
         }
     },
     {

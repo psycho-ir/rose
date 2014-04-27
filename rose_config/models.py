@@ -29,18 +29,20 @@ class RequestDescription(models.Model):
     business_parts = models.ManyToManyField(to=BusinessPart, db_constraint=True,
                                             related_name='request_descriptions')
 
-class LoanType(models.Model):
-    name = models.CharField(max_length=50)
-    local_name = models.CharField(max_length=50)
-    description = models.CharField(max_length=60, default="")
-    enable = models.BooleanField(default=True)
-
 
 class RefundType(models.Model):
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60)
     enable = models.BooleanField(default=True)
+
+
+class LoanType(models.Model):
+    name = models.CharField(max_length=50)
+    local_name = models.CharField(max_length=50)
+    description = models.CharField(max_length=60, default="")
+    enable = models.BooleanField(default=True)
+    refund_types = models.ManyToManyField(RefundType)
 
 
 class Town(models.Model):
