@@ -87,39 +87,43 @@
              {% endif %}
 
              rose-progress-bar-cell" id="loan_info">
-                <div class="col-xs-8">
-                    اطلاعات تسهیلات
-                </div>
-                <div id="loan_info_state" class="col-xs-1">
-                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                <div class="row">
+                    <div class="col-xs-8">
+                        اطلاعات تسهیلات
+                    </div>
+                    <div id="loan_info_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
                                 {% if not customer_request.complete_information %}
                                     display: none;
                                 {% endif %}
                                 "></span>
-                </div>
-                <div id="loan_info_loader" class="col-xs-1">
+                    </div>
+                    <div id="loan_info_loader" class="col-xs-1">
+                    </div>
                 </div>
             </div>
             <div class="col-xs-2
-             {% if customer_request.debit_credit_information %}
+             {% if customer_info.asset_info %}
              completed
              {% else %}
              pending
              {% endif %}
              rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">
-                <div class="col-xs-9">
-                    دارایی ها و بدهی ها
-                </div>
-                <div id="asset_info_state" class="col-xs-1">
-                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                <div class="row">
+                    <div class="col-xs-9">
+                        دارایی ها و بدهی ها
+                    </div>
+                    <div id="asset_info_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_request.debit_credit_information %}
+                                {% if not customer_info.asset_info %}
                                     display: none;
                                 {% endif %}
                                 "></span>
-                </div>
-                <div id="asset_info_loader" class="col-xs-1">
+                    </div>
+                    <div id="asset_info_loader" class="col-xs-1">
+                    </div>
                 </div>
             </div>
             <div class="col-xs-2
@@ -130,18 +134,20 @@
              {% endif %}
 
              rose-progress-bar-cell" id="bank_income_info">
-                <div class="col-xs-9">
-                    بانکها و درآمد
-                </div>
-                <div id="bank_income_state" class="col-xs-1">
-                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                <div class="row">
+                    <div class="col-xs-9">
+                        بانکها و درآمد
+                    </div>
+                    <div id="bank_income_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
                                 {% if not customer_info.bank_income_info %}
                                     display: none;
                                 {% endif %}
                                 "></span>
-                </div>
-                <div id="bank_income_loader" class="col-xs-1">
+                    </div>
+                    <div id="bank_income_loader" class="col-xs-1">
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,7 +193,14 @@
 
 {% block js %}
     <script type="text/javascript">
+        function check_for_showing_next_level() {
+            if ($('.pending').length == 0) {
+                $('#next_level').show('slow');
+
+            }
+        }
         $(window).ready(function () {
+            check_for_showing_next_level();
             $('#birth_date,#birth_date_span').persianDatepicker();
             $('.rose-progress-bar-cell').click(function () {
                 var cell = $(this)
@@ -215,10 +228,7 @@
                                         $('#' + state_id + ' #failed').hide();
                                         $('#' + state_id + ' #ok').show();
                                         $('#' + state_id).parent().parent().removeClass('pending').addClass('completed')
-                                        if ($('.pending').length == 0) {
-                                            $('#next_level').show('slow');
-
-                                        }
+                                        check_for_showing_next_level();
                                     }
                                     else {
                                         $('#' + state_id + ' #failed').show();
