@@ -58,14 +58,26 @@ class BankIncomeView(View):
     @transaction.atomic()
     def post(self, request):
         try:
+            vasighes = request.POST.getlist('vasighe_types')
+            if len(vasighes) == 0:
+                print "There is no selected vasighe_type"
+                return HttpResponse("False")
+
+            banks = request.POST.getlist('banks')
+
+            if len(banks) == 0:
+                print "There is no selected bank"
+                return HttpResponse("False")
+
             maskan_vasighe_type = VasigheType.objects.filter(name='melki').first()
             sanad = None
-            if str(maskan_vasighe_type.id) in request.POST.getlist('vasighe_types'):
+            if str(maskan_vasighe_type.id) in vasighes:
                 sanad = SanadMelkiInformation.from_dic(request.POST)
                 sanad.save()
             bank_income = BankIncomeInformation.from_dic(request.POST, sanad)
             bank_income.save()
-            SanadMelkiInformation.objects.exclude(bankincomeinformation__in=BankIncomeInformation.objects.all()).delete()
+            SanadMelkiInformation.objects.exclude(
+                bankincomeinformation__in=BankIncomeInformation.objects.all()).delete()
             return HttpResponse("True")
 
         except Exception as e:
