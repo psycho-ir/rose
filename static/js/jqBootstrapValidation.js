@@ -813,7 +813,7 @@
 				name: "Number",
 				type: "regex",
 				regex: "([+-]?\\\d+(\\\.\\\d*)?([eE][+-]?[0-9]+)?)?",
-				message: "Must be a number<!-- data-validator-number-message to override -->"
+				message: "عدد وارد نمایید<!-- data-validator-number-message to override -->"
 			},
 			integer: {
 				name: "Integer",
