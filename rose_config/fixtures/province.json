@@ -1,19 +1,259 @@
 [
+
     {
-        "pk": 1,
         "model": "rose_config.province",
+        "pk": "3",
         "fields": {
-            "name": "Tehran",
-            "local_name": "تهران"
-
-        },
-        "pk": 2,
-        "model": "rose_config.province",
-        "fields": {
-            "name": "Alborz",
-            "local_name": "البرز"
-
+            "name": "خراسان رضوي",
+            "local_name": "خراسان رضوي"
         }
-
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "31",
+        "fields": {
+            "name": "سيستان و بلوچستان",
+            "local_name": "سيستان و بلوچستان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "4",
+        "fields": {
+            "name": "کهکيلويه و بوير احمد",
+            "local_name": "کهکيلويه و بوير احمد"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "32",
+        "fields": {
+            "name": "آذربايجان شرقي",
+            "local_name": "آذربايجان شرقي"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "5",
+        "fields": {
+            "name": "چهار محال بختياري",
+            "local_name": "چهار محال بختياري"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "6",
+        "fields": {
+            "name": "زنجان",
+            "local_name": "زنجان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "7",
+        "fields": {
+            "name": "کردستان",
+            "local_name": "کردستان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "8",
+        "fields": {
+            "name": "خارج از کشور",
+            "local_name": "خارج از کشور"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "9",
+        "fields": {
+            "name": "اردبيل",
+            "local_name": "اردبيل"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "10",
+        "fields": {
+            "name": "قم",
+            "local_name": "قم"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "11",
+        "fields": {
+            "name": "قزوين",
+            "local_name": "قزوين"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "12",
+        "fields": {
+            "name": "تهران",
+            "local_name": "تهران"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "13",
+        "fields": {
+            "name": "هرمزگان",
+            "local_name": "هرمزگان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "14",
+        "fields": {
+            "name": "مرکزي",
+            "local_name": "مرکزي"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "15",
+        "fields": {
+            "name": "مازندران",
+            "local_name": "مازندران"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "16",
+        "fields": {
+            "name": "کرمانشاه",
+            "local_name": "کرمانشاه"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "17",
+        "fields": {
+            "name": "گيلان",
+            "local_name": "گيلان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "18",
+        "fields": {
+            "name": "خراسان جنوبي",
+            "local_name": "خراسان جنوبي"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "19",
+        "fields": {
+            "name": "بوشهر",
+            "local_name": "بوشهر"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "20",
+        "fields": {
+            "name": "خوزستان",
+            "local_name": "خوزستان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "21",
+        "fields": {
+            "name": "آذربايجان غربي",
+            "local_name": "آذربايجان غربي"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "22",
+        "fields": {
+            "name": "ايلام",
+            "local_name": "ايلام"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "23",
+        "fields": {
+            "name": "فارس",
+            "local_name": "فارس"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "24",
+        "fields": {
+            "name": "خراسان شمالي",
+            "local_name": "خراسان شمالي"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "25",
+        "fields": {
+            "name": "سمنان",
+            "local_name": "سمنان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "26",
+        "fields": {
+            "name": "گلستان",
+            "local_name": "گلستان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "27",
+        "fields": {
+            "name": "اصفهان",
+            "local_name": "اصفهان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "28",
+        "fields": {
+            "name": "همدان",
+            "local_name": "همدان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "29",
+        "fields": {
+            "name": "لرستان",
+            "local_name": "لرستان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "1",
+        "fields": {
+            "name": "کرمان",
+            "local_name": "کرمان"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "30",
+        "fields": {
+            "name": "يزد",
+            "local_name": "يزد"
+        }
+    },
+    {
+        "model": "rose_config.province",
+        "pk": "2",
+        "fields": {
+            "name": "البرز",
+            "local_name": "البرز"
+        }
     }
 ]
