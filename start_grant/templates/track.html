@@ -24,7 +24,6 @@
             {% endif %}">{% endcomment %}
                     <td>{{ request.id }}</td>
                     <td>{{ request.cif }}</td>
-                    <td>{{ request.user.get_full_name }}</td>
                     <td>
                         {% if request.type == 'haghighi' %}
                             حقیقی
@@ -32,6 +31,7 @@
                             حقوقی
                         {% endif %}
                     </td>
+                    <td>{{ request.user.get_full_name }}</td>
                     <td>{{ request.business_part.local_name }}</td>
                     <td>{{ request.request_description.local_name }}</td>
                     <td>{% if request.status == 'intro' %}
@@ -62,9 +62,9 @@
             });
 
             $('#requests').dataTable({
-                bPaginate:false,
+                bPaginate: false,
                 bFilter: false,
-                bInfo:false
+                bInfo: false
             });
         });
 
