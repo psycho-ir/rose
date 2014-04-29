@@ -252,7 +252,7 @@
                 $.ajax({
                     url: function () {
                         return '{% url 'config:refund_type' '' %}' + loan_type_id
-                    }(),
+                    }()
                 }).done(function (data) {
                     var result = JSON.parse(data);
                     $(depend_id).empty();
@@ -291,58 +291,59 @@
                             }));
                         }
                     }
-                });
-            });
-
-            $('select').each(function () {
-                var value = $(this).attr('value');
-                if (value) {
-                    $(this).val(value);
-                    $(this).change();
-                }
-            });
-
-            $('select').each(function () {
-                var value = $(this).attr('value');
-                if (value) {
-                    $(this).val(value);
-                    $(this).change();
-                }
-            });
-
-            var selected_banks = [
-                {% for bank in  customer_info.bank_income_info.banks.all %}
-                    '{{  bank.id }}',
-                {% endfor %}
-            ];
-
-            $('[name=banks]').not('[type!=checkbox]').each(function () {
-
-                var item = $(this);
-                var found = $.inArray(item.val(), selected_banks) > -1;
-                if (found) {
-                    item.attr('checked', 'checked');
-                }
-            });
-
-            var selected_vasighes = [
-                {% for vasighe in  customer_info.bank_income_info.vasighe_types.all %}
-                    '{{  vasighe.id }}',
-                {% endfor %}
-            ];
-
-            $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
-
-                var item = $(this);
-                var found = $.inArray(item.val(), selected_vasighes) > -1;
-                if (found) {
-                    item.attr('checked', 'checked');
-                }
-
+                    var value = $(depend_id).attr('value');
+                    console.log(depend_id);
+                    if (value) {
+                        $(depend_id).val(value);
+                        $(depend_id).change();
+                    }
 
             });
+        });
+
+        $('select').each(function () {
+            var value = $(this).attr('value');
+            if (value) {
+                $(this).val(value);
+                $(this).change();
+            }
+        });
+
+
+        var selected_banks = [
+            {% for bank in  customer_info.bank_income_info.banks.all %}
+                '{{  bank.id }}',
+            {% endfor %}
+        ];
+
+        $('[name=banks]').not('[type!=checkbox]').each(function () {
+
+            var item = $(this);
+            var found = $.inArray(item.val(), selected_banks) > -1;
+            if (found) {
+                item.attr('checked', 'checked');
+            }
+        });
+
+        var selected_vasighes = [
+            {% for vasighe in  customer_info.bank_income_info.vasighe_types.all %}
+                '{{  vasighe.id }}',
+            {% endfor %}
+        ];
+
+        $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
+
+            var item = $(this);
+            var found = $.inArray(item.val(), selected_vasighes) > -1;
+            if (found) {
+                item.attr('checked', 'checked');
+            }
 
 
         });
+
+
+        })
+        ;
     </script>
 {% endblock %}

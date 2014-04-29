@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from customer.models import CUSTOMER_TYPE
+from customer.models import CUSTOMER_TYPE, CustomerInformation
 import datetime
 from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType
 
@@ -21,6 +21,7 @@ class Request(models.Model):
     has_loan_from_current_bank = models.BooleanField(default=True)
     request_amount = models.BigIntegerField(default=1000000)
     status = models.CharField(max_length=50, default='intro')
+    guarantors = models.ManyToManyField(to=CustomerInformation, related_name='guaranted_requests')
 
     @staticmethod
     def from_dic(dic, user):

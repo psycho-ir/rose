@@ -11,7 +11,7 @@
             <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
 
             <div class="control-group">
-                <div class="row">
+                <div class="row controls">
                     <div class="col-xs-2">
                         شفل
                     </div>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select style="width: 100%;" name="job_town_id" id="job_town_id"
-                                value="{{ job_info.job_town_id }}">
+                                value="{{ customer_info.job_info.job_town_id }}">
                             {#                        <option value="1">تهران</option>#}
                         </select>
                     </div>

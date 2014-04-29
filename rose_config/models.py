@@ -13,6 +13,11 @@ class Province(models.Model):
     description = models.CharField(max_length=60, default="")
     enable = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['local_name']
+
+
+
 
 class BusinessPart(models.Model):
     name = models.CharField(max_length=50)
@@ -46,6 +51,9 @@ class LoanType(models.Model):
 
 
 class Town(models.Model):
+    class Meta:
+        ordering = ['local_name']
+
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60)

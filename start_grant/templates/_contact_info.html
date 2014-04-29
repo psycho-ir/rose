@@ -11,7 +11,7 @@
             <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
 
             <div class="control-group">
-                <div class="row">
+                <div class="row controls">
                     <div class="col-xs-2">
                         استان
                     </div>
@@ -29,7 +29,7 @@
                         شهرستان
                     </div>
                     <div class="col-xs-3">
-                        <select name="town_id" value="{{ contact_info.town_id }}" id="contact_town_id"
+                        <select name="town_id" value="{{ customer_info.contact_info.town_id }}" id="contact_town_id"
                                 style="width: 100%;">
                         </select>
                     </div>
