@@ -9,18 +9,10 @@
               action="{% url 'customer:customer_info' %}" novalidate>
             {% csrf_token %}
 
-            <input type="hidden" name="type" value="{{ customer_type }}"/>
+            <input type="hidden" name="type" value="{{ customer_type }}" />
+            <input type="hidden" name="national_number" value="{{ customer_id }}" />
 
             <div class="control-group">
-                <div class="row controls">
-                    <div class="col-xs-2">
-                        کد ملی
-                    </div>
-                    <div class="col-xs-3">
-                        <input type="number" class="form-control" name="national_number"
-                               value="{{ customer.national_number }}" required>
-                    </div>
-                </div>
                 <div class="row controls">
                     <div class="col-xs-2">
                         نام
