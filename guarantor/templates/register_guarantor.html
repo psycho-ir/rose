@@ -1,12 +1,36 @@
 {% extends 'base_dashboard.html' %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
     <div style="border: 1px solid #dddddd;border-radius: 5px;"
          class="form-group">
-        <div class="row rose-progress-bar" style="padding-top:15px;padding-bottom:15px; margin:0px;">
-            <div class="col-xs-2
-            {% if customer_info %}
+        <form method="get" action="{% url 'guarantor:register' customer_request.id %}">
+            <div class="row"
+                 style="background-color: #f5e79e; margin-bottom: 0px; margin-left: 0px;margin-right: 0px; padding-bottom: 20px;">
+                <div class="row" style="margin-bottom: 0px; padding-top: 5px; padding-bottom: 5px; text-align: center">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-2">
+                        کد ملی
+                    </div>
+                    <div class="col-xs-2">
+                        <input type="number" name="customer_id" id="customer_id" class="form-control"/>
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center;">
+                        <button type="submit" style="width: 90%;" id="job_info_button" class="btn btn-success">
+                            بارگذاری مشتری
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row rose-progress-bar" style="padding-top:0px;padding-bottom:15px; margin:0px;">
+
+            <div class="col-xs-3
+            {% if customer %}
             completed
             {% else %}
             pending
@@ -22,7 +46,7 @@
 
                                 "></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if  not customer_info %}
+                                {% if  not customer %}
                                     display: none;
                                 {% endif %}
                                 "></span>
@@ -32,9 +56,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2
+            <div class="col-xs-3
 
-             {% if customer_info.contact_info %}
+             {% if customer.contact_info %}
                 completed
              {% else %}
                 pending
@@ -48,7 +72,7 @@
                     <div id="contact_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_info.contact_info %}
+                                {% if not customer.contact_info %}
                                     display: none;"></span>
                                 {% endif %}
                     </div>
@@ -56,8 +80,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2
-             {% if customer_info.job_info %}
+            <div class="col-xs-3
+             {% if customer.job_info %}
                 completed
              {% else %}
                 pending
@@ -70,7 +94,7 @@
                     <div id="job_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_info.job_info %}
+                                {% if not customer.job_info %}
                                     display: none;
                                 {% endif %}
                                 "></span>
@@ -79,55 +103,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2
-             {% if customer_request.complete_information %}
-                   completed
-             {% else %}
-                    pending
-             {% endif %}
-
-             rose-progress-bar-cell" id="loan_info">
-                <div class="row">
-                    <div class="col-xs-8">
-                        اطلاعات تسهیلات
-                    </div>
-                    <div id="loan_info_state" class="col-xs-1">
-                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
-                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_request.complete_information %}
-                                    display: none;
-                                {% endif %}
-                                "></span>
-                    </div>
-                    <div id="loan_info_loader" class="col-xs-1">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-2
-             {% if customer_info.asset_info %}
-             completed
-             {% else %}
-             pending
-             {% endif %}
-             rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">
-                <div class="row">
-                    <div class="col-xs-9">
-                        دارایی ها و بدهی ها
-                    </div>
-                    <div id="asset_info_state" class="col-xs-1">
-                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
-                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_info.asset_info %}
-                                    display: none;
-                                {% endif %}
-                                "></span>
-                    </div>
-                    <div id="asset_info_loader" class="col-xs-1">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-2
-             {% if customer_info.bank_income_info %}
+            <div class="col-xs-3
+             {% if customer.bank_income_info %}
              completed
              {% else %}
              pending
@@ -136,12 +113,12 @@
              rose-progress-bar-cell" id="bank_income_info">
                 <div class="row">
                     <div class="col-xs-9">
-                        بانکها و درآمد
+                        درآمد
                     </div>
                     <div id="bank_income_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_info.bank_income_info %}
+                                {% if not customer.bank_income_info %}
                                     display: none;
                                 {% endif %}
                                 "></span>
@@ -164,22 +141,16 @@
             <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
                 {% if customer_request.type == 'haghighi' %}
                     <div class="rose-submit-container" id="customer_info_container">
-                        {% include '_customer_info.html' %}
+                        {% include '_guarantor_customer_info.html' %}
                     </div>
                     <div class="rose-submit-container collapse" id="contact_info_container">
-                        {% include '_contact_info.html' %}
+                        {% include '_guarantor_contact_info.html' %}
                     </div>
                     <div class="rose-submit-container collapse" id="job_info_container">
-                        {% include '_job_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="loan_info_container">
-                        {% include '_loan_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="asset_info_container">
-                        {% include '_asset_info.html' %}
+                        {% include '_guarantor_job_info.html' %}
                     </div>
                     <div class="rose-submit-container collapse" id="bank_income_info_container">
-                        {% include '_bank_income_info.html' %}
+                        {% include '_guarantor_bank_income_info.html' %}
                     </div>
                     </div>
                 {% else %}
@@ -200,6 +171,18 @@
             }
         }
         $(window).ready(function () {
+
+            {% if customer_id != None and message == None %}
+                $('#customer_id').val('{{ customer_id }}');
+                $('#customer_id').attr('disabled', 'disabled');
+            {% endif %}
+
+
+            {% if message %}
+                alertBar('{% trans message %}');
+
+            {% endif %}
+
             check_for_showing_next_level();
             $('#birth_date,#birth_date_span').persianDatepicker();
             $('.rose-progress-bar-cell').click(function () {
@@ -298,49 +281,50 @@
                         $(depend_id).change();
                     }
 
+                });
             });
-        });
 
-        $('select').each(function () {
-            var value = $(this).attr('value');
-            if (value) {
-                $(this).val(value);
-                $(this).change();
-            }
-        });
-
-
-        var selected_banks = [
-            {% for bank in  customer_info.bank_income_info.banks.all %}
-                '{{  bank.id }}',
-            {% endfor %}
-        ];
-
-        $('[name=banks]').not('[type!=checkbox]').each(function () {
-
-            var item = $(this);
-            var found = $.inArray(item.val(), selected_banks) > -1;
-            if (found) {
-                item.attr('checked', 'checked');
-            }
-        });
-
-        var selected_vasighes = [
-            {% for vasighe in  customer_info.bank_income_info.vasighe_types.all %}
-                '{{  vasighe.id }}',
-            {% endfor %}
-        ];
-
-        $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
-
-            var item = $(this);
-            var found = $.inArray(item.val(), selected_vasighes) > -1;
-            if (found) {
-                item.attr('checked', 'checked');
-            }
+            $('select').each(function () {
+                var value = $(this).attr('value');
+                if (value) {
+                    $(this).val(value);
+                    $(this).change();
+                }
+            });
 
 
-        });
+            var selected_banks = [
+                {% for bank in  customer_info.bank_income_info.banks.all %}
+                    '{{  bank.id }}',
+                {% endfor %}
+            ];
+
+            $('[name=banks]').not('[type!=checkbox]').each(function () {
+
+                var item = $(this);
+                var item = $(this);
+                var found = $.inArray(item.val(), selected_banks) > -1;
+                if (found) {
+                    item.attr('checked', 'checked');
+                }
+            });
+
+            var selected_vasighes = [
+                {% for vasighe in  customer_info.bank_income_info.vasighe_types.all %}
+                    '{{  vasighe.id }}',
+                {% endfor %}
+            ];
+
+            $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
+
+                var item = $(this);
+                var found = $.inArray(item.val(), selected_vasighes) > -1;
+                if (found) {
+                    item.attr('checked', 'checked');
+                }
+
+
+            });
 
 
         })

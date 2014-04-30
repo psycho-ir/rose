@@ -12,19 +12,11 @@
             <div class="control-group">
                 <div class="row controls">
                     <div class="col-xs-2">
-                        کد ملی
-                    </div>
-                    <div class="col-xs-2">
-                        <input type="number" name="customer_id">
-                    </div>
-                </div>
-                <div class="row controls">
-                    <div class="col-xs-2">
                         استان
                     </div>
                     <div class="col-xs-3">
                         <select class="province" depend="contact_town_id" name="province_id" style="width: 100%;"
-                                value="{{ customer_info.contact_info.province_id }}">
+                                value="{{ customer.contact_info.province_id }}">
                             {% for province in provinces %}
                                 <option value="{{ province.id }}">
                                     {{ province.local_name }}
@@ -36,7 +28,7 @@
                         شهرستان
                     </div>
                     <div class="col-xs-3">
-                        <select name="town_id" value="{{ customer_info.contact_info.town_id }}" id="contact_town_id"
+                        <select name="town_id" value="{{ customer.contact_info.town_id }}" id="contact_town_id"
                                 style="width: 100%;">
                         </select>
                     </div>
@@ -48,7 +40,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="number" class="form-control" name="phone_number"
-                               value="{{ customer_info.contact_info.phone_number }}"
+                               value="{{ customer.contact_info.phone_number }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -58,7 +50,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="number" class="form-control" name="cell_number"
-                               value="{{ customer_info.contact_info.cell_number }}"
+                               value="{{ customer.contact_info.cell_number }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -70,7 +62,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="email" class="form-control" name="email"
-                               value="{{ customer_info.contact_info.email }}"
+                               value="{{ customer.contact_info.email }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -80,7 +72,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="number" class="form-control" name="postal_code"
-                               value="{{ customer_info.contact_info.postal_code }}"
+                               value="{{ customer.contact_info.postal_code }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -94,7 +86,7 @@
                         <textarea class="form-control"
                                   name="address"
                                   required
-                                  data-validation-required-message="وارد کردن این فیلد الزامی است">{{ customer_info.contact_info.address }}</textarea>
+                                  data-validation-required-message="وارد کردن این فیلد الزامی است">{{ customer.contact_info.address }}</textarea>
                     </div>
                 </div>
             </div>

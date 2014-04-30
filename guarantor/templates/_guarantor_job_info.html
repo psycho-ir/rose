@@ -16,7 +16,7 @@
                         شفل
                     </div>
                     <div class="col-xs-3">
-                        <select style="width: 100%;" name="job_id" value="{{ customer_info.job_info.job_id }}">
+                        <select style="width: 100%;" name="job_id" value="{{ customer.job_info.job_id }}">
                             {% for job_type in job_types %}
                                 <option value="{{ job_type.id }}">{{ job_type.local_name }}</option>
                             {% endfor %}
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="job_activity"
-                               value="{{ customer_info.job_info.job_activity }}"
+                               value="{{ customer.job_info.job_activity }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select style="width: 100%;" name="Job_certificate_id"
-                                value="{{ customer_info.job_info.Job_certificate_id }}">
+                                value="{{ customer.job_info.Job_certificate_id }}">
                             {% for certificate in certificate_types %}
                                 <option value="{{ certificate.id }}">{{ certificate.local_name }}</option>
                             {% endfor %}
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="job_certificate_number"
-                               value="{{ customer_info.job_info.job_certificate_number }}"
+                               value="{{ customer.job_info.job_certificate_number }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
                     </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select style="width:100%;" name="job_province_id" class="province" depend="job_town_id"
-                                value="{{ customer_info.job_info.job_province_id }}">
+                                value="{{ customer.job_info.job_province_id }}">
                             {% for province in provinces %}
                                 <option value="{{ province.id }}">{{ province.local_name }}</option>
                             {% endfor %}
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select style="width: 100%;" name="job_town_id" id="job_town_id"
-                                value="{{ customer_info.job_info.job_town_id }}">
+                                value="{{ customer.job_info.job_town_id }}">
                             {#                        <option value="1">تهران</option>#}
                         </select>
                     </div>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="job_contact_number"
-                               value="{{ customer_info.job_info.job_contact_number }}"
+                               value="{{ customer.job_info.job_contact_number }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="job_postal_code"
-                               value="{{ customer_info.job_info.job_postal_code }}"
+                               value="{{ customer.job_info.job_postal_code }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -114,7 +114,7 @@
                                   name="job_address"
                                   required
                                   data-validation-required-message="وارد کردن این فیلد الزامی است"
-                                >{{ customer_info.job_info.job_address }}</textarea>
+                                >{{ customer.job_info.job_address }}</textarea>
                     </div>
                 </div>
             </div>

@@ -125,46 +125,16 @@ class AssetInformation(models.Model):
         return asset
 
 
-class SanadMelkiInformation(models.Model):
-    sanad_no = models.CharField(max_length=30)
-    owner_name = models.CharField(max_length=60)
-    current_value = models.BigIntegerField()
-    address = models.CharField(max_length=500)
-
-    @staticmethod
-    def from_dic(dic, ):
-        sanad = SanadMelkiInformation(sanad_no=dic['sanad_no'],
-                                      owner_name=dic['owner_name'],
-                                      current_value=dic['current_value'],
-                                      address=dic['address']
-        )
-
-        return sanad
 
 
 class BankIncomeInformation(models.Model):
     customer = models.OneToOneField(CustomerInformation, related_name='bank_income_info', primary_key=True)
-    banks = models.ManyToManyField(Bank, null=True, blank=True)
-    income = models.IntegerField()
-    vasighe_types = models.ManyToManyField(VasigheType, null=True, blank=True)
-    sanad_melki_info = models.ForeignKey(SanadMelkiInformation, blank=True, null=True)
 
+    income = models.IntegerField()
 
     @staticmethod
-    def from_dic(dic, sanad):
-        if sanad is None:
-            bi = BankIncomeInformation(income=dic['income'], customer_id=dic['customer_id'])
-        else:
-            bi = BankIncomeInformation(income=dic['income'], customer_id=dic['customer_id'],
-                                       sanad_melki_info_id=sanad.id)
-        bi.save()
-       # if bi.sanad_melki_info:
-       #     bi.sanad_melki_info.delete()
-
-        bi.vasighe_types.clear()
-        bi.banks.clear()
-        bi.vasighe_types = dic.getlist('vasighe_types')
-        bi.banks = dic.getlist('banks')
+    def from_dic(dic):
+        bi = BankIncomeInformation(income=dic['income'], customer_id=dic['customer_id'])
         return bi
 
 

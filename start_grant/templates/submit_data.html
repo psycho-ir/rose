@@ -311,7 +311,7 @@
 
 
         var selected_banks = [
-            {% for bank in  customer_info.bank_income_info.banks.all %}
+            {% for bank in  customer_request.vasighe_information.banks.all %}
                 '{{  bank.id }}',
             {% endfor %}
         ];
@@ -326,7 +326,7 @@
         });
 
         var selected_vasighes = [
-            {% for vasighe in  customer_info.bank_income_info.vasighe_types.all %}
+            {% for vasighe in  customer_request.vasighe_information.vasighe_types.all %}
                 '{{  vasighe.id }}',
             {% endfor %}
         ];

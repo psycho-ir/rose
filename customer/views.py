@@ -1,10 +1,9 @@
 from django.db import transaction
 from django.http.response import HttpResponse
-from django.utils.decorators import method_decorator
 from django.views.generic import View
-from customer.models import CustomerInformation, ContactInformation, JobInformation, BankIncomeInformation, \
-    SanadMelkiInformation, AssetInformation
+from customer.models import CustomerInformation, ContactInformation, JobInformation, BankIncomeInformation,  AssetInformation
 from rose_config.models import VasigheType
+from start_grant.models import BankVasigheInformation, SanadMelkiInformation
 
 
 class CustomerInfoView(View):
@@ -58,26 +57,31 @@ class BankIncomeView(View):
     @transaction.atomic()
     def post(self, request):
         try:
-            vasighes = request.POST.getlist('vasighe_types')
-            if len(vasighes) == 0:
-                print "There is no selected vasighe_type"
-                return HttpResponse("False")
-
-            banks = request.POST.getlist('banks')
-
-            if len(banks) == 0:
-                print "There is no selected bank"
-                return HttpResponse("False")
-
-            maskan_vasighe_type = VasigheType.objects.filter(name='melki').first()
-            sanad = None
-            if str(maskan_vasighe_type.id) in vasighes:
-                sanad = SanadMelkiInformation.from_dic(request.POST)
-                sanad.save()
-            bank_income = BankIncomeInformation.from_dic(request.POST, sanad)
+            no_vasighe = request.POST.get('no_vasighe_info')
+            bank_income = BankIncomeInformation.from_dic(request.POST)
             bank_income.save()
-            SanadMelkiInformation.objects.exclude(
-                bankincomeinformation__in=BankIncomeInformation.objects.all()).delete()
+            if not no_vasighe:
+                vasighes = request.POST.getlist('vasighe_types')
+                if len(vasighes) == 0:
+                    print "There is no selected vasighe_type"
+                    return HttpResponse("False")
+
+                banks = request.POST.getlist('banks')
+
+                if len(banks) == 0:
+                    print "There is no selected bank"
+                    return HttpResponse("False")
+
+                maskan_vasighe_type = VasigheType.objects.filter(name='melki').first()
+                sanad = None
+                if str(maskan_vasighe_type.id) in vasighes:
+                    sanad = SanadMelkiInformation.from_dic(request.POST)
+                    sanad.save()
+                bank_vasighe = BankVasigheInformation.from_dic(request.POST, sanad)
+                bank_vasighe.save()
+                SanadMelkiInformation.objects.exclude(
+                    bankvasigheinformation__in=BankVasigheInformation.objects.all()).delete()
+
             return HttpResponse("True")
 
         except Exception as e:

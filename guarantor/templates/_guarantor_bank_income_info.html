@@ -1,0 +1,38 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            بانک ها و درآمد
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="bank_income_form" name="bank_income_form" method="post"
+              action="{% url 'customer:bank_income_info' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="customer_id" value="{{ customer.national_number }}" />
+            <input type="hidden" name="no_vasighe_info" value="true" />
+
+            <div class="control-group">
+                <div class="row">
+                    <div class="col-xs-2">
+                        درآمد ماهیانه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="income"
+                               value="{{ customer.bank_income_info.income }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="bank_income_info_button" class="btn btn-success">
+                        ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

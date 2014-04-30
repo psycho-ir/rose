@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from customer.models import CUSTOMER_TYPE, CustomerInformation
 import datetime
-from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType
+from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
 
 
 class Request(models.Model):
@@ -34,6 +34,23 @@ class Request(models.Model):
         return request
 
 
+class SanadMelkiInformation(models.Model):
+    sanad_no = models.CharField(max_length=30)
+    owner_name = models.CharField(max_length=60)
+    current_value = models.BigIntegerField()
+    address = models.CharField(max_length=500)
+
+    @staticmethod
+    def from_dic(dic):
+        sanad = SanadMelkiInformation(sanad_no=dic['sanad_no'],
+                                      owner_name=dic['owner_name'],
+                                      current_value=dic['current_value'],
+                                      address=dic['address']
+        )
+
+        return sanad
+
+
 class RequestCompleteInformation(models.Model):
     request = models.OneToOneField(to=Request, related_name='complete_information', primary_key=True)
     prepayed_amount = models.BigIntegerField(default=0)
@@ -49,6 +66,29 @@ class RequestCompleteInformation(models.Model):
                                          refund_type_id=dic['refund_type_id'],
                                          number_of_installments=dic['number_of_installments'])
         return rci
+
+
+class BankVasigheInformation(models.Model):
+    request = models.OneToOneField(to=Request, related_name='vasighe_information', primary_key=True)
+    banks = models.ManyToManyField(Bank, null=True, blank=True)
+    vasighe_types = models.ManyToManyField(VasigheType, null=True, blank=True)
+    sanad_melki_info = models.ForeignKey(SanadMelkiInformation, blank=True, null=True)
+
+    @staticmethod
+    def from_dic(dic, sanad):
+        if sanad is None:
+            bank_vasighe = BankVasigheInformation(request_id=dic['request_id'])
+
+        else:
+            bank_vasighe = BankVasigheInformation(request_id=dic['request_id'], sanad_melki_info_id=sanad.id)
+
+        bank_vasighe.save()
+        bank_vasighe.vasighe_types.clear()
+        bank_vasighe.banks.clear()
+        bank_vasighe.vasighe_types = dic.getlist('vasighe_types')
+        bank_vasighe.banks = dic.getlist('banks')
+
+        return bank_vasighe
 
 
 
