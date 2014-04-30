@@ -1,0 +1,131 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            اطلاعات شغلی
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="job_info_form" name="job_info_form" method="post"
+              action="{% url 'customer:job_info' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
+
+            <div class="control-group">
+                <div class="row controls">
+                    <div class="col-xs-2">
+                        شفل
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="job_id" value="{{ customer_info.job_info.job_id }}">
+                            {% for job_type in job_types %}
+                                <option value="{{ job_type.id }}">{{ job_type.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        نوع فعالیت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="job_activity"
+                               value="{{ customer_info.job_info.job_activity }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        مدرک شغلی
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="Job_certificate_id"
+                                value="{{ customer_info.job_info.Job_certificate_id }}">
+                            {% for certificate in certificate_types %}
+                                <option value="{{ certificate.id }}">{{ certificate.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        شناسه مدرک شغلی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="job_certificate_number"
+                               value="{{ customer_info.job_info.job_certificate_number }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-5" style="font-weight: bold;">
+                        اطلاعات تماس شغلی
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        استان
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width:100%;" name="job_province_id" class="province" depend="job_town_id"
+                                value="{{ customer_info.job_info.job_province_id }}">
+                            {% for province in provinces %}
+                                <option value="{{ province.id }}">{{ province.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        شهرستان
+                    </div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;" name="job_town_id" id="job_town_id"
+                                value="{{ customer_info.job_info.job_town_id }}">
+                            {#                        <option value="1">تهران</option>#}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        شماره تماس
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="job_contact_number"
+                               value="{{ customer_info.job_info.job_contact_number }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                    <div class="col-xs-2">
+                        کد پستی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="job_postal_code"
+                               value="{{ customer_info.job_info.job_postal_code }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        آدرس محل کار
+                    </div>
+                    <div class="col-xs-9">
+                        <textarea class="form-control"
+                                  name="job_address"
+                                  required
+                                  data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                >{{ customer_info.job_info.job_address }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="job_info_button" class="btn btn-success">ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,139 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            اطلاعات شخصی
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="customer_info_form" name="customer_info_form" method="post"
+              action="{% url 'customer:customer_info' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="type" value="{{ customer_request.type }}">
+
+            <div class="control-group">
+                <div class="row controls">
+                    <div class="col-xs-2">
+                        نام
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="name" value="{{ customer_info.name }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+
+                    <div class="col-xs-2">
+                        نام خانوادگی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="last_name" value="{{ customer_info.last_name }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        جنسیت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="radio" value="male" name="gender"
+                                {% if customer_info and customer_info.gender == 'male' %}
+                               checked="checked"
+                                {% elif not customer_info %}
+                               checked="checked"
+                                {% endif %}
+
+                                >مرد</input>
+                        <input type="radio" value="female" name="gender" style="margin-right: 40px;"
+                                {% if customer_info and customer_info.gender == 'female' %}
+                               checked="checked"
+                                {% endif %}
+                                >زن</input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        نام پدر
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="father_name"
+                               value="{{ customer_info.father_name }}""
+                        required
+                        data-validation-required-message="وارد کردن این فیلد الزامی است"
+                        />
+                    </div>
+
+                    <div class="col-xs-2">
+                        شماره شناسنامه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="bc_number" value="{{ customer_info.bc_number }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        شماره سریال شناسنامه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="bc_serial_number"
+                               value="{{ customer_info.bc_serial_number }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+
+                    <div class="col-xs-2">
+                        کد ملی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="national_number" readonly="readonly"
+                               value="{{ customer_request.cif }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        محل صدور شناسنامه
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" value="{{ customer_info.bc_place }}" name="bc_place"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+
+                    <div class="col-xs-2">
+                        تاریخ تولد
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" required name="birth_date" id="birth_date"
+                               value="{{ customer_info.get_persian_birth_date }}"
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                        <span id="birth_date_span"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        محل تولد
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" value="{{ customer_info.birth_place }}"
+                               name="birth_place"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="customer_info_button" class="btn btn-success">ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
