@@ -1,6 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
@@ -32,13 +31,21 @@ class RegisterGuarantorView(View):
         context = RequestContext(request, {'customer_type': 'haghighi', 'customer_request': customer_request,
                                            'customer': customer,
                                            'provinces': provinces,
-                                            'towns': towns,
-                                            'job_types': job_types,
-                                            'certificate_types': certificate_types,
-                                            'customer_id':customer_id,
-                                            'message':message
+                                           'towns': towns,
+                                           'job_types': job_types,
+                                           'certificate_types': certificate_types,
+                                           'customer_id': customer_id,
+                                           'message': message
         })
         template = loader.get_template("register_guarantor.html")
 
         return HttpResponse(template.render(context))
+
+
+class introduce_guarantor_as_an_model(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
 
