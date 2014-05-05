@@ -1,0 +1,81 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <div style="border: 1px solid #dddddd; padding: 15px 30px 15px 30px;border-radius: 5px;"
+         class="form-group">
+        <table id="guarantors" class="display" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <td>شماره ضامن</td>
+                <td>نام</td>
+                <td>نام خانوادگی</td>
+                <td>وصیغه</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for guarantor in guarantors %}
+                <tr id="{{ guarantor.customer.national_number }}">
+                    {% comment %}                    class="{% if request.status == 'intro' %}
+            warning
+            {% endif %}">{% endcomment %}
+                    <td>{{ guarantor.customer.national_number }}</td>
+                    <td>{{ guarantor.customer.name }}</td>
+                    <td>{{ guarantor.customer.last_name }}</td>
+                    <td>{{ guarantor.vasighe_type.local_name }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <form style="width: 10px;" method="post"
+                                      action="{% url 'guarantor:remove' request_id guarantor.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="glyphicon glyphicon-remove remove"
+                                            style="padding-right: 10px;color: red;">
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-xs-3">
+                                <form style="width: 10px;" method="get"
+                                      action="{% url 'guarantor:register' request_id %}">
+                                    <input type="hidden" name="customer_id"
+                                           value="{{ guarantor.customer.national_number }}"/>
+                                    <button type="submit" class="glyphicon glyphicon-edit edit"
+                                            style="padding-right: 10px;color: #2244ff;">
+                                    </button>
+                                </form
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            </tfoot>
+
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(window).ready(function () {
+
+
+            $('#guarantors tbody tr').click(function () {
+                {#                window.alert($(this).attr('id'));#}
+            });
+
+            $('#guarantors').dataTable({
+                "oLanguage": {
+                    sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است'
+                },
+
+                bPaginate: false,
+                bFilter: false,
+                bInfo: false
+            });
+        });
+
+    </script>
+{% endblock %}

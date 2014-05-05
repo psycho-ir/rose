@@ -14,6 +14,7 @@
                 <td>بخش اقتصادی</td>
                 <td>شرح درخواست</td>
                 <td>وضعیت</td>
+                <td>عملیات</td>
             </tr>
             </thead>
             <tbody>
@@ -39,9 +40,19 @@
                         <span style="padding-right: 3px;">
                         <a href="{% url 'grant:submit'  request.id %}">ادامه ثبت اطلاعات</a>
                         </span>
+                    {% elif request.status == 'res_info_completed' %}
+                        ثبت تکمیلی
+                        <span style="padding-right: 3px;">
+                        <a href="{% url 'grant:submit'  request.id %}">ویرایش اطلاعات</a>
+                        </span>
                     {% else %}
                         new
                     {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'guarantor:list' request.id %}">
+                            مشاهده ضامنین
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

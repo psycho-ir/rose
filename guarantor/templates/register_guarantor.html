@@ -129,12 +129,16 @@
             </div>
         </div>
         <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-            <div class="col-xs-12" style="text-align: center;">
-                <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
-                    اکنون با کلیک بر روی این بخش می توانید این مشتری را به عنوان ضامن درخواست وام
-                    "{{ customer_request.id }}" انتخاب نمایید
-                </button>
-            </div>
+            <form action="{% url 'guarantor:register' customer_request.id  %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="customer_id" value="{{ customer_id }}" />
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style=" width: 90%;" id="register_guarantor" class="btn btn-success">
+                        اکنون با کلیک بر روی این بخش می توانید این مشتری را به عنوان ضامن درخواست وام
+                        "{{ customer_request.id }}" انتخاب نمایید
+                    </button>
+                </div>
+            </form>
         </div>
         {#        <form method="post">#}
         <div id="submit_forms" class="form-group">
@@ -183,6 +187,8 @@
             {% endif %}
 
             check_for_showing_next_level();
+
+
             $('#birth_date,#birth_date_span').persianDatepicker();
             $('.rose-progress-bar-cell').click(function () {
                 var cell = $(this)

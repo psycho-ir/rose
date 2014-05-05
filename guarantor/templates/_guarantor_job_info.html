@@ -8,7 +8,7 @@
         <form id="job_info_form" name="job_info_form" method="post"
               action="{% url 'customer:job_info' %}" novalidate>
             {% csrf_token %}
-            <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
+            <input type="hidden" name="customer_id" value="{{ customer_id }}">
 
             <div class="control-group">
                 <div class="row controls">

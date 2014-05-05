@@ -9,6 +9,8 @@
               action="{% url 'customer:contact_info' %}" novalidate>
             {% csrf_token %}
 
+            <input type="hidden" name="customer_id" value="{{ customer_id }}" />
+
             <div class="control-group">
                 <div class="row controls">
                     <div class="col-xs-2">

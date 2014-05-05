@@ -1,9 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
 from customer.models import CustomerInformation
+from guarantor.models import Guarantor
 from rose_config.models import Province, Town, JobType, JobCertificateType
 from start_grant.models import Request
 from core_connection.customer_repository import *
@@ -41,11 +43,35 @@ class RegisterGuarantorView(View):
 
         return HttpResponse(template.render(context))
 
+    def post(self, request, request_id):
+        guarantor = Guarantor()
+        guarantor.customer_id = request.POST.get('customer_id')
+        guarantor.vasighe_type_id = 1
 
-class introduce_guarantor_as_an_model(View):
-    def get(self, request):
-        pass
+        request = Request.objects.get(pk=request_id)
+        if request.guarantors.filter(customer_id=guarantor.customer_id).exists():
+            return HttpResponseRedirect(reverse('guarantor:register', args=[request_id]))
 
-    def post(self, request):
-        pass
+        guarantor.save()
+        request.guarantors.add(guarantor)
+
+        return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
+
+
+class GuarantorListView(View):
+    def get(self, request, request_id):
+        customer_request = Request.objects.get(pk=request_id)
+
+        context = RequestContext(request, {'guarantors': customer_request.guarantors.all(),
+                                           'request_id': request_id})
+        template = loader.get_template('guarantor_list.html')
+
+        return HttpResponse(template.render(context))
+
+
+class GuarantorRemoveView(View):
+    def post(self, request, request_id, guarantor_id):
+        r = Request.objects.get(pk=request_id)
+        r.guarantors.remove(guarantor_id)
+        return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
 
