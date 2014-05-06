@@ -5,7 +5,7 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-from customer.models import RealCustomerInformation
+from customer.models.real_models import RealCustomerInformation
 from rose_config.models import config, JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
     VasigheType, BusinessPlace
 from start_grant.models import Request, BusinessPart, RequestDescription, RequestCompleteInformation

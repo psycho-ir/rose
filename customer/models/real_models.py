@@ -1,17 +1,16 @@
+from customer.models.common import Customer
+
+__author__ = 'soroosh'
+
 from django.db import models
 from jdatetime import datetime as jalali_datetime
 from rose_config.models import Town, Province, JobType, JobCertificateType, Bank, VasigheType, BusinessPlace
 
-CUSTOMER_TYPE = (
-    ("haghighi", "haghighi"),
-    ("hoghooghi", "haghighi"),
-)
-
-class Customer(models.Model):
-    type = models.CharField(choices=CUSTOMER_TYPE, max_length=30)
-    customer_code = models.CharField(max_length=10, primary_key=True)
 
 class RealCustomerInformation(Customer):
+    class Meta:
+        app_label = 'customer'
+
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=50)
@@ -33,15 +32,18 @@ class RealCustomerInformation(Customer):
                                                int(birth_date_parts[2])).togregorian()
 
         c = RealCustomerInformation(type=dic['type'], customer_code=dic['national_number'],
-                                name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
-                                bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
-                                birth_date=gregorian_birth_date, bc_place=dic['bc_place'],
-                                birth_place=dic['birth_place'], gender=dic['gender'])
+                                    name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
+                                    bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
+                                    birth_date=gregorian_birth_date, bc_place=dic['bc_place'],
+                                    birth_place=dic['birth_place'], gender=dic['gender'])
 
         return c
 
 
 class ContactInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
+
     customer = models.OneToOneField(RealCustomerInformation, related_name='contact_info', primary_key=True)
     phone_number = models.CharField(max_length=16)
     cell_number = models.CharField(max_length=16)
@@ -62,6 +64,9 @@ class ContactInformation(models.Model):
 
 
 class JobInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
+
     customer = models.OneToOneField(RealCustomerInformation, related_name='job_info', primary_key=True)
     job = models.ForeignKey(JobType)
     job_activity = models.CharField(max_length=100)
@@ -90,6 +95,9 @@ class JobInformation(models.Model):
 
 
 class AssetInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
+
     customer = models.OneToOneField(RealCustomerInformation, related_name='asset_info', primary_key=True)
     cash = models.BigIntegerField(default=0)
     account = models.BigIntegerField(default=0)
@@ -125,9 +133,9 @@ class AssetInformation(models.Model):
         return asset
 
 
-
-
 class BankIncomeInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
     customer = models.OneToOneField(RealCustomerInformation, related_name='bank_income_info', primary_key=True)
 
     income = models.IntegerField()

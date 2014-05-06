@@ -1,10 +1,9 @@
 from django.db import transaction
 from django.http.response import HttpResponse
 from django.views.generic import View
-from customer.models import RealCustomerInformation, ContactInformation, JobInformation, BankIncomeInformation,  AssetInformation
 from rose_config.models import VasigheType
 from start_grant.models import BankVasigheInformation, SanadMelkiInformation
-
+from customer.models.real_models import *
 
 class CustomerInfoView(View):
     def post(self, request):

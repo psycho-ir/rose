@@ -1,5 +1,5 @@
 from django.db import models
-from customer.models import RealCustomerInformation, Customer
+from customer.models.common import Customer
 from rose_config.models import VasigheType
 
 

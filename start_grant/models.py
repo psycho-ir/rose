@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
-from customer.models import CUSTOMER_TYPE, RealCustomerInformation
 import datetime
+from customer.models.common import CUSTOMER_TYPE
 from guarantor.models import Guarantor
 from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
 

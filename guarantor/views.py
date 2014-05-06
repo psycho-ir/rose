@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
+from customer.models import *
 from customer.models import RealCustomerInformation
 from guarantor.models import Guarantor
 from rose_config.models import Province, Town, JobType, JobCertificateType

@@ -550,11 +550,14 @@ form .row {
 
 /******** guarantor ***********/
 
-.new_guarantor{
-
+.new_guarantor {
+    padding-top: 5px;
 }
 
-.new_guarantor:hover{
+.new_guarantor:hover {
+
     background-color: #c4c4ff;
+    border-radius: 5px;
 }
+
 /******************************/
