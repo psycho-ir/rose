@@ -15,13 +15,13 @@
             </thead>
             <tbody>
             {% for guarantor in guarantors %}
-                <tr id="{{ guarantor.customer.national_number }}">
+                <tr id="{{ guarantor.customer.customer_code }}">
                     {% comment %}                    class="{% if request.status == 'intro' %}
             warning
             {% endif %}">{% endcomment %}
-                    <td>{{ guarantor.customer.national_number }}</td>
-                    <td>{{ guarantor.customer.name }}</td>
-                    <td>{{ guarantor.customer.last_name }}</td>
+                    <td>{{ guarantor.customer.customer_code }}</td>
+                    <td>{{ guarantor.customer.realcustomerinformation.name }}</td>
+                    <td>{{ guarantor.customer.realcustomerinformation.last_name }}</td>
                     <td>{{ guarantor.vasighe_type.local_name }}</td>
                     <td>
                         <div class="row">
@@ -38,7 +38,7 @@
                                 <form style="width: 10px;" method="get"
                                       action="{% url 'guarantor:register' request_id %}">
                                     <input type="hidden" name="customer_id"
-                                           value="{{ guarantor.customer.national_number }}"/>
+                                           value="{{ guarantor.customer.customer_code }}"/>
                                     <button type="submit" class="glyphicon glyphicon-edit edit"
                                             style="padding-right: 10px;color: #2244ff;">
                                     </button>
@@ -53,6 +53,18 @@
             </tfoot>
 
         </table>
+    <div class="row new_guarantor" style="margin-top:35px;" id="new_real_guarantor">
+        <div class="col-xs-3">
+            <span class="glyphicon glyphicon-plus" style="color:#00dd00;" ></span>
+            ضامن حقیقی جدید
+        </div>
+    </div>
+     <div class="row new_guarantor" style="margin-top:15px;"  id="new_enterprise_guarantor">
+        <div class="col-xs-3">
+            <span class="glyphicon glyphicon-plus" style="color:#00dd00;" ></span>
+            ضامن حقیقی جدید
+        </div>
+    </div>
     </div>
 
 {% endblock %}
@@ -61,6 +73,13 @@
     <script type="text/javascript">
         $(window).ready(function () {
 
+            $('#new_real_guarantor').click(function(){
+                window.location = '{% url 'guarantor:register' request_id %}';
+            });
+
+            $('#new_enterprise_guarantor').click(function(){
+                window.location = '{% url 'guarantor:register' request_id %}';
+            });
 
             $('#guarantors tbody tr').click(function () {
                 {#                window.alert($(this).attr('id'));#}

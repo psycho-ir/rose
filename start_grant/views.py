@@ -1,12 +1,13 @@
 import json
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-from customer.models import CustomerInformation
+from customer.models import RealCustomerInformation
 from rose_config.models import config, JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
     VasigheType, BusinessPlace
 from start_grant.models import Request, BusinessPart, RequestDescription, RequestCompleteInformation
@@ -40,13 +41,13 @@ class StartView(View):
 class SubmitDataView(View):
     def get(self, request, request_id):
         customer_request = Request.objects.get(id=request_id)
-        customer_information = CustomerInformation.objects.filter(pk=customer_request.cif).first()
+        customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
         job_types = JobType.objects.all()
         certificate_types = JobCertificateType.objects.all()
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
         loan_types = LoanType.objects.all()
-        refund_types = RefundType.objects.all()
+        refund_types = loan_types.first().refund_types.all()
         banks = Bank.objects.all()
         business_places = BusinessPlace.objects.all()
         vasighe_types = VasigheType.objects.all()
@@ -64,6 +65,13 @@ class SubmitDataView(View):
                                   'vasighe_types': vasighe_types,
                                   'business_places': business_places})
         return HttpResponse(template.render(context))
+
+    def post(self, request, request_id):
+        customer_request = Request.objects.get(id=request_id)
+
+        if Request.objects.get(id=2).vasighe_information.vasighe_types.filter(Q(id=2) | Q(id=3)).exists():
+            return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
+
 
 
 from django.core import serializers

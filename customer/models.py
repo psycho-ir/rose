@@ -7,11 +7,11 @@ CUSTOMER_TYPE = (
     ("hoghooghi", "haghighi"),
 )
 
-
-class CustomerInformation(models.Model):
+class Customer(models.Model):
     type = models.CharField(choices=CUSTOMER_TYPE, max_length=30)
-    national_number = models.CharField(max_length=10, primary_key=True)
-    cif = models.CharField(max_length=20)
+    customer_code = models.CharField(max_length=10, primary_key=True)
+
+class RealCustomerInformation(Customer):
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=50)
@@ -31,8 +31,8 @@ class CustomerInformation(models.Model):
         birth_date_parts = birth_date.split('/')
         gregorian_birth_date = jalali_datetime(int(birth_date_parts[0]), int(birth_date_parts[1]),
                                                int(birth_date_parts[2])).togregorian()
-        cif = str(long(dic['national_number']))
-        c = CustomerInformation(type=dic['type'], cif=cif, national_number=dic['national_number'],
+
+        c = RealCustomerInformation(type=dic['type'], customer_code=dic['national_number'],
                                 name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
                                 bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
                                 birth_date=gregorian_birth_date, bc_place=dic['bc_place'],
@@ -42,7 +42,7 @@ class CustomerInformation(models.Model):
 
 
 class ContactInformation(models.Model):
-    customer = models.OneToOneField(CustomerInformation, related_name='contact_info', primary_key=True)
+    customer = models.OneToOneField(RealCustomerInformation, related_name='contact_info', primary_key=True)
     phone_number = models.CharField(max_length=16)
     cell_number = models.CharField(max_length=16)
     email = models.EmailField()
@@ -62,7 +62,7 @@ class ContactInformation(models.Model):
 
 
 class JobInformation(models.Model):
-    customer = models.OneToOneField(CustomerInformation, related_name='job_info', primary_key=True)
+    customer = models.OneToOneField(RealCustomerInformation, related_name='job_info', primary_key=True)
     job = models.ForeignKey(JobType)
     job_activity = models.CharField(max_length=100)
     Job_certificate = models.ForeignKey(JobCertificateType)
@@ -90,7 +90,7 @@ class JobInformation(models.Model):
 
 
 class AssetInformation(models.Model):
-    customer = models.OneToOneField(CustomerInformation, related_name='asset_info', primary_key=True)
+    customer = models.OneToOneField(RealCustomerInformation, related_name='asset_info', primary_key=True)
     cash = models.BigIntegerField(default=0)
     account = models.BigIntegerField(default=0)
     business_place = models.ForeignKey(BusinessPlace)
@@ -128,7 +128,7 @@ class AssetInformation(models.Model):
 
 
 class BankIncomeInformation(models.Model):
-    customer = models.OneToOneField(CustomerInformation, related_name='bank_income_info', primary_key=True)
+    customer = models.OneToOneField(RealCustomerInformation, related_name='bank_income_info', primary_key=True)
 
     income = models.IntegerField()
 

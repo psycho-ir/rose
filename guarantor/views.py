@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
-from customer.models import CustomerInformation
+from customer.models import RealCustomerInformation
 from guarantor.models import Guarantor
 from rose_config.models import Province, Town, JobType, JobCertificateType
 from start_grant.models import Request
@@ -20,7 +20,7 @@ class RegisterGuarantorView(View):
             try:
                 if len(find_customer(customer_id)) == 0:
                     message = 'customer does not exist'
-                customer = CustomerInformation.objects.get(pk=customer_id)
+                customer = RealCustomerInformation.objects.get(pk=customer_id)
 
             except ObjectDoesNotExist as e:
                 print e

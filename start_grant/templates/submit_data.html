@@ -152,12 +152,15 @@
             </div>
         </div>
         <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-            <div class="col-xs-12" style="text-align: center;">
-                <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
-                    اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
-                </button>
+            <form action="{% url 'grant:submit' customer_request.id %}" method="post">
+                {% csrf_token %}
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
+                        اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
+                    </button>
 
-            </div>
+                </div>
+            </form>
         </div>
         {#        <form method="post">#}
         <div id="submit_forms" class="form-group">
@@ -298,49 +301,49 @@
                         $(depend_id).change();
                     }
 
+                });
             });
-        });
 
-        $('select').each(function () {
-            var value = $(this).attr('value');
-            if (value) {
-                $(this).val(value);
-                $(this).change();
-            }
-        });
-
-
-        var selected_banks = [
-            {% for bank in  customer_request.vasighe_information.banks.all %}
-                '{{  bank.id }}',
-            {% endfor %}
-        ];
-
-        $('[name=banks]').not('[type!=checkbox]').each(function () {
-
-            var item = $(this);
-            var found = $.inArray(item.val(), selected_banks) > -1;
-            if (found) {
-                item.attr('checked', 'checked');
-            }
-        });
-
-        var selected_vasighes = [
-            {% for vasighe in  customer_request.vasighe_information.vasighe_types.all %}
-                '{{  vasighe.id }}',
-            {% endfor %}
-        ];
-
-        $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
-
-            var item = $(this);
-            var found = $.inArray(item.val(), selected_vasighes) > -1;
-            if (found) {
-                item.attr('checked', 'checked');
-            }
+            $('select').each(function () {
+                var value = $(this).attr('value');
+                if (value) {
+                    $(this).val(value);
+                    $(this).change();
+                }
+            });
 
 
-        });
+            var selected_banks = [
+                {% for bank in  customer_request.vasighe_information.banks.all %}
+                    '{{  bank.id }}',
+                {% endfor %}
+            ];
+
+            $('[name=banks]').not('[type!=checkbox]').each(function () {
+
+                var item = $(this);
+                var found = $.inArray(item.val(), selected_banks) > -1;
+                if (found) {
+                    item.attr('checked', 'checked');
+                }
+            });
+
+            var selected_vasighes = [
+                {% for vasighe in  customer_request.vasighe_information.vasighe_types.all %}
+                    '{{  vasighe.id }}',
+                {% endfor %}
+            ];
+
+            $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
+
+                var item = $(this);
+                var found = $.inArray(item.val(), selected_vasighes) > -1;
+                if (found) {
+                    item.attr('checked', 'checked');
+                }
+
+
+            });
 
 
         })
