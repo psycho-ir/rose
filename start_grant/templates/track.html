@@ -50,9 +50,11 @@
                     {% endif %}
                     </td>
                     <td>
+                        {% if request.need_guarantor %}
                         <a href="{% url 'guarantor:list' request.id %}">
                             مشاهده ضامنین
                         </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

@@ -2893,7 +2893,6 @@ msgstr "^trackbacks/(?P<year>\\d{4})/(?P<month>\\d{2})/(?P<day>\\d{2})/(?P<slug>
 msgid "^quick-entry/$"
 msgstr "^quick-entry/$"
 
-#: urls/tags.py:18\
 msgid "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 msgstr "^(?P<tag>[^/]+(?u))/page/(?P<page>\\d+)/$"
 
@@ -2923,6 +2922,8 @@ msgstr "User cannot %s."
 msgid "No title"
 msgstr "No title"
 
-
 msgid "customer does not exist"
 msgstr "مشتری  با این شماره ملی در سیستم جامع وجود ندارد"
+
+msgid "This request does not new guarantor"
+msgstr "این درخواست تسهیلات نیازی به ضامن ندارد"

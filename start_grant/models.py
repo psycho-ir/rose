@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 from customer.models import CUSTOMER_TYPE, RealCustomerInformation
 import datetime
 from guarantor.models import Guarantor
@@ -23,6 +24,12 @@ class Request(models.Model):
     request_amount = models.BigIntegerField(default=1000000)
     status = models.CharField(max_length=50, default='intro')
     guarantors = models.ManyToManyField(to=Guarantor, related_name='guaranted_requests')
+
+    def need_guarantor(self):
+        if self.vasighe_information.vasighe_types.filter(Q(id=2) | Q(id=3)).exists():
+            return True
+        else:
+            return False
 
     @staticmethod
     def from_dic(dic, user):

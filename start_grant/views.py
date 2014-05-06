@@ -1,7 +1,5 @@
 import json
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
@@ -69,8 +67,11 @@ class SubmitDataView(View):
     def post(self, request, request_id):
         customer_request = Request.objects.get(id=request_id)
 
-        if Request.objects.get(id=2).vasighe_information.vasighe_types.filter(Q(id=2) | Q(id=3)).exists():
+        if Request.objects.get(id=2).need_guarantor():
             return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
+
+        else:
+            return HttpResponseRedirect(reverse('grant:track'))
 
 
 

@@ -62,10 +62,14 @@ class GuarantorListView(View):
     def get(self, request, request_id):
         customer_request = Request.objects.get(pk=request_id)
 
-        context = RequestContext(request, {'guarantors': customer_request.guarantors.all(),
-                                           'request_id': request_id})
-        template = loader.get_template('guarantor_list.html')
+        if customer_request.need_guarantor():
 
+            context = RequestContext(request, {'guarantors': customer_request.guarantors.all(),
+                                               'request_id': request_id})
+        else:
+            context = RequestContext(request, {'message': 'This request does not new guarantor', 'request_id': request_id})
+
+        template = loader.get_template('guarantor_list.html')
         return HttpResponse(template.render(context))
 
 
