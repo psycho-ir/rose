@@ -7,6 +7,8 @@ __author__ = 'soroosh'
 
 
 class BoadOfDirectorRole(models.Model):
+    class Meta:
+        app_label = 'customer'
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
@@ -14,6 +16,8 @@ class BoadOfDirectorRole(models.Model):
 
 
 class RegisterTown(models.Model):
+    class Meta:
+        app_label = 'customer'
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
@@ -21,6 +25,8 @@ class RegisterTown(models.Model):
 
 
 class EnterpriseCustomerInformation(Customer):
+    class Meta:
+        app_label = 'customer'
     company_name = models.CharField(max_length=256)
     register_number = models.IntegerField()
     company_type = models.ForeignKey(CompanyType)
@@ -44,6 +50,8 @@ class EnterpriseCustomerInformation(Customer):
 
 
 class BoardOfDirector(models.Model):
+    class Meta:
+        app_label = 'customer'
     company = models.ForeignKey(EnterpriseCustomerInformation)
     customer = models.ForeignKey(RealCustomerInformation)
     role = models.ForeignKey(BoadOfDirectorRole)
@@ -65,6 +73,8 @@ class BoardOfDirector(models.Model):
 
 
 class EnterpriseContactInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
     company = models.OneToOneField(EnterpriseCustomerInformation, primary_key=True)
     province = models.ForeignKey(Province)
     town = models.ForeignKey(Town)
@@ -87,6 +97,8 @@ class EnterpriseContactInformation(models.Model):
 
 
 class EnterpriseActivity(models.Model):
+    class Meta:
+        app_label = 'customer'
     activity_type = models.CharField(max_length=256)
     certificate_type = models.ForeignKey(JobCertificateType)
     certificate_number = models.CharField(max_length=20)
