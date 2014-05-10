@@ -38,12 +38,20 @@
                     <td>{% if request.status == 'intro' %}
                         ثبت اولیه
                         <span style="padding-right: 3px;">
-                        <a href="{% url 'grant:submit'  request.id %}">ادامه ثبت اطلاعات</a>
+                        {% if request.type == 'haghighi' %}
+                            <a href="{% url 'grant:submit'  request.id %}">ادامه ثبت اطلاعات</a>
+                        {% else %}
+                            <a href="{% url 'grant:enterprise_submit'  request.id %}">ادامه ثبت اطلاعات</a>
+                        {% endif %}
                         </span>
                     {% elif request.status == 'res_info_completed' %}
                         ثبت تکمیلی
                         <span style="padding-right: 3px;">
-                        <a href="{% url 'grant:submit'  request.id %}">ویرایش اطلاعات</a>
+                          {% if request.type == 'haghighi' %}
+                              <a href="{% url 'grant:submit'  request.id %}">ویرایش اطلاعات</a>
+                          {% else %}
+                              <a href="{% url 'grant:enterprise_submit'  request.id %}">ویرایش اطلاعات</a>
+                          {% endif %}
                         </span>
                     {% else %}
                         new
@@ -51,9 +59,9 @@
                     </td>
                     <td>
                         {% if request.need_guarantor %}
-                        <a href="{% url 'guarantor:list' request.id %}">
-                            مشاهده ضامنین
-                        </a>
+                            <a href="{% url 'guarantor:list' request.id %}">
+                                مشاهده ضامنین
+                            </a>
                         {% endif %}
                     </td>
                 </tr>
