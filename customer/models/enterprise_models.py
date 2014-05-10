@@ -70,7 +70,7 @@ class BoardOfDirector(models.Model):
     class Meta:
         app_label = 'customer'
 
-    company = models.ForeignKey(EnterpriseCustomerInformation)
+    company = models.ForeignKey(EnterpriseCustomerInformation,related_name='director_set')
     customer = models.ForeignKey(RealCustomerInformation)
     role = models.ForeignKey(BoadOfDirectorRole)
     sign_permission = models.BooleanField(default=False)
@@ -79,12 +79,13 @@ class BoardOfDirector(models.Model):
 
     @staticmethod
     def from_dic(dic):
+        sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
         b = BoardOfDirector(company_id=dic['company_id'],
                             customer_id=dic['customer_id'],
                             role_id=dic['role_id'],
-                            sing_permission=dic['sign_permission'],
-                            sign_expire_date=dic['sign_expire_date'],
-                            sign_enough=dic['sign_enough']
+                            sign_permission=dic.get('sign_permission', False),
+                            sign_expire_date=sign_expire_date,
+                            sign_enough=dic.get('sign_enough', False)
         )
 
         return b
