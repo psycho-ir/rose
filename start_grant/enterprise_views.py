@@ -8,8 +8,8 @@ __author__ = 'soroosh'
 
 
 class EnterpriseSubmitDataView(View):
-    def get(self, request,request_id):
-        customer_request = Request.objects.get(pk='request_id')
+    def get(self, request, request_id):
+        customer_request = Request.objects.get(pk=request_id)
         customer_information = EnterpriseCustomerInformation.objects.filter(pk=customer_request.cif).first()
 
         template = loader.get_template('enterprise_submit_data.html')
