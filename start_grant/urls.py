@@ -16,7 +16,6 @@ urlpatterns = patterns('',
                            login_required(SubmitDataView.as_view(), login_url='/'), name='submit'),
                        url(r'^(?i)complete_request', login_required(ReqCompleteView.as_view(), login_url='/'),
                            name='complete_request'),
-
                        url(r'^(?i)enterprise_submit/request_id=(?P<request_id>\d*)',
                            login_required(EnterpriseSubmitDataView.as_view(), login_url='/'), name='enterprise_submit')
 
