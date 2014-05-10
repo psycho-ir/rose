@@ -1,0 +1,66 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "aam",
+            "local_name": "سهامی عام"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "khaas",
+            "local_name": "سهامی خاص"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "mahdood",
+            "local_name": "مسئولیت محدود"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "mokhtalet",
+            "local_name": "مختلط سهامی"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "gheir-sahami",
+            "local_name": "مختلط غیر سهامی"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "tazamoni",
+            "local_name": "تضامنی"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "nesbi",
+            "local_name": "نسبی"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.companytype",
+        "fields": {
+            "name": "taavoni",
+            "local_name": "تعاونی"
+        }
+    }
+]
