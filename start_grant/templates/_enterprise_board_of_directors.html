@@ -5,19 +5,18 @@
         </div>
     </div>
     <div class="panel-body">
-        <form id="activity_info_form" name="activity_info_form" method="post"
-              action="{% url 'customer:enterprise_activity_info' %}" novalidate>
+        <form id="board_of_director_form" name="board_of_director_form" method="post"
+              action="{% url 'customer:board_of_director' %}" novalidate>
             {% csrf_token %}
             <input type="hidden" name="company_id" value="{{ customer_request.cif }}">
 
             <div class="control-group">
                 <div class="row controls">
                     <div class="col-xs-2">
-                        نوع فعالیت
+                        کد ملی عضو هیات مدیره
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="activity_type"
-                               value="{{ customer_info.activity_info.activity_type }}"
+                        <input type="number" class="form-control" name="customer_id"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -26,11 +25,11 @@
                         مدرک شغلی
                     </div>
                     <div class="col-xs-3">
-                        <select name="certificate_type_id" value="{{ customer_info.activity_info.certificate_type_id }}"
-                                id="certificate_type_id"
+                        <select name="role_id"
+                                id="role_id"
                                 style="width: 100%;">
-                            {% for t in certificate_types %}
-                                <option value="{{ t.id }}">{{ t.local_name }}</option>
+                            {% for b in board_of_directors %}
+                                <option value="{{ b.id }}">{{ b.local_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -38,42 +37,37 @@
 
                 <div class="row">
                     <div class="col-xs-2">
-                        شناسه مدرک شغلی
+                        حق امضا
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="certificate_number"
-                               value="{{ customer_info.activity_info.certificate_number }}"
-                               required
+                        <input type="checkbox" class="form-control" name="sign_permission"
+                               value="True"
                                 />
                     </div>
+                    <div class="col-xs-2">
+                        کفایت امضا
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="checkbox" class="form-control" name="sign_enough" value="True"/>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-xs-2">
-                       تاریخ صدور
+                        اعتبار امضا
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="certificate_start_date" id="certificate_start_date"
-                               value="{{ customer_info.activity_info.get_persian_certificate_start_date }}"
+                        <input type="text" class="form-control" name="sign_expire_date" id="sign_expire_date"
                                required
                                 />
-                        <span id="certificate_start_date_span" />
-                    </div>
-                    <div class="col-xs-2">
-                        تاریخ اعتبار
-                    </div>
-                    <div class="col-xs-3">
-                        <input type="text" class="form-control" name="certificate_expire_date" id="certificate_expire_date"
-                               value="{{ customer_info.activity_info.get_persian_certificate_expire_date }}"
-                               required
-                                />
-                        <span id="certificate_expire_date_span"></span>
+                        <span id="sign_expire_date_span"/>
                     </div>
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-xs-12" style="text-align: center;">
-                    <button type="submit" style="width: 90%;" id="contact_info_button" class="btn btn-success">ثبت
+                    <button type="submit" style="width: 90%;" id="board_of_director_button" class="btn btn-success">ثبت
                         اطلاعات
                     </button>
                 </div>
@@ -81,5 +75,55 @@
 
         </form>
 
+    </div>
+    <div class="row" style="padding-top: 20px; padding-bottom: 10px;">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10" style="border: solid 1px #665555; border-radius: 5px; padding-bottom: 10px; ">
+            <table id="director_table" class="display">
+                <thead>
+                <td>کد ملی</td>
+                <td>نام</td>
+                <td>نام خانوادگی</td>
+                <td>سمت</td>
+                <td>حق امضا</td>
+                <td>کفایت امضا</td>
+                </thead>
+                <tbody>
+
+                {% for director in customer_info.director_set.all %}
+                    <tr>
+                        <td>
+                            {{ director.customer.customer_code }}
+                        </td>
+                        <td>
+                            {{ director.customer.name }}
+
+                        </td>
+                        <td>
+                            {{ director.customer.last_name }}
+                        </td>
+                        <td>
+                            {{ director.role.local_name }}
+                        </td>
+                        <td>
+                            {% if director.sign_permission %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove"></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if director.sign_enough %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove"></span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-1"></div>
     </div>
 </div>
