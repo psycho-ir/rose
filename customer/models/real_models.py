@@ -26,11 +26,8 @@ class RealCustomerInformation(Customer):
 
     @staticmethod
     def from_dic(dic):
-        birth_date = dic['birth_date']
-        birth_date_parts = birth_date.split('/')
-        gregorian_birth_date = jalali_datetime(int(birth_date_parts[0]), int(birth_date_parts[1]),
-                                               int(birth_date_parts[2])).togregorian()
-
+        from utils.date_utils import greg_date_from_shamsi
+        gregorian_birth_date = greg_date_from_shamsi(dic['birth_date'], '/')
         c = RealCustomerInformation(type=dic['type'], customer_code=dic['national_number'],
                                     name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
                                     bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
@@ -136,6 +133,7 @@ class AssetInformation(models.Model):
 class BankIncomeInformation(models.Model):
     class Meta:
         app_label = 'customer'
+
     customer = models.OneToOneField(RealCustomerInformation, related_name='bank_income_info', primary_key=True)
 
     income = models.IntegerField()

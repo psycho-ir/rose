@@ -1,8 +1,6 @@
 __author__ = 'soroosh'
 
 from django.db import models
-from jdatetime import datetime as jalali_datetime
-from rose_config.models import Town, Province, JobType, JobCertificateType, Bank, VasigheType, BusinessPlace
 
 CUSTOMER_TYPE = (
     ("haghighi", "haghighi"),
