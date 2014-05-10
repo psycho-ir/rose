@@ -1,0 +1,85 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            اطلاعات اعضای هیات مدیره
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="activity_info_form" name="activity_info_form" method="post"
+              action="{% url 'customer:enterprise_activity_info' %}" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="company_id" value="{{ customer_request.cif }}">
+
+            <div class="control-group">
+                <div class="row controls">
+                    <div class="col-xs-2">
+                        نوع فعالیت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="activity_type"
+                               value="{{ customer_info.activity_info.activity_type }}"
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
+                    </div>
+                    <div class="col-xs-2">
+                        مدرک شغلی
+                    </div>
+                    <div class="col-xs-3">
+                        <select name="certificate_type_id" value="{{ customer_info.activity_info.certificate_type_id }}"
+                                id="certificate_type_id"
+                                style="width: 100%;">
+                            {% for t in certificate_types %}
+                                <option value="{{ t.id }}">{{ t.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2">
+                        شناسه مدرک شغلی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="certificate_number"
+                               value="{{ customer_info.activity_info.certificate_number }}"
+                               required
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                       تاریخ صدور
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="certificate_start_date" id="certificate_start_date"
+                               value="{{ customer_info.activity_info.get_persian_certificate_start_date }}"
+                               required
+                                />
+                        <span id="certificate_start_date_span" />
+                    </div>
+                    <div class="col-xs-2">
+                        تاریخ اعتبار
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="certificate_expire_date" id="certificate_expire_date"
+                               value="{{ customer_info.activity_info.get_persian_certificate_expire_date }}"
+                               required
+                                />
+                        <span id="certificate_expire_date_span"></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12" style="text-align: center;">
+                    <button type="submit" style="width: 90%;" id="contact_info_button" class="btn btn-success">ثبت
+                        اطلاعات
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

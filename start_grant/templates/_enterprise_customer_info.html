@@ -1,0 +1,101 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            اطلاعات ثبتی شرکت
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="customer_info_form" name="customer_info_form" method="post"
+              action="{% url 'customer:enterprise_customer_info' %}" novalidate>
+            {% csrf_token %}
+
+            <input type="hidden" name="company_id" value="{{ customer_request.cif }}"/>
+
+            <div class="control-group">
+                <div class="row controls">
+                    <div class="col-xs-2">
+                        نام شرکت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="company_name"
+                               value="{{ customer_info.company_name }}"
+                               required
+                                />
+                    </div>
+
+                    <div class="col-xs-2">
+                        شماره ثبت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="number" class="form-control" name="register_number"
+                               value="{{ customer_info.register_number }}"
+                               required
+                                />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        نوع شرکت
+                    </div>
+                    <div class="col-xs-3">
+                        <select name="company_type_id" style="width:100%;" value="{{ customer_info.company_type_id }}">
+                            {% for company_type in company_types %}
+                                <option value="{{ company_type.id }}">{{ company_type.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        تاریخ ثبت
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" required name="register_date" id="register_date"
+                               value="{{ customer_info.get_persian_register_date }}"
+                                />
+                        <span id="register_date_span"></span>
+                    </div>
+
+                    <div class="col-xs-2">
+                        شماره روزنامه رسمی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="newspaper_number"
+                               value="{{ customer_info.newspaper_number }}"
+                               required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        تاریخ روزنامه رسمی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" name="newspaper_date" id="newspaper_date"
+                               value="{{ customer_info.get_persian_newspaper_date }}"
+                               required/>
+                        <span id="newspaper_date_span"></span>
+                    </div>
+
+                    <div class="col-xs-2">
+                        محل ثبت
+                    </div>
+                    <div class="col-xs-3">
+                        <select name="register_place_id" style="width:100%;">
+                            {% for town in register_towns %}
+                                <option value="{{ town.id }}">{{ town.local_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12" style="text-align: center;">
+                        <button type="submit" style="width: 90%;" id="customer_info_button" class="btn btn-success">ثبت
+                            اطلاعات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+</div>

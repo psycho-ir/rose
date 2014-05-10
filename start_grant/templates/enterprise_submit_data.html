@@ -4,19 +4,19 @@
 {% block content %}
     <div style="border: 1px solid #dddddd;border-radius: 5px;"
          class="form-group">
-        <div class="row rose-progress-bar" style="padding-top:15px;padding-bottom:15px; margin:0px;">
-            <div class="col-xs-2
+    <div class="row rose-progress-bar" style="padding-top:15px;padding-bottom:15px; margin:0px;">
+        <div class="col-xs-2
             {% if customer_info %}
             completed
             {% else %}
             pending
             {% endif %}
             rose-progress-bar-cell" id="customer_info">
-                <div class="row">
-                    <div class="col-xs-8">
-                        اطلاعات ثبتی شرکت
-                    </div>
-                    <div id="customer_info_state" class="col-xs-1">
+            <div class="row">
+                <div class="col-xs-8">
+                    اطلاعات ثبتی شرکت
+                </div>
+                <div id="customer_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;
                                  display: none;
 
@@ -26,170 +26,195 @@
                                     display: none;
                                 {% endif %}
                                 "></span>
-                    </div>
-                    <div id="customer_info_loader" class="col-xs-1">
+                </div>
+                <div id="customer_info_loader" class="col-xs-1">
 
-                    </div>
                 </div>
             </div>
-{#            <div class="col-xs-2#}
-{##}
-{#             {% if customer_info.contact_info %}#}
-{#                completed#}
-{#             {% else %}#}
-{#                pending#}
-{#             {% endif %}#}
-{##}
-{#             rose-progress-bar-cell" id="contact_info">#}
-{#                <div class="row">#}
-{#                    <div class="col-xs-8">#}
-{#                        اطلاعات تماس#}
-{#                    </div>#}
-{#                    <div id="contact_info_state" class="col-xs-1">#}
-{#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-{#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-{#                                {% if not customer_info.contact_info %}#}
-{#                                    display: none;"></span>#}
-{#                                {% endif %}#}
-{#                    </div>#}
-{#                    <div id="contact_info_loader" class="col-xs-1">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-xs-2#}
-{#             {% if customer_info.job_info %}#}
-{#                completed#}
-{#             {% else %}#}
-{#                pending#}
-{#             {% endif %}#}
-{#             rose-progress-bar-cell" id="job_info">#}
-{#                <div class="row">#}
-{#                    <div class="col-xs-8">#}
-{#                        اطلاعات شغلی#}
-{#                    </div>#}
-{#                    <div id="job_info_state" class="col-xs-1">#}
-{#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-{#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-{#                                {% if not customer_info.job_info %}#}
-{#                                    display: none;#}
-{#                                {% endif %}#}
-{#                                "></span>#}
-{#                    </div>#}
-{#                    <div id="job_info_loader" class="col-xs-1">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-xs-2#}
-{#             {% if customer_request.complete_information %}#}
-{#                   completed#}
-{#             {% else %}#}
-{#                    pending#}
-{#             {% endif %}#}
-{##}
-{#             rose-progress-bar-cell" id="loan_info">#}
-{#                <div class="row">#}
-{#                    <div class="col-xs-8">#}
-{#                        اطلاعات تسهیلات#}
-{#                    </div>#}
-{#                    <div id="loan_info_state" class="col-xs-1">#}
-{#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-{#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-{#                                {% if not customer_request.complete_information %}#}
-{#                                    display: none;#}
-{#                                {% endif %}#}
-{#                                "></span>#}
-{#                    </div>#}
-{#                    <div id="loan_info_loader" class="col-xs-1">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-xs-2#}
-{#             {% if customer_info.asset_info %}#}
-{#             completed#}
-{#             {% else %}#}
-{#             pending#}
-{#             {% endif %}#}
-{#             rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">#}
-{#                <div class="row">#}
-{#                    <div class="col-xs-9">#}
-{#                        دارایی ها و بدهی ها#}
-{#                    </div>#}
-{#                    <div id="asset_info_state" class="col-xs-1">#}
-{#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-{#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-{#                                {% if not customer_info.asset_info %}#}
-{#                                    display: none;#}
-{#                                {% endif %}#}
-{#                                "></span>#}
-{#                    </div>#}
-{#                    <div id="asset_info_loader" class="col-xs-1">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-xs-2#}
-{#             {% if customer_info.bank_income_info %}#}
-{#             completed#}
-{#             {% else %}#}
-{#             pending#}
-{#             {% endif %}#}
-{##}
-{#             rose-progress-bar-cell" id="bank_income_info">#}
-{#                <div class="row">#}
-{#                    <div class="col-xs-9">#}
-{#                        بانکها و درآمد#}
-{#                    </div>#}
-{#                    <div id="bank_income_state" class="col-xs-1">#}
-{#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-{#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-{#                                {% if not customer_info.bank_income_info %}#}
-{#                                    display: none;#}
-{#                                {% endif %}#}
-{#                                "></span>#}
-{#                    </div>#}
-{#                    <div id="bank_income_loader" class="col-xs-1">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
         </div>
-        <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-            <form action="{% url 'grant:submit' customer_request.id %}" method="post">
-                {% csrf_token %}
-                <div class="col-xs-12" style="text-align: center;">
-                    <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
-                        اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
-                    </button>
+        <div class="col-xs-2
 
+             {% if customer_info.contact_info %}
+                completed
+             {% else %}
+                pending
+             {% endif %}
+
+             rose-progress-bar-cell" id="contact_info">
+            <div class="row">
+                <div class="col-xs-8">
+                    اطلاعات تماس
                 </div>
-            </form>
-        </div>
-        {#        <form method="post">#}
-        <div id="submit_forms" class="form-group">
-            <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
-                {% if customer_request.type == 'haghighi' %}
-                    <div class="rose-submit-container" id="customer_info_container">
-                        {% include '_customer_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="contact_info_container">
-                        {% include '_contact_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="job_info_container">
-                        {% include '_job_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="loan_info_container">
-                        {% include '_loan_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="asset_info_container">
-                        {% include '_asset_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="bank_income_info_container">
-                        {% include '_bank_income_info.html' %}
-                    </div>
-                    </div>
-                {% else %}
-                {% endif %}
+                <div id="contact_info_state" class="col-xs-1">
+                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                {% if not customer_info.contact_info %}
+                                    display: none;"></span>
+                                {% endif %}
+                </div>
+                <div id="activity_info_loader" class="col-xs-1">
+                </div>
+            </div>
         </div>
 
-        {#        </form>#}
+        <div class="col-xs-2
+
+             {% if customer_info.activity_info %}
+                completed
+             {% else %}
+                pending
+             {% endif %}
+
+             rose-progress-bar-cell" id="activity_info">
+            <div class="row">
+                <div class="col-xs-8">
+                    زمینه فعالیت
+                </div>
+                <div id="activity_info_state" class="col-xs-1">
+                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                {% if not customer_info.activity_info %}
+                                    display: none;"></span>
+                                {% endif %}
+                </div>
+                <div id="activity_info_loader" class="col-xs-1">
+                </div>
+            </div>
+        </div>
+        {#            <div class="col-xs-2#}
+        {#             {% if customer_info.job_info %}#}
+        {#                completed#}
+        {#             {% else %}#}
+        {#                pending#}
+        {#             {% endif %}#}
+        {#             rose-progress-bar-cell" id="job_info">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-xs-8">#}
+        {#                        اطلاعات شغلی#}
+        {#                    </div>#}
+        {#                    <div id="job_info_state" class="col-xs-1">#}
+        {#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
+        {#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
+        {#                                {% if not customer_info.job_info %}#}
+        {#                                    display: none;#}
+        {#                                {% endif %}#}
+        {#                                "></span>#}
+        {#                    </div>#}
+        {#                    <div id="job_info_loader" class="col-xs-1">#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        <div class="col-xs-2
+                         {% if customer_request.complete_information %}
+                               completed
+                         {% else %}
+                                pending
+                         {% endif %}
+
+                         rose-progress-bar-cell" id="loan_info">
+            <div class="row">
+                <div class="col-xs-8">
+                    اطلاعات تسهیلات
+                </div>
+                <div id="loan_info_state" class="col-xs-1">
+                    <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                                    <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                            {% if not customer_request.complete_information %}
+                                                display: none;
+                                            {% endif %}
+                                            "></span>
+                </div>
+                <div id="loan_info_loader" class="col-xs-1">
+                </div>
+            </div>
+        </div>
+        {#                        <div class="col-xs-2#}
+        {#             {% if customer_info.asset_info %}#}
+        {#             completed#}
+        {#             {% else %}#}
+        {#             pending#}
+        {#             {% endif %}#}
+        {#             rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-xs-9">#}
+        {#                        دارایی ها و بدهی ها#}
+        {#                    </div>#}
+        {#                    <div id="asset_info_state" class="col-xs-1">#}
+        {#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
+        {#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
+        {#                                {% if not customer_info.asset_info %}#}
+        {#                                    display: none;#}
+        {#                                {% endif %}#}
+        {#                                "></span>#}
+        {#                    </div>#}
+        {#                    <div id="asset_info_loader" class="col-xs-1">#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="col-xs-2#}
+        {#             {% if customer_info.bank_income_info %}#}
+        {#             completed#}
+        {#             {% else %}#}
+        {#             pending#}
+        {#             {% endif %}#}
+        {##}
+        {#             rose-progress-bar-cell" id="bank_income_info">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-xs-9">#}
+        {#                        بانکها و درآمد#}
+        {#                    </div>#}
+        {#                    <div id="bank_income_state" class="col-xs-1">#}
+        {#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
+        {#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
+        {#                                {% if not customer_info.bank_income_info %}#}
+        {#                                    display: none;#}
+        {#                                {% endif %}#}
+        {#                                "></span>#}
+        {#                    </div>#}
+        {#                    <div id="bank_income_loader" class="col-xs-1">#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+    </div>
+    <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
+        <form action="{% url 'grant:submit' customer_request.id %}" method="post">
+            {% csrf_token %}
+            <div class="col-xs-12" style="text-align: center;">
+                <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
+                    اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
+                </button>
+
+            </div>
+        </form>
+    </div>
+    {#        <form method="post">#}
+    <div id="submit_forms" class="form-group">
+        <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
+            {% if customer_request.type == 'hoghooghi' %}
+                <div class="rose-submit-container" id="customer_info_container">
+                    {% include '_enterprise_customer_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="contact_info_container">
+                    {% include '_enterprise_contact_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="activity_info_container">
+                    {% include '_enterprise_activity_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="loan_info_container">
+                    {% include '_loan_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="asset_info_container">
+                    {% include '_asset_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="bank_income_info_container">
+                    {% include '_bank_income_info.html' %}
+                </div>
+                </div>
+            {% else %}
+            {% endif %}
+    </div>
+
+    {#        </form>#}
     </div>
 {% endblock %}
 
@@ -204,10 +229,15 @@
         }
         $(window).ready(function () {
             check_for_showing_next_level();
-            $('#birth_date,#birth_date_span').persianDatepicker();
+            $('#register_date,#register_date_span').persianDatepicker();
+            $('#newspaper_date,#newspaper_date_span').persianDatepicker();
+            $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
+            $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
+
             $('.rose-progress-bar-cell').click(function () {
                 var cell = $(this)
                 var container = $('#' + $(this).attr('id') + '_container');
+                console.log(container);
                 $('.rose-progress-bar-cell').removeClass('selected');
                 $(this).addClass('selected');
                 $(".rose-submit-container").hide();
@@ -268,6 +298,12 @@
                             }));
                         }
                     }
+
+                    var value = $(depend_id).attr('value');
+                    if (value) {
+                        $(depend_id).val(value);
+                        $(depend_id).change();
+                    }
                 })
             })
 
@@ -295,7 +331,6 @@
                         }
                     }
                     var value = $(depend_id).attr('value');
-                    console.log(depend_id);
                     if (value) {
                         $(depend_id).val(value);
                         $(depend_id).change();
@@ -306,6 +341,7 @@
 
             $('select').each(function () {
                 var value = $(this).attr('value');
+                {#                alert($(this).attr('id'));#}
                 if (value) {
                     $(this).val(value);
                     $(this).change();
