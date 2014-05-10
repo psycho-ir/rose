@@ -33,6 +33,33 @@
             </div>
         </div>
         <div class="col-xs-2
+            {% if customer_info.director_set %}
+            completed
+            {% else %}
+            pending
+            {% endif %}
+            rose-progress-bar-cell" id="director_info">
+            <div class="row">
+                <div class="col-xs-8">
+                    اعضا هیات مدیره
+                </div>
+                <div id="board_of_director_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;
+                                 display: none;
+
+                                "></span>
+                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                {% if  not customer_info.director_set %}
+                                    display: none;
+                                {% endif %}
+                                "></span>
+                </div>
+                <div id="board_of_director_loader" class="col-xs-1">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2
 
              {% if customer_info.contact_info %}
                 completed
@@ -194,6 +221,9 @@
                 <div class="rose-submit-container" id="customer_info_container">
                     {% include '_enterprise_customer_info.html' %}
                 </div>
+                <div class="rose-submit-container collapse" id="director_info_container">
+                    {% include '_enterprise_board_of_directors.html' %}
+                </div>
                 <div class="rose-submit-container collapse" id="contact_info_container">
                     {% include '_enterprise_contact_info.html' %}
                 </div>
@@ -228,11 +258,21 @@
             }
         }
         $(window).ready(function () {
+            $('#director_table').dataTable({
+                "oLanguage": {
+                    sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است'
+                },
+
+                bPaginate: false,
+                bFilter: false,
+                bInfo: false
+            });
             check_for_showing_next_level();
             $('#register_date,#register_date_span').persianDatepicker();
             $('#newspaper_date,#newspaper_date_span').persianDatepicker();
             $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
             $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
+            $('#sign_expire_date,#sign_expire_date_span').persianDatepicker();
 
             $('.rose-progress-bar-cell').click(function () {
                 var cell = $(this)
