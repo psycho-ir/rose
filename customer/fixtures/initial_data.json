@@ -6,5 +6,66 @@
             "name": "tehran",
             "local_name": "تهران"
         }
+    },
+    {
+        "pk":1,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"amel",
+            "local_name":"مدیرعامل"
+        }
+    },
+    {
+        "pk":2,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"رئیس هیئت مدیره",
+            "local_name":"رئیس هیئت مدیره"
+        }
     }
+    ,
+    {
+        "pk":3,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"عضو هیئت مدیره",
+            "local_name":"عضو هیئت مدیره"
+        }
+    }
+    ,
+    {
+        "pk":4,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"نایب رئیس هیئت مدیره",
+            "local_name":"نایب رئیس هیئت مدیره"
+        }
+    }
+    ,
+    {
+        "pk":5,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"وکیل",
+            "local_name":"وکیل"
+        }
+    }
+    ,
+    {
+        "pk":6,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"عضو علی البدل",
+            "local_name":"عضو علی البدل"
+        }
+    }  ,
+    {
+        "pk":7,
+        "model":"customer.boadofdirectorrole",
+        "fields":{
+            "name":"نماینده",
+            "local_name":"نماینده"
+        }
+    }
+
 ]
