@@ -10,7 +10,7 @@ urlpatterns = patterns('',
                        url(r'^asset_info', AssetInfoView.as_view(), name='asset_info'),
                        url(r'^bank_income_info', BankIncomeView.as_view(), name='bank_income_info'),
 
-                       url(r'^enterprise_customer_info', EnterpriseContactInformationView.as_view(),
+                       url(r'^enterprise_customer_info', EnterpriseCustomerInfoView.as_view(),
                            name='enterprise_customer_info'),
 
                        url(r'^enterprise_contact_info', EnterpriseContactInformationView.as_view(),
