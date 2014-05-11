@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="number" class="form-control" name="customer_id"
+                               id="director_id"
                                required
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
                     </div>
                     <div class="col-xs-2">
@@ -40,7 +40,7 @@
                         حق امضا
                     </div>
                     <div class="col-xs-3">
-                        <input type="checkbox" class="form-control" name="sign_permission"
+                        <input type="checkbox" class="form-control" name="sign_permission" id="sign_permission"
                                value="True"
                                 />
                     </div>
@@ -48,7 +48,7 @@
                         کفایت امضا
                     </div>
                     <div class="col-xs-3">
-                        <input type="checkbox" class="form-control" name="sign_enough" value="True"/>
+                        <input type="checkbox" class="form-control" name="sign_enough" id="sign_enough" value="True"/>
                     </div>
 
                 </div>
@@ -87,6 +87,7 @@
                 <td>سمت</td>
                 <td>حق امضا</td>
                 <td>کفایت امضا</td>
+                <td></td>
                 </thead>
                 <tbody>
 
@@ -118,6 +119,11 @@
                             {% else %}
                                 <span class="glyphicon glyphicon-remove" style="color:red;"></span>
                             {% endif %}
+                        </td>
+                        <td>
+                            <a href="#" class="edit_director"  sign_expire_date="{{ director.get_persian_sign_expire_date }}"
+                               sign_permission="{{ director.sign_permission }}" sign_enough="{{ director.sign_enough }}"
+                               role_id="{{ director.role.id }}" customer_code="{{ director.customer.customer_code }}">ویرایش</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -69,24 +69,26 @@ class EnterpriseCustomerInformation(Customer):
 class BoardOfDirector(models.Model):
     class Meta:
         app_label = 'customer'
+        unique_together = ('company', 'customer',)
 
-    company = models.ForeignKey(EnterpriseCustomerInformation,related_name='director_set')
+    company = models.ForeignKey(EnterpriseCustomerInformation, related_name='director_set')
     customer = models.ForeignKey(RealCustomerInformation)
     role = models.ForeignKey(BoadOfDirectorRole)
     sign_permission = models.BooleanField(default=False)
-    sign_expire_date = models.DateField()
+    sign_expire_date = models.DateTimeField()
     sign_enough = models.BooleanField(default=False)
+
+    def get_persian_sign_expire_date(self):
+        return jalali_datetime.fromgregorian(datetime=self.sign_expire_date).strftime('%Y/%m/%d')
 
     @staticmethod
     def from_dic(dic):
         sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
-        b = BoardOfDirector(company_id=dic['company_id'],
-                            customer_id=dic['customer_id'],
-                            role_id=dic['role_id'],
-                            sign_permission=dic.get('sign_permission', False),
-                            sign_expire_date=sign_expire_date,
-                            sign_enough=dic.get('sign_enough', False)
-        )
+        b, e = BoardOfDirector.objects.get_or_create(company_id=dic['company_id'], customer_id=dic['customer_id'])
+        b.role_id = dic['role_id']
+        b.sign_permission = dic.get('sign_permission', False)
+        b.sign_expire_date = sign_expire_date
+        b.sign_enough = dic.get('sign_enough', False)
 
         return b
 

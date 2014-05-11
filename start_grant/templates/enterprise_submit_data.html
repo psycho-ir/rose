@@ -421,6 +421,24 @@
 
             });
 
+            $('.edit_director').click(function () {
+                var item = $(this);
+                var sign_enough = item.attr('sign_enough');
+                var sign_permission = item.attr('sign_permission');
+                var customer_code = item.attr('customer_code');
+                var role_id = item.attr('role_id');
+                var sign_expire_date =item.attr('sign_expire_date');
+
+                $('#director_id').val(customer_code);
+                $('#role_id').val(role_id);
+                $('#sign_permission').prop('checked',sign_permission == 'True');
+                $('#sign_enough').prop('checked',sign_enough == 'True');
+                $('#sign_expire_date').val(sign_expire_date)
+
+
+
+            })
+
 
         })
         ;
