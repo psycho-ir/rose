@@ -84,7 +84,10 @@ class BoardOfDirector(models.Model):
     @staticmethod
     def from_dic(dic):
         sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
-        b, e = BoardOfDirector.objects.get_or_create(company_id=dic['company_id'], customer_id=dic['customer_id'])
+        if BoardOfDirector.objects.filter(company_id=dic['company_id'], customer_id=dic['customer_id']).exists():
+            b = BoardOfDirector.objects.get(company_id=dic['company_id'], customer_id=dic['customer_id'])
+        else:
+            b = BoardOfDirector(company_id=dic['company_id'], customer_id=dic['customer_id'])
         b.role_id = dic['role_id']
         b.sign_permission = dic.get('sign_permission', False)
         b.sign_expire_date = sign_expire_date
