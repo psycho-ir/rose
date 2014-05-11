@@ -4,6 +4,7 @@ from customer.views import *
 
 
 urlpatterns = patterns('',
+                       url(r'^real_register', RegisterRealCustomerView.as_view(), name='real_register'),
                        url(r'^customer_info', CustomerInfoView.as_view(), name='customer_info'),
                        url(r'^contact_info', ContactInfoView.as_view(), name='contact_info'),
                        url(r'^job_info', JobInfoView.as_view(), name='job_info'),
