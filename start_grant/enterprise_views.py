@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
 from customer.models.enterprise_models import EnterpriseCustomerInformation, RegisterTown, BoadOfDirectorRole
-from rose_config.models import CompanyType, Province, Town, JobCertificateType, LoanType
+from rose_config.models import CompanyType, Province, Town, JobCertificateType, LoanType, VasigheType, Bank
 from start_grant.models import Request
 
 __author__ = 'soroosh'
@@ -20,6 +20,8 @@ class EnterpriseSubmitDataView(View):
         loan_types = LoanType.objects.all()
         refund_types = loan_types.first().refund_types.all()
         board_of_directors = BoadOfDirectorRole.objects.all()
+        vasighe_types = VasigheType.objects.all()
+        banks = Bank.objects.all()
 
         template = loader.get_template('enterprise_submit_data.html')
         context = RequestContext(request,
@@ -32,7 +34,8 @@ class EnterpriseSubmitDataView(View):
                                   'certificate_types': certificate_types,
                                   'loan_types': loan_types,
                                   'refund_types': refund_types,
-                                  'board_of_directors': board_of_directors})
+                                  'board_of_directors': board_of_directors,
+                                  'vasighe_types':vasighe_types,'banks':banks})
 
         return HttpResponse(template.render(context))
 
