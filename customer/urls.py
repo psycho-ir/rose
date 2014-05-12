@@ -18,5 +18,6 @@ urlpatterns = patterns('',
                            name='enterprise_contact_info'),
                        url(r'^enterprise_activity_info', EnterpriseActivityView.as_view(),
                            name='enterprise_activity_info'),
-                       url(r'^board_of_director', BoardOfDirectorView.as_view(), name='board_of_director')
+                       url(r'^board_of_director', BoardOfDirectorView.as_view(), name='board_of_director'),
+                       url(r'^enterprise_asset_info', EnterpriseAssetInfoView.as_view(), name='enterprise_asset_info'),
 )

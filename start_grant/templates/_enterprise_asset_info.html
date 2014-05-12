@@ -1,0 +1,341 @@
+<div class="panel panel-success">
+<div class="panel-heading">
+    <div class="panel-title">
+        دارایی ها و بدهی ها
+    </div>
+</div>
+<div class="panel-body">
+<form id="asset_info_form" name="asset_info_form" method="post" action="{% url 'customer:enterprise_asset_info' %}"
+      novalidate>
+{% csrf_token %}
+<input type="hidden" name="company_id" value="{{ customer_info.pk }}">
+
+<div class="control-group">
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        وجه نقد
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        صندوق
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="cash"
+               value="{{ customer_info.asset_info.cash }}"
+               required
+               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                />
+    </div>
+    <div class="col-xs-2">
+        حسابهای بانکی
+    </div>
+    <div class="col-xs-3">
+        <input type="text" class="form-control" name="account"
+               value="{{ customer_info.asset_info.account }}"
+               required
+               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        موجودی کالا
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        مواد اولیه
+    </div>
+    <div class="col-xs-3">
+        <input type="number" name="ingredient" class="form-control"
+               value="{{ customer_info.asset_info.ingredient }}" required/>
+
+    </div>
+    <div class="col-xs-2">
+        محصولات در جریان ساخت
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="current_develop_products_amount"
+               value="{{ customer_info.asset_info.current_develop_products_amount }}"
+               required/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        محصولات ساخته شده
+    </div>
+    <div class="col-xs-3">
+        <input type="number" name="current_products_amount" class="form-control"
+               value="{{ customer_info.asset_info.current_products_amount }}" required/>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        مطالبات
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        از اشخاص
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="individual_credit_amount" value="{{ customer_info.asset_info.individual_credit_amount }}"
+               required
+               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                />
+    </div>
+    <div class="col-xs-2">
+        از شرکتها و موسسات
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="company_credit_amount"
+               value="{{ customer_info.asset_info.company_credit_amount }}"
+               required
+               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        متفرقه
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="other_credit_amount"
+               value="{{ customer_info.asset_info.other_credit_amount }}" required/>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        اموال منقول و غیر منقول
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        زمین و ساختمان
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="manghool_building_amount"
+               value="{{ customer_info.asset_info.manghool_building_amount }}"
+               required
+                />
+    </div>
+    <div class="col-xs-2">
+        تاسیسات
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="manghool_installation_amount"
+               value="{{ customer_info.asset_info.manghool_installation_amount }}"
+               required
+                />
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        وسایط نقلیه
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="manghool_vehicle_amount"
+               value="{{ customer_info.asset_info.manghool_vehicle_amount }}"
+               required
+                />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        مشارکت در شرکت ها
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        اوراق مشارکت بی نام
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="oragh_mosharekat_bi_nam_amount"
+               value="{{ customer_info.asset_info.oragh_mosharekat_bi_nam_amount }}"
+               required
+                />
+    </div>
+    <div class="col-xs-2">
+        اوراق سهام شرکت ها
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="oragh_saham_sherkat_amount"
+               value="{{ customer_info.asset_info.oragh_saham_sherkat_amount }}"
+               required
+                />
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        سهم الشرکه (بدون اوراق سهام(
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="sahm_sherke_amount"
+               value="{{ customer_info.asset_info.sahm_sherke_amount }}"
+               required
+                />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        بدهی
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        سرمایه ثبت شده
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        پرداخت شده
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="registered_payed"
+               value="{{ customer_info.asset_info.registered_payed }}"
+               required
+                />
+    </div>
+    <div class="col-xs-2">
+        تعهد شده
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="registered_guarantied"
+               value="{{ customer_info.asset_info.registered_guarantied }}"
+               required
+                />
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        مانده حساب سود زیان
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        مانده حساب سود زیان
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="remained_benefit_amount"
+               value="{{ customer_info.asset_info.remained_benefit_amount }}"
+               required
+                />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        وام و اعتبار دریافتی
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        به اشخاص و بازرگانان
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="loan_from_individual_amount"
+               value="{{ customer_info.asset_info.loan_from_individual_amount }}"
+               required
+                />
+    </div>
+    <div class="col-xs-2">
+        به شرکت ها و موسسات
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="loan_from_institutes_amount"
+               value="{{ customer_info.asset_info.loan_from_institutes_amount }}"
+               required
+                />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        به بانکها
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="loan_from_banks_amount"
+               value="{{ customer_info.asset_info.loan_from_banks_amount }}"
+               required
+                />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        پیش دریافت ها
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        پیش دریافت ها
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="pish_daryaft_amount"
+               value="{{ customer_info.asset_info.pish_daryaft_amount }}"
+               required
+                />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        بستانکاران
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        بستانکاران
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="bestankaran_amount"
+               value="{{ customer_info.asset_info.bestankaran_amount }}"
+               required
+                />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5" style="font-weight: bold;">
+        اسناد پرداختی
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        اسناد پرداختی
+    </div>
+    <div class="col-xs-3">
+        <input type="number" class="form-control" name="payed_documents_amount"
+               value="{{ customer_info.asset_info.payed_documents_amount }}"
+               required
+                />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12" style="text-align: center;">
+        <button type="submit" style="width: 90%;" id="asset_info_button" class="btn btn-success">ثبت
+            اطلاعات
+        </button>
+    </div>
+</div>
+</div>
+</form>
+</div>
+</div>

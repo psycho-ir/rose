@@ -55,3 +55,14 @@ class EnterpriseActivityView(View):
         except Exception as e:
             print e
             return HttpResponse("False")
+
+
+class EnterpriseAssetInfoView(View):
+    def post(self, request):
+        try:
+            asset = EnterpriseAssetInformation.from_dic(request.POST)
+            asset.save()
+            return HttpResponse("True")
+        except Exception as e:
+            print e
+            return HttpResponse("False")

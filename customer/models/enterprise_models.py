@@ -154,6 +154,76 @@ class EnterpriseActivity(models.Model):
         return ea
 
 
+class EnterpriseAssetInformation(models.Model):
+    class Meta:
+        app_label = 'customer'
+
+    company = models.OneToOneField(EnterpriseCustomerInformation, related_name='asset_info', primary_key=True)
+
+    cash = models.BigIntegerField(default=0)
+    account = models.BigIntegerField(default=0)
+
+    ingredient = models.BigIntegerField(default=0)
+    current_develop_products_amount = models.BigIntegerField(default=0)
+    current_products_amount = models.BigIntegerField(default=0)
+
+    individual_credit_amount = models.BigIntegerField(default=0)
+    company_credit_amount = models.BigIntegerField(default=0)
+    other_credit_amount = models.BigIntegerField(default=0)
+
+    manghool_building_amount = models.BigIntegerField(default=0)
+    manghool_installation_amount = models.BigIntegerField(default=0)
+    manghool_vehicle_amount = models.BigIntegerField(default=0)
+
+    oragh_mosharekat_bi_nam_amount = models.BigIntegerField(default=0)
+    oragh_saham_sherkat_amount = models.BigIntegerField(default=0)
+    sahm_sherke_amount = models.BigIntegerField(default=0)
+
+    registered_payed = models.BigIntegerField(default=0)
+    registered_guarantied = models.BigIntegerField(default=0)
+
+    remained_benefit_amount = models.BigIntegerField(default=0)
+
+    loan_from_individual_amount = models.BigIntegerField(default=0)
+    loan_from_institutes_amount = models.BigIntegerField(default=0)
+    loan_from_banks_amount = models.BigIntegerField(default=0)
+
+    pish_daryaft_amount = models.BigIntegerField(default=0)
+    bestankaran_amount = models.BigIntegerField(default=0)
+
+    payed_documents_amount = models.BigIntegerField(default=0)
+
+    @staticmethod
+    def from_dic(dic):
+        asset = EnterpriseAssetInformation(company_id=dic['company_id'],
+                                           cash=dic['cash'],
+                                           account=dic['account'],
+                                           ingredient=dic['ingredient'],
+                                           current_develop_products_amount=dic['current_develop_products_amount'],
+                                           current_products_amount=dic['current_products_amount'],
+                                           individual_credit_amount=dic['individual_credit_amount'],
+                                           company_credit_amount=dic['company_credit_amount'],
+                                           other_credit_amount=dic['other_credit_amount'],
+                                           manghool_building_amount=dic['manghool_building_amount'],
+                                           manghool_installation_amount=dic['manghool_installation_amount'],
+                                           manghool_vehicle_amount=dic['manghool_vehicle_amount'],
+                                           oragh_mosharekat_bi_nam_amount=dic['oragh_mosharekat_bi_nam_amount'],
+                                           oragh_saham_sherkat_amount=dic['oragh_saham_sherkat_amount'],
+                                           sahm_sherke_amount=dic['sahm_sherke_amount'],
+                                           registered_payed=dic['registered_payed'],
+                                           registered_guarantied=dic['registered_guarantied'],
+                                           remained_benefit_amount=dic['remained_benefit_amount'],
+                                           loan_from_individual_amount=dic['loan_from_individual_amount'],
+                                           loan_from_institutes_amount=dic['loan_from_institutes_amount'],
+                                           loan_from_banks_amount=dic['loan_from_banks_amount'],
+                                           pish_daryaft_amount=dic['pish_daryaft_amount'],
+                                           bestankaran_amount=dic['bestankaran_amount'],
+                                           payed_documents_amount=dic['payed_documents_amount']
+        )
+        return asset
+
+
+
 
 
 

@@ -180,29 +180,29 @@
             </div>
         </div>
     </div>
-    {#                        <div class="col-xs-2#}
-    {#             {% if customer_info.asset_info %}#}
-    {#             completed#}
-    {#             {% else %}#}
-    {#             pending#}
-    {#             {% endif %}#}
-    {#             rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">#}
-    {#                <div class="row">#}
-    {#                    <div class="col-xs-9">#}
-    {#                        دارایی ها و بدهی ها#}
-    {#                    </div>#}
-    {#                    <div id="asset_info_state" class="col-xs-1">#}
-    {#                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>#}
-    {#                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;#}
-    {#                                {% if not customer_info.asset_info %}#}
-    {#                                    display: none;#}
-    {#                                {% endif %}#}
-    {#                                "></span>#}
-    {#                    </div>#}
-    {#                    <div id="asset_info_loader" class="col-xs-1">#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </div>#}
+    <div class="col-xs-12
+                 {% if customer_info.asset_info %}
+                 completed
+                 {% else %}
+                 pending
+                 {% endif %}
+                 rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">
+        <div class="row">
+            <div class="col-xs-9">
+                دارایی ها و بدهی ها
+            </div>
+            <div id="asset_info_state" class="col-xs-1">
+                <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                            <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                    {% if not customer_info.asset_info %}
+                                        display: none;
+                                    {% endif %}
+                                    "></span>
+            </div>
+            <div id="asset_info_loader" class="col-xs-1">
+            </div>
+        </div>
+    </div>
     {#            <div class="col-xs-2#}
     {#             {% if customer_info.bank_income_info %}#}
     {#             completed#}
@@ -261,8 +261,8 @@
                 <div class="rose-submit-container collapse" id="vasighe_info_container">
                     {% include '_enterprise_bank_info.html' %}
                 </div>
-                <div class="rose-submit-container collapse" id="bank_income_info_container">
-                    {% include '_bank_income_info.html' %}
+                <div class="rose-submit-container collapse" id="asset_info_container">
+                    {% include '_enterprise_asset_info.html' %}
                 </div>
                 </div>
             {% else %}
