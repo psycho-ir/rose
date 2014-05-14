@@ -45,8 +45,6 @@
                                value="{{ customer_request.complete_information.prepayed_amount }}"
                                required
                                number
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"
-                               data-validator-number-message="عدد وارد نمایید"
                                 />
                     </div>
                 </div>
@@ -71,10 +69,9 @@
                         تعداد اقساط
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="number_of_installments"
+                        <input type="number" class="form-control" name="number_of_installments"
                                value="{{ customer_request.complete_information.number_of_installments }}"
                                required
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
                     </div>
                     <div class="col-xs-2">

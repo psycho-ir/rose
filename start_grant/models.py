@@ -6,6 +6,12 @@ from customer.models.common import CUSTOMER_TYPE
 from guarantor.models import Guarantor
 from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
 
+REQUEST_STATUS = (
+    ("intro", "intro"),
+    ("req_info_completed", "req_info_completed"),
+    ("need_guarantor", "need_guarantor")
+)
+
 
 class Request(models.Model):
     class Meta:
@@ -75,6 +81,11 @@ class RequestCompleteInformation(models.Model):
                                          number_of_installments=dic['number_of_installments'])
         return rci
 
+    def save(self, *args, **kwargs):
+        super(RequestCompleteInformation, self).save(*args, **kwargs)
+        self.request.status = 'req_info_completed'
+        self.request.save()
+
 
 class BankVasigheInformation(models.Model):
     request = models.OneToOneField(to=Request, related_name='vasighe_information', primary_key=True)
@@ -97,6 +108,7 @@ class BankVasigheInformation(models.Model):
         bank_vasighe.banks = dic.getlist('banks')
 
         return bank_vasighe
+
 
 
 

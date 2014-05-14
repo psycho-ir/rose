@@ -44,7 +44,7 @@
                             <a href="{% url 'grant:enterprise_submit'  request.id %}">ادامه ثبت اطلاعات</a>
                         {% endif %}
                         </span>
-                    {% elif request.status == 'res_info_completed' %}
+                    {% elif request.status == 'req_info_completed' %}
                         ثبت تکمیلی
                         <span style="padding-right: 3px;">
                           {% if request.type == 'haghighi' %}

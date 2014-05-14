@@ -58,9 +58,9 @@ class ReqCompleteView(View):
         try:
             complete_info = RequestCompleteInformation.from_dic(request.POST)
             complete_info.save()
-            r = Request.objects.get(pk=request.POST.get('request_id'))
-            r.status = 'res_info_completed'
-            r.save()
+            # r = Request.objects.get(pk=request.POST.get('request_id'))
+            # r.status = 'req_info_completed'
+            # r.save()
             return HttpResponse("True")
         except Exception as e:
             print e
