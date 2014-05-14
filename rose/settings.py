@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'orcl',
         'USER': 's5samens',
         'PASSWORD': 's5samens',
-        'HOST': '192.168.101.20',
+        'HOST': '192.168.101.97',
         'PORT': '1521',
         'OPTIONS': {
             'threaded': True,

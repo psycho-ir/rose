@@ -49,20 +49,22 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-2">
-                       تاریخ صدور
+                        تاریخ صدور
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="certificate_start_date" id="certificate_start_date"
+                        <input type="text" class="form-control" name="certificate_start_date"
+                               id="certificate_start_date"
                                value="{{ customer_info.activity_info.get_persian_certificate_start_date }}"
                                required
                                 />
-                        <span id="certificate_start_date_span" />
+                        <span id="certificate_start_date_span"/>
                     </div>
                     <div class="col-xs-2">
                         تاریخ اعتبار
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="certificate_expire_date" id="certificate_expire_date"
+                        <input type="text" class="form-control" name="certificate_expire_date"
+                               id="certificate_expire_date"
                                value="{{ customer_info.activity_info.get_persian_certificate_expire_date }}"
                                required
                                 />
@@ -73,13 +75,54 @@
             </div>
             <div class="row">
                 <div class="col-xs-12" style="text-align: center;">
-                    <button type="submit" style="width: 90%;" id="contact_info_button" class="btn btn-success">ثبت
+                    <button type="submit" style="width: 90%;" id="activity_info_button" class="btn btn-success">ثبت
                         اطلاعات
                     </button>
                 </div>
             </div>
 
         </form>
-
+    </div>
+    <div class="row" style="padding-top: 20px; padding-bottom: 10px;">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10" style="border: solid 1px #665555; border-radius: 5px; padding-bottom: 10px; ">
+            <table id="activity_table" class="display">
+                <thead>
+                <td>نوع فعالیت</td>
+                <td>مدرک شغلی</td>
+                <td>شناسه مدرک شغلی</td>
+                <td>تاریخ صدور</td>
+                <td>تاریخ اعتبار</td>
+                <td>عملیات</td>
+                <td>عملیات</td>
+                </thead>
+{#                <tbody>#}
+{##}
+{#                {% for activity in customer_info.activity_info.all %}#}
+{#                    <tr>#}
+{#                        <td>#}
+{#                            {{ activity.activity_type }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ activity.certificate_type.local_name }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ activity.certificate_number }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ activity.get_persian_certificate_start_date }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ activity.get_persian_certificate_expire_date }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            <a  href="#" url="{% url 'customer:enterprise_activity_delete' %}?activity_id={{ activity.id }}&company_id={{ activity.company.customer_code }}" class="delete_activity" >حذف</a>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+            </table>
+        </div>
+        <div class="col-xs-1"></div>
     </div>
 </div>

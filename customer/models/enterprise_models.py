@@ -125,7 +125,7 @@ class EnterpriseActivity(models.Model):
     class Meta:
         app_label = 'customer'
 
-    company = models.OneToOneField(EnterpriseCustomerInformation, related_name='activity_info', primary_key=True)
+    company = models.ForeignKey(EnterpriseCustomerInformation, related_name='activity_info')
     activity_type = models.CharField(max_length=256)
     certificate_type = models.ForeignKey(JobCertificateType)
     certificate_number = models.CharField(max_length=20)

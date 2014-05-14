@@ -14,3 +14,4 @@ class Customer(models.Model):
 
     type = models.CharField(choices=CUSTOMER_TYPE, max_length=30)
     customer_code = models.CharField(max_length=10, primary_key=True)
+

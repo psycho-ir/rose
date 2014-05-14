@@ -14,8 +14,28 @@
             <div class="panel-body">
                 <form method="post" action="{% url 'grant:start' %}" novalidate>
                     {% csrf_token %}
-                    {#                    <div class="form-group">#}
                     <div class="form-group control-group">
+
+{#                        <div class="row controls">#}
+{#                            <div class="col-xs-1"></div>#}
+{#                            <div class="col-xs-5">#}
+{#                                ثبت درخواست توسط وکیل#}
+{#                            </div>#}
+{#                            <div class="col-xs-4">#}
+{#                                <input type="checkbox" id="is_agent"/>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="collapse" id="agent_form">#}
+{#                            <div class="row">#}
+{#                                <div class="col-xs-1"></div>#}
+{#                                <div class="col-xs-5">#}
+{#                                    شماره ملی#}
+{#                                </div>#}
+{#                                <div class="col-xs-4">#}
+{#                                    <input class="form-control" type="text" name="national_number"/>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
                         <div class="row controls">
                             <div class="col-xs-1"></div>
                             <div class="col-xs-5">
@@ -142,7 +162,6 @@
                             </div>
                         </div>
 
-                        {# todo: if it is about current user we don't need to show them here! #}
                         <div class="row">
                             <div class="col-xs-5">
 
@@ -158,7 +177,6 @@
             </div>
             <div class="row">
             </div>
-            </form>
 
         </div>
     </div>
@@ -197,6 +215,15 @@
         }
         ;
 
+        $('#is_agent').change(function () {
+            var selected = $(this).prop('checked');
+            if (selected) {
+                $('#agent_form').show();
+            }
+            else {
+                $('#agent_form').hide();
+            }
+        });
         $('#business_part').change(function () {
             load_request_descriptions($(this).val());
         })

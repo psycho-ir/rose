@@ -79,7 +79,7 @@
                                     display: none;"></span>
                                 {% endif %}
             </div>
-            <div id="activity_info_loader" class="col-xs-1">
+            <div id="contact_info_loader" class="col-xs-1">
             </div>
         </div>
     </div>
@@ -101,8 +101,8 @@
                 <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
                                 {% if not customer_info.activity_info %}
-                                    display: none;"></span>
-                                {% endif %}
+                                    display: none;
+                                {% endif %}"></span>
             </div>
             <div id="activity_info_loader" class="col-xs-1">
             </div>
@@ -276,195 +276,331 @@
 
 {% block js %}
     <script type="text/javascript">
-        function check_for_showing_next_level() {
-            if ($('.pending').length == 0) {
-                $('#next_level').show('slow');
+    var table;
+    function check_for_showing_next_level() {
+        if ($('.pending').length == 0) {
+            $('#next_level').show('slow');
 
-            }
         }
-        $(window).ready(function () {
-            $('#director_table').dataTable({
-                "oLanguage": {
-                    sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است'
-                },
+    }
+    $(window).ready(function () {
 
-                bPaginate: false,
-                bFilter: false,
-                bInfo: false
-            });
-            check_for_showing_next_level();
-            $('#register_date,#register_date_span').persianDatepicker();
-            $('#newspaper_date,#newspaper_date_span').persianDatepicker();
-            $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
-            $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
-            $('#sign_expire_date,#sign_expire_date_span').persianDatepicker();
 
-            $('.rose-progress-bar-cell').click(function () {
-                var cell = $(this)
-                var container = $('#' + $(this).attr('id') + '_container');
-                console.log(container);
-                $('.rose-progress-bar-cell').removeClass('selected');
-                $(this).addClass('selected');
-                $(".rose-submit-container").hide();
-                container.show();
-            });
+        check_for_showing_next_level();
+        $('#register_date,#register_date_span').persianDatepicker();
+        $('#newspaper_date,#newspaper_date_span').persianDatepicker();
+        $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
+        $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
+        $('#sign_expire_date,#sign_expire_date_span').persianDatepicker();
 
-            /* form submission ajax */
-            $('#submit_forms form').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
-                submitSuccess: function ($form, event) {
-                    var form_id = $form.attr('id');
-                    var form_common = form_id.substr(0, form_id.lastIndexOf('_form'));
-                    var loader_id = form_common + '_loader';
-                    var state_id = form_common + '_state';
-                    $('#' + loader_id).html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
-                    var form = $form;
-                    $.post(form.attr('action'), form.serialize(),
-                            function (data, state) {
-                                if (state == 'success') {
-                                    if (data == 'True') {
+        $('.rose-progress-bar-cell').click(function () {
+            var cell = $(this)
+            var container = $('#' + $(this).attr('id') + '_container');
+            console.log(container);
+            $('.rose-progress-bar-cell').removeClass('selected');
+            $(this).addClass('selected');
+            $(".rose-submit-container").hide();
+            container.show();
+        });
 
-                                        $('#' + state_id + ' #failed').hide();
-                                        $('#' + state_id + ' #ok').show();
-                                        $('#' + state_id).parent().parent().removeClass('pending').addClass('completed')
-                                        check_for_showing_next_level();
-                                    }
-                                    else {
-                                        $('#' + state_id + ' #failed').show();
-                                        $('#' + state_id + ' #ok').hide();
-                                    }
-                                } else {
-                                    alert('خطا در برقراری ارتباط با سرور. لطفا مجددا تلاش کنید');
+        /* form submission ajax */
+        $('#submit_forms form').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
+            submitSuccess: function ($form, event) {
+                var form_id = $form.attr('id');
+                var form_common = form_id.substr(0, form_id.lastIndexOf('_form'));
+                var loader_id = form_common + '_loader';
+                var state_id = form_common + '_state';
+                $('#' + loader_id).html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
+                var form = $form;
+                $.post(form.attr('action'), form.serialize(),
+                        function (data, state) {
+                            if (state == 'success') {
+                                if (data == 'True') {
+
+                                    $('#' + state_id + ' #failed').hide();
+                                    $('#' + state_id + ' #ok').show();
+                                    $('#' + state_id).parent().parent().removeClass('pending').addClass('completed')
+                                    check_for_showing_next_level();
                                 }
-                                $('#' + loader_id).empty();
-                            });
+                                else {
+                                    $('#' + state_id + ' #failed').show();
+                                    $('#' + state_id + ' #ok').hide();
+                                }
+                                $('#director_table').dataTable().fnReloadAjax();
+                                $('#activity_table').dataTable().fnReloadAjax();
+                            } else {
+                                alert('خطا در برقراری ارتباط با سرور. لطفا مجددا تلاش کنید');
+                            }
+                            $('#' + loader_id).empty();
+                        });
 
 
-                    event.preventDefault();
+                event.preventDefault();
+            }
+
+        });
+
+        $('#loan_type').change(function () {
+            var depend_id = '#' + $(this).attr('depend');
+            var loan_type_id = $(this).val();
+            $.ajax({
+                url: function () {
+                    return '{% url 'config:refund_type' '' %}' + loan_type_id
+                }()
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                $(depend_id).empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $(depend_id).append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
                 }
 
-            });
-
-            $('#loan_type').change(function () {
-                var depend_id = '#' + $(this).attr('depend');
-                var loan_type_id = $(this).val();
-                $.ajax({
-                    url: function () {
-                        return '{% url 'config:refund_type' '' %}' + loan_type_id
-                    }()
-                }).done(function (data) {
-                    var result = JSON.parse(data);
-                    $(depend_id).empty();
-                    for (var _item in result) {
-                        var item = result[_item]
-                        if ((typeof (item) == 'object')) {
-                            $(depend_id).append($('<option>', {
-                                value: item.pk,
-                                text: item.fields.local_name
-                            }));
-                        }
-                    }
-
-                    var value = $(depend_id).attr('value');
-                    if (value) {
-                        $(depend_id).val(value);
-                        $(depend_id).change();
-                    }
-                })
-            })
-
-            $('.province').change(function () {
-                var depend_id = '#' + $(this).attr('depend');
-                var province_id = $(this).val();
-                $.ajax({
-                    url: function () {
-                        return '{% url 'config:town' ''%}' + province_id;
-                    }(),
-                    complete: function () {
-                        {#                        $('#request_description_loader').empty();#}
-                    }
-
-                }).done(function (data) {
-                    var result = JSON.parse(data);
-                    $(depend_id).empty();
-                    for (var _item in result) {
-                        var item = result[_item]
-                        if ((typeof (item) == 'object')) {
-                            $(depend_id).append($('<option>', {
-                                value: item.pk,
-                                text: item.fields.local_name
-                            }));
-                        }
-                    }
-                    var value = $(depend_id).attr('value');
-                    if (value) {
-                        $(depend_id).val(value);
-                        $(depend_id).change();
-                    }
-
-                });
-            });
-
-            $('select').each(function () {
-                var value = $(this).attr('value');
-                {#                alert($(this).attr('id'));#}
+                var value = $(depend_id).attr('value');
                 if (value) {
-                    $(this).val(value);
-                    $(this).change();
+                    $(depend_id).val(value);
+                    $(depend_id).change();
                 }
-            });
-
-
-            var selected_banks = [
-                {% for bank in  customer_request.vasighe_information.banks.all %}
-                    '{{  bank.id }}',
-                {% endfor %}
-            ];
-
-            $('[name=banks]').not('[type!=checkbox]').each(function () {
-
-                var item = $(this);
-                var found = $.inArray(item.val(), selected_banks) > -1;
-                if (found) {
-                    item.attr('checked', 'checked');
-                }
-            });
-
-            var selected_vasighes = [
-                {% for vasighe in  customer_request.vasighe_information.vasighe_types.all %}
-                    '{{  vasighe.id }}',
-                {% endfor %}
-            ];
-
-            $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
-
-                var item = $(this);
-                var found = $.inArray(item.val(), selected_vasighes) > -1;
-                if (found) {
-                    item.attr('checked', 'checked');
-                }
-
-
-            });
-
-            $('.edit_director').click(function () {
-                var item = $(this);
-                var sign_enough = item.attr('sign_enough');
-                var sign_permission = item.attr('sign_permission');
-                var customer_code = item.attr('customer_code');
-                var role_id = item.attr('role_id');
-                var sign_expire_date = item.attr('sign_expire_date');
-
-                $('#director_id').val(customer_code);
-                $('#role_id').val(role_id);
-                $('#sign_permission').prop('checked', sign_permission == 'True');
-                $('#sign_enough').prop('checked', sign_enough == 'True');
-                $('#sign_expire_date').val(sign_expire_date)
-
-
             })
-
-
         })
-        ;
+
+        $('.province').change(function () {
+            var depend_id = '#' + $(this).attr('depend');
+            var province_id = $(this).val();
+            $.ajax({
+                url: function () {
+                    return '{% url 'config:town' ''%}' + province_id;
+                }(),
+                complete: function () {
+                    {#                        $('#request_description_loader').empty();#}
+                }
+
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                $(depend_id).empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $(depend_id).append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
+                }
+                var value = $(depend_id).attr('value');
+                if (value) {
+                    $(depend_id).val(value);
+                    $(depend_id).change();
+                }
+
+            });
+        });
+
+        $('select').each(function () {
+            var value = $(this).attr('value');
+            {#                alert($(this).attr('id'));#}
+            if (value) {
+                $(this).val(value);
+                $(this).change();
+            }
+        });
+
+
+        var selected_banks = [
+            {% for bank in  customer_request.vasighe_information.banks.all %}
+                '{{  bank.id }}',
+            {% endfor %}
+        ];
+
+        $('[name=banks]').not('[type!=checkbox]').each(function () {
+
+            var item = $(this);
+            var found = $.inArray(item.val(), selected_banks) > -1;
+            if (found) {
+                item.attr('checked', 'checked');
+            }
+        });
+
+        var selected_vasighes = [
+            {% for vasighe in  customer_request.vasighe_information.vasighe_types.all %}
+                '{{  vasighe.id }}',
+            {% endfor %}
+        ];
+
+        $('[name=vasighe_types]').not('[type!=checkbox]').each(function () {
+
+            var item = $(this);
+            var found = $.inArray(item.val(), selected_vasighes) > -1;
+            if (found) {
+                item.attr('checked', 'checked');
+            }
+
+
+        });
+
+        $(document).on('click', '.edit_director', function () {
+            var item = $(this);
+            var sign_enough = item.attr('sign_enough');
+            var sign_permission = item.attr('sign_permission');
+            var customer_code = item.attr('customer_code');
+            var role_id = item.attr('role_id');
+            var sign_expire_date = item.attr('sign_expire_date');
+
+            $('#director_id').val(customer_code);
+            $('#role_id').val(role_id);
+            $('#sign_permission').prop('checked', sign_permission == 'True');
+            $('#sign_enough').prop('checked', sign_enough == 'True');
+            $('#sign_expire_date').val(sign_expire_date)
+
+
+        });
+
+        $.fn.dataTableExt.oApi.fnReloadAjax = function (oSettings, sNewSource, fnCallback, bStandingRedraw) {
+            if (sNewSource !== undefined && sNewSource !== null) {
+                oSettings.sAjaxSource = sNewSource;
+            }
+
+            // Server-side processing should just call fnDraw
+            if (oSettings.oFeatures.bServerSide) {
+                this.fnDraw();
+                return;
+            }
+
+            this.oApi._fnProcessingDisplay(oSettings, true);
+            var that = this;
+            var iStart = oSettings._iDisplayStart;
+            var aData = [];
+
+            this.oApi._fnServerParams(oSettings, aData);
+
+            oSettings.fnServerData.call(oSettings.oInstance, oSettings.sAjaxSource, aData, function (json) {
+                /* Clear the old information from the table */
+                that.oApi._fnClearTable(oSettings);
+
+                /* Got the data - add it to the table */
+                var aData = (oSettings.sAjaxDataProp !== "") ?
+                        that.oApi._fnGetObjectDataFn(oSettings.sAjaxDataProp)(json) : json;
+
+                for (var i = 0; i < aData.length; i++) {
+                    that.oApi._fnAddData(oSettings, aData[i]);
+                }
+
+                oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+
+                that.fnDraw();
+
+                if (bStandingRedraw === true) {
+                    oSettings._iDisplayStart = iStart;
+                    that.oApi._fnCalculateEnd(oSettings);
+                    that.fnDraw(false);
+                }
+
+                that.oApi._fnProcessingDisplay(oSettings, false);
+
+                /* Callback user function - for event handlers etc */
+                if (typeof fnCallback == 'function' && fnCallback !== null) {
+                    fnCallback(oSettings);
+                }
+            }, oSettings);
+        };
+
+        $('#director_table').dataTable({
+            "oLanguage": {
+                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',
+                sProcessing: 'در حال به روز رسانی'
+            },
+            "sAjaxSource": "{% url 'customer:director_list' %}?company_id={{ customer_request.cif }}",
+            "sAjaxDataProp": "",
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false,
+
+            aoColumns: [
+                {"mData": "national_number"},
+                {"mData": "name"},
+                {"mData": "last_name"},
+                {"mData": "role"},
+                {"mData": "sign_permission",
+                    "fnRender": function (a) {
+                        v = a.aData.sign_permission;
+                        if (v) {
+                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';
+                        }
+                        else {
+                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';
+                        }
+                    }
+                },
+                {
+                    "mData": "sign_enough",
+                    "fnRender": function (a) {
+                        v = a.aData.sign_enough;
+                        if (v) {
+                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';
+                        }
+                        else {
+                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';
+                        }
+                    }
+                },
+                {   "mData": "role_id",
+                    "fnRender": function (a) {
+                        result = '<a href="#" class="edit_director"  sign_expire_date="' + a.aData.sign_expire_date + '"' +
+                                ' role_id = "' + a.aData.role_id + '"' +
+                                ' customer_code = "' + a.aData.national_number + '" > ویرایش </a > ';
+
+                        return result;
+                    }}
+            ]
+        });
+
+        $('#activity_table').dataTable({
+            "bProcessing": true,
+            "oLanguage": {
+                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',
+                sProcessing: 'در حال به روز رسانی'
+            },
+            "sAjaxSource": "{% url 'customer:enterprise_activity_list' %}?company_id={{ customer_request.cif }}",
+            "sAjaxDataProp": "",
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false,
+            aoColumns: [
+                {"mData": "activity_type"},
+                {"mData": "certificate_name"},
+                {"mData": "certificate_number"},
+                {"mData": "register_date"},
+                {"mData": "expire_date"},
+                {
+                    "mData": "company_id",
+                    "fnRender": function (a) {
+                        var url = "{% url 'customer:enterprise_activity_delete' %}";
+                        return  '<a class="delete_activity"  href="#" url="' + url + '?activity_id=' + a.aData.activity_id + '&company_id=' + a.aData.company_id + '">حذف</a>';
+                    }
+                },
+                {   "bVisible": false,
+                    "mData": "company_id"},
+                {
+                    "bVisible": false,
+                    "mData": "activity_id"}
+
+            ]
+        });
+
+
+        $(document).on('click', '.delete_activity', function () {
+            alert('here');
+            var url = $(this).attr('url');
+            $.ajax({
+                url: url
+            }).done(function (data) {
+                $('#activity_table').dataTable().fnReloadAjax();
+            });
+        });
+    });
     </script>
 {% endblock %}
