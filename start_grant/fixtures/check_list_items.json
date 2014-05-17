@@ -1,0 +1,175 @@
+[
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 1,
+        "fields": {
+            "name": "shenasname",
+            "local_name": "شناسنامه",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 2,
+        "fields": {
+            "name": "kart-melli",
+            "local_name": "کارت ملی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 3,
+        "fields": {
+            "name": "ejare-ghaz",
+            "local_name": "اجاره نامه / قبض آب و برق",
+            "description": ""
+        }
+    },
+
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 4,
+        "fields": {
+            "name": "javaz-eshteghbal-be-kar",
+            "local_name": "جواز / نامه اشتغال به کار",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 5,
+        "fields": {
+            "name": "pish-factor-tarh-tojihi",
+            "local_name": "پیش فاکتور / طرح توجیهی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 6,
+        "fields": {
+            "name": "soorat-hesab-bank",
+            "local_name": "آخرین صورتحساب بانک",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 7,
+        "fields": {
+            "name": "sanad-mahal-kasb",
+            "local_name": "سند محل کسب / اجاره نامه / سرقفلی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 8,
+        "fields": {
+            "name": "asnad-ashkhas",
+            "local_name": "اسناد دریافتی از اشخاص",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 9,
+        "fields": {
+            "name": "asnad-sherkat",
+            "local_name": "اسناد دریافتی از شرکت ها و موسسات",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 10,
+        "fields": {
+            "name": "resid-anbar",
+            "local_name": "رسید انبارهای عمومی / رسید گمرک",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 11,
+        "fields": {
+            "name": "sanad-melki",
+            "local_name": "سند ملکی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 12,
+        "fields": {
+            "name": "sanad-naghlie",
+            "local_name": "سند وسایل نقلیه",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 13,
+        "fields": {
+            "name": "ansad-pardakhti-ashkhas",
+            "local_name": "اسناد پرداختی بدهی به اشخاص",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 14,
+        "fields": {
+            "name": "asnad-pardakhti-sherkat",
+            "local_name": "اسناد پرداختی بدهی به شرکتها و موسسات",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 15,
+        "fields": {
+            "name": "sanad-pardakhti-bank",
+            "local_name": "سند پرداختی بدهی به بانکها",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 16,
+        "fields": {
+            "name": "soorat-hesab-bank-contact",
+            "local_name": "صورتحساب بانکهای طرف قرارداد",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 17,
+        "fields": {
+            "name": "fish-hoghooghi",
+            "local_name": "فیش حقوقی / گواهی حقوقی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 18,
+        "fields": {
+            "name": "copy-sanad-vasighe",
+            "local_name": "کپی سند وثیقه",
+            "description": ""
+        }
+    },
+
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 19,
+        "fields": {
+            "name": "guarantor-madrak",
+            "local_name": "مدارک شناسایی ضامنین",
+            "description": ""
+        }
+    }
+]
