@@ -1,14 +1,14 @@
-import json
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
-from django.utils.decorators import method_decorator
 from django.views.generic import View
 from customer.models.real_models import RealCustomerInformation
-from rose_config.models import config, JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
+from rose_config.models import JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
     VasigheType, BusinessPlace
-from start_grant.models import Request, BusinessPart, RequestDescription, RequestCompleteInformation
+from start_grant.checklist import createCheckList
+from start_grant.models import Request, RequestDescription, RequestCompleteInformation
+from django.core import serializers
 
 
 class SubmitDataView(View):
@@ -42,15 +42,20 @@ class SubmitDataView(View):
     def post(self, request, request_id):
         customer_request = Request.objects.get(id=request_id)
 
-        if Request.objects.get(id=2).need_guarantor():
+        if not customer_request.is_all_information_completed():
+            return HttpResponseRedirect(reverse('grant:submit', args=[request_id]))
+
+        createCheckList(customer_request)
+
+
+        customer_request.status = 'ready_for_checklist'
+        customer_request.save()
+
+        if customer_request.need_guarantor():
             return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
 
         else:
             return HttpResponseRedirect(reverse('grant:track'))
-
-
-
-from django.core import serializers
 
 
 class ReqCompleteView(View):
@@ -58,9 +63,6 @@ class ReqCompleteView(View):
         try:
             complete_info = RequestCompleteInformation.from_dic(request.POST)
             complete_info.save()
-            # r = Request.objects.get(pk=request.POST.get('request_id'))
-            # r.status = 'req_info_completed'
-            # r.save()
             return HttpResponse("True")
         except Exception as e:
             print e
