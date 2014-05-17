@@ -2,14 +2,15 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
 import datetime
-from customer.models.common import CUSTOMER_TYPE
+from customer.models.common import CUSTOMER_TYPE, Customer
 from guarantor.models import Guarantor
 from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
 
 REQUEST_STATUS = (
     ("intro", "intro"),
     ("req_info_completed", "req_info_completed"),
-    ("need_guarantor", "need_guarantor")
+    ("ready_for_checklist", "ready_for_checklist"),
+    ("checklist_completed","checklist_completed")
 )
 
 
@@ -28,7 +29,7 @@ class Request(models.Model):
     request_description = models.ForeignKey(RequestDescription)
     has_loan_from_current_bank = models.BooleanField(default=True)
     request_amount = models.BigIntegerField(default=1000000)
-    status = models.CharField(max_length=50, default='intro')
+    status = models.CharField(max_length=50, choices=REQUEST_STATUS, default='intro')
     guarantors = models.ManyToManyField(to=Guarantor, related_name='guaranted_requests')
 
     def need_guarantor(self):
@@ -36,6 +37,36 @@ class Request(models.Model):
             return True
         else:
             return False
+
+
+    def is_all_information_completed(self):
+        if not hasattr(self, 'vasighe_information') or not hasattr(self, 'complete_information'):
+            return False
+        customer = Customer.objects.get(customer_code=self.cif)
+        if customer.type == 'haghighi':
+            if hasattr(customer, 'realcustomerinformation'):
+                cus_info = customer.realcustomerinformation
+                if hasattr(cus_info, 'contact_info') and hasattr(cus_info, 'job_info') and hasattr(cus_info,
+                                                                                                   'asset_info') and hasattr(
+                        cus_info, 'bank_income_info'):
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        elif customer.type == 'hoghooghi':
+            if customer.enterprisecustomerinformation is not None:
+                cus_info = customer.enterprisecustomerinformation
+                if cus_info.director_set.count() > 0 and hasattr(cus_info, 'contact_info') and hasattr(cus_info,
+                                                                                                       'activity_info') and hasattr(
+                        cus_info, 'asset_info') and cus_info.activity_info.count() > 0:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        else:
+            raise Exception("customer type is not ok, it is: " + customer.types)
 
     @staticmethod
     def from_dic(dic, user):
@@ -108,6 +139,29 @@ class BankVasigheInformation(models.Model):
         bank_vasighe.banks = dic.getlist('banks')
 
         return bank_vasighe
+
+
+class CheckListItem(models.Model):
+    name = models.CharField(max_length=100)
+    local_name = models.CharField(max_length=1000)
+    description = models.CharField(max_length=2000)
+
+
+class CheckList(models.Model):
+    request = models.OneToOneField(Request, related_name='check_list', primary_key=True)
+
+    def is_done(self):
+        for item in self.items.all():
+            if not item.checked:
+                return False
+        return True
+
+
+class CheckListItemInstance(models.Model):
+    item = models.ForeignKey(CheckListItem)
+    checked = models.BooleanField(default=False)
+    checklist = models.ForeignKey(CheckList, related_name='items')
+
 
 
 
