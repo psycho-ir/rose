@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, RequestContext
 from django.views.generic import View
-from start_grant.models import Request
+from start_grant.models import Request, CheckList
 
 __author__ = 'soroosh'
 
@@ -40,3 +40,26 @@ class StartView(View):
             return HttpResponseRedirect(reverse('grant:enterprise_submit', args=(request.id,)))
 
         return HttpResponse("Fatal Error %s" % request.type)
+
+
+class CheckListView(View):
+    def get(self, request, request_id):
+        checklist = CheckList.objects.get(request__id=request_id)
+
+        template = loader.get_template('check_list.html')
+        context = RequestContext(request, {'request_id': request_id, 'checkListItems': checklist.items.all()})
+        return HttpResponse(template.render(context))
+
+    def post(self, request, request_id):
+        checklist = CheckList.objects.get(request__id=request_id)
+        for item in checklist.items.all():
+            value = bool(request.POST.get(str(item.id), False))
+            item.checked = value
+            item.save()
+
+        if checklist.is_done():
+            customer_request = Request.objects.get(id=request_id)
+            customer_request.status = 'checklist_completed'
+            customer_request.save()
+
+        return HttpResponseRedirect(reverse('grant:track'))
