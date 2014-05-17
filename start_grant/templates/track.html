@@ -53,6 +53,22 @@
                               <a href="{% url 'grant:enterprise_submit'  request.id %}">ویرایش اطلاعات</a>
                           {% endif %}
                         </span>
+                    {% elif request.status == 'ready_for_checklist' %}
+                        آماده پر کردن چک لیست
+                        <span style="padding-right: 3px;">
+                            <a href="{% url 'grant:check_list' request.id %}">پرکردن چک لیست</a>
+                        </span>
+                        |
+                        <span style="padding-right: 3px;">
+                          {% if request.type == 'haghighi' %}
+                              <a href="{% url 'grant:submit'  request.id %}">ویرایش اطلاعات</a>
+                          {% else %}
+                              <a href="{% url 'grant:enterprise_submit'  request.id %}">ویرایش اطلاعات</a>
+                          {% endif %}
+                        </span>
+
+                    {% elif request.status == 'checklist_completed' %}
+                        آماده ارجاع
                     {% else %}
                         new
                     {% endif %}
