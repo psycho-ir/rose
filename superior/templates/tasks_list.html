@@ -1,0 +1,87 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <div style="border: 1px solid #dddddd; padding: 15px 30px 15px 30px;border-radius: 5px;"
+         class="form-group">
+
+        <table id="requests" class="display" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <td>کد پیگیری</td>
+                <td>شماره مشتری</td>
+                <td>نوع مشتری</td>
+                <td>کاربر ثبت کننده</td>
+                <td>بخش اقتصادی</td>
+                <td>شرح درخواست</td>
+                <td>وضعیت</td>
+                <td>عملیات</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for request in requests %}
+                <tr id="{{ request.id }}">
+                    {% comment %}                    class="{% if request.status == 'intro' %}
+            warning
+            {% endif %}">{% endcomment %}
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.cif }}</td>
+                    <td>
+                        {% if request.type == 'haghighi' %}
+                            حقیقی
+                        {% else %}
+                            حقوقی
+                        {% endif %}
+                    </td>
+                    <td>{{ request.user.get_full_name }}</td>
+                    <td>{{ request.business_part.local_name }}</td>
+                    <td>{{ request.request_description.local_name }}</td>
+                    <td>
+
+
+                        {% if request.status == 'checklist_completed' %}
+                            آماده ارجاع
+                            <a href="{% url 'superior:enquiry_assign' request.id %}">ارجاع جهت استعلام</a>
+                        {% else %}
+                            new
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if request.type == 'haghighi' %}
+                            <a href="{% url 'grant:submit'  request.id %}">مشاهده اطلاعات</a>
+                        {% else %}
+                            <a href="{% url 'grant:enterprise_submit'  request.id %}">مشاهده اطلاعات</a>
+                        {% endif %}
+                        <br/>
+
+                        {% if request.need_guarantor %}
+                            <a href="{% url 'guarantor:list' request.id %}">
+                                مشاهده ضامنین
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(window).ready(function () {
+            $('#requests tbody tr').click(function () {
+                {#                window.alert($(this).attr('id'));#}
+            });
+
+            $('#requests').dataTable({
+                bPaginate: false,
+                bFilter: false,
+                bInfo: false
+            });
+        });
+
+    </script>
+{% endblock %}
