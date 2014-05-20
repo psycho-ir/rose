@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from customer.models.common import CUSTOMER_TYPE
+from start_grant.models import Request
 
 
 class EnquiryAction(models.Model):
@@ -20,5 +21,6 @@ class Assign(models.Model):
 
 class EnquiryAssign(Assign):
     actions = models.ManyToManyField(EnquiryAction)
+    request = models.ForeignKey(Request, related_name='enquiry_assigns')
     # special_actions
 
