@@ -1,33 +1,92 @@
 {% extends 'base_dashboard.html' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-2">
-            ارجاع گیرنده
-        </div>
-        <div class="col-xs-3">
-            <select>
-                {% for u in target_users %}
-                    <option>{{ u.get_full_name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-xs-2">
-            حداکثر تاریخ انجام اقدامات
-        </div>
-        <div class="col-xs-3">
-            <input type="text" class="form-control" style="width: 100%;"/>
-        </div>
-    </div>
-    <div class="row">
-        اقدامات:
-        <div class="row">
-            {% for action in actions %}
-                <input type="checkbox">{{ action.local_name }}</input>
-                <br/>
-            {% endfor %}
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title"></div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="{% url 'superior:enquiry_assign' request_id %}" novalidate>
+                    <div class="control-group">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xs-2">
+                                ارجاع گیرنده
+                            </div>
+                            <div class="col-xs-3">
+                                <select name="target_user" style="width: 100%;">
+                                    {% for u in target_users %}
+                                        <option value="{{ u.id }}">{{ u.get_full_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-xs-2">
+                                حداکثر تاریخ انجام اقدامات
+                            </div>
+                            <div class="col-xs-3">
+                                <input id="expire_date" name="expire_date" type="text" class="form-control"
+                                       style="width: 100%;" required/>
+                                <span id="expire_date_span"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                یاد داشت اختصاصی
+                            </div>
+                            <div class="col-xs-8">
+                                <textarea name="comment" class="form-control" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                اولویت
+                            </div>
+                            <div class="col-xs-3">
+                                <select name="priority" style="width: 100%;">
+                                    <option value="50">بالا</option>
+                                    <option value="40">متوسط</option>
+                                    <option value="30">پایین</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                اقدامات:
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-6">
+                                {% for action in actions %}
+                                    <input name="selected_actions" value="{{ action.id }}"
+                                           type="checkbox">{{ action.local_name }}</input>
+                                    <br/>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12" style="text-align: center;">
+                                <button type="submit" style="width: 90%;" id="assign_button" class="btn btn-success">
+                                    ثبت
+                                    اطلاعات
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
 
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+                    $('#expire_date,#expire_date_span').persianDatepicker();
+                });
+    </script>
 {% endblock %}
