@@ -10,6 +10,9 @@ __author__ = 'soroosh'
 
 class EnterpriseSubmitDataView(View):
     def get(self, request, request_id):
+        readonly = False
+        if request.user.profile.role.name == 'superior':
+            readonly = True
         customer_request = Request.objects.get(pk=request_id)
         customer_information = EnterpriseCustomerInformation.objects.filter(pk=customer_request.cif).first()
         company_types = CompanyType.objects.all()
@@ -25,17 +28,19 @@ class EnterpriseSubmitDataView(View):
 
         template = loader.get_template('enterprise_submit_data.html')
         context = RequestContext(request,
-                                 {'customer_info': customer_information,
-                                  'customer_request': customer_request,
-                                  'company_types': company_types,
-                                  'register_towns': register_towns,
-                                  'provinces': provinces,
-                                  'towns': towns,
-                                  'certificate_types': certificate_types,
-                                  'loan_types': loan_types,
-                                  'refund_types': refund_types,
-                                  'board_of_directors': board_of_directors,
-                                  'vasighe_types':vasighe_types,'banks':banks})
+                                 {
+                                     'readonly': readonly,
+                                     'customer_info': customer_information,
+                                     'customer_request': customer_request,
+                                     'company_types': company_types,
+                                     'register_towns': register_towns,
+                                     'provinces': provinces,
+                                     'towns': towns,
+                                     'certificate_types': certificate_types,
+                                     'loan_types': loan_types,
+                                     'refund_types': refund_types,
+                                     'board_of_directors': board_of_directors,
+                                     'vasighe_types': vasighe_types, 'banks': banks})
 
         return HttpResponse(template.render(context))
 
