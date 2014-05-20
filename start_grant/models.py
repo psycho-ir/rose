@@ -68,7 +68,7 @@ class Request(models.Model):
             else:
                 return False
         else:
-            raise Exception("customer type is not ok, it is: " + customer.types)
+            raise Exception("customer type is not ok, it is: " + customer.type)
 
     @staticmethod
     def from_dic(dic, user):

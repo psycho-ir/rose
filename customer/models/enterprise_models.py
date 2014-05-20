@@ -53,6 +53,7 @@ class EnterpriseCustomerInformation(Customer):
         print register_date
         newspaper_date = greg_date_from_shamsi(dic['newspaper_date'], '/')
         c = EnterpriseCustomerInformation(
+            type='hoghooghi',
             customer_code=dic['company_id'],
             company_name=dic['company_name'],
             register_number=dic['register_number'],

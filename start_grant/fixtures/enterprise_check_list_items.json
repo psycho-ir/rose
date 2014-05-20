@@ -1,0 +1,56 @@
+[
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 101,
+        "fields": {
+            "name": "asasname",
+            "local_name": "اساسنامه",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 102,
+        "fields": {
+            "name": "roozname",
+            "local_name": "روزنامه رسمی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 105,
+        "fields": {
+            "name": "agahi-akharin-taghirat",
+            "local_name": "آگهی آخرین تغییرات",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 106,
+        "fields": {
+            "name": "madrak-shoghli",
+            "local_name": "مدرک شغلی",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 107,
+        "fields": {
+            "name": "akharin-soorat-hesabi",
+            "local_name": "آخرین صورتحساب سود و زیان حسابرسی شده",
+            "description": ""
+        }
+    },
+    {
+        "model": "start_grant.checklistitem",
+        "pk": 108,
+        "fields": {
+            "name": "asasnameh",
+            "local_name": "اساسنامه",
+            "description": ""
+        }
+    }
+]

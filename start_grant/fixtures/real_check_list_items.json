@@ -21,7 +21,7 @@
         "model": "start_grant.checklistitem",
         "pk": 3,
         "fields": {
-            "name": "ejare-ghaz",
+            "name": "ejare-ghabz",
             "local_name": "اجاره نامه / قبض آب و برق",
             "description": ""
         }

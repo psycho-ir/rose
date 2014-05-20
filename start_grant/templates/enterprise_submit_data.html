@@ -86,7 +86,7 @@
 
     <div class="col-xs-2
 
-             {% if customer_info.activity_info %}
+             {% if customer_info.activity_info.count > 0 %}
                 completed
              {% else %}
                 pending
@@ -100,7 +100,7 @@
             <div id="activity_info_state" class="col-xs-1">
                 <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer_info.activity_info %}
+                                {% if customer_info.activity_info.count == 0 %}
                                     display: none;
                                 {% endif %}"></span>
             </div>
