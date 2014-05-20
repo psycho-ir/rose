@@ -43,6 +43,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     branch_code = models.IntegerField(default=0)
     role = models.ForeignKey(Role, default=1)
+    default_login_url = models.CharField(max_length=100)
 
 
 class Commission(models.Model):

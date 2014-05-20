@@ -1,19 +1,22 @@
-[    {
+[
+    {
         "pk": 1,
         "model": "user_profile.userprofile",
         "fields": {
             "user": 1,
             "branch_code": "0",
-            "role":"1"
+            "role": "1",
+            "default_login_url": "/grant/track"
         }
     },
-     {
+    {
         "pk": 2,
         "model": "user_profile.userprofile",
         "fields": {
             "user": 2,
             "branch_code": "0",
-            "role":"2"
+            "role": "2",
+            "default_login_url": "/superior/tasks"
         }
     }
 ]

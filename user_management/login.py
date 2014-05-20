@@ -16,7 +16,8 @@ def auth_user(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return redirect(settings.DEFAULT_LOGIN_URL)
+
+            return redirect(request.user.profile.default_login_url)
         else:
             template = loader.get_template('login.html')
             context = RequestContext(request, {'error_message': 'User is disabled'})
