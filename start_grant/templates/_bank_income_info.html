@@ -8,7 +8,7 @@
         <form id="bank_income_form" name="bank_income_form" method="post"
               action="{% url 'customer:bank_income_info' %}" novalidate>
             {% csrf_token %}
-            <input type="hidden" name="customer_id" value="{{ customer_info.pk }}"/>
+            <input type="hidden" name="customer_id" value="{{ customer_request.cif }}"/>
             <input type="hidden" name="request_id" value="{{ customer_request.id }}"/>
 
             <div class="control-group">
