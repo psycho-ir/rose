@@ -1,0 +1,33 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-2">
+            ارجاع گیرنده
+        </div>
+        <div class="col-xs-3">
+            <select>
+                {% for u in target_users %}
+                    <option>{{ u.get_full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-xs-2">
+            حداکثر تاریخ انجام اقدامات
+        </div>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" style="width: 100%;"/>
+        </div>
+    </div>
+    <div class="row">
+        اقدامات:
+        <div class="row">
+            {% for action in actions %}
+                <input type="checkbox">{{ action.local_name }}</input>
+                <br/>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
