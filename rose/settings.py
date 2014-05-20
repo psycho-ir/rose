@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'start_grant',
     'guarantor',
     'superior',
+    'notification',
     'south',
     'compressor',
     'django.contrib.admin',
@@ -40,6 +41,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    #    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+     'notification.context_processor.notification'
 )
 
 MIDDLEWARE_CLASSES = (
