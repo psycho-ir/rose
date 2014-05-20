@@ -3,18 +3,16 @@
         "pk": 1,
         "model": "user_profile.role",
         "fields": {
-            "name": "Teller",
+            "name": "teller",
             "local_name": "تحویلدار"
         }
     },
-
     {
-        "pk": 1,
-        "model": "user_profile.userprofile",
+        "pk": 2,
+        "model": "user_profile.role",
         "fields": {
-            "user": 1,
-            "branch_code": "0",
-            "role":"1"
+            "name": "superior",
+            "local_name": "کاربر ارشد"
         }
     }
 ]
