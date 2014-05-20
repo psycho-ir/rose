@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'rose_config',
     'start_grant',
     'guarantor',
+    'superior',
     'south',
     'compressor',
     'django.contrib.admin',

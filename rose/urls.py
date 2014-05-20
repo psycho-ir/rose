@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                        url(r'^(?i)customer/', include('customer.urls', namespace='customer')),
                        url(r'^(?i)config/', include('rose_config.urls', namespace='config')),
                        url(r'^(?i)guarantor/', include('guarantor.urls', namespace='guarantor')),
+                       url(r'^(?i)superior/', include('superior.urls', namespace='superior')),
                        url(r'^$', LoginView.as_view()),
 )
 
