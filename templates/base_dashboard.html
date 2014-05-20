@@ -43,7 +43,7 @@
                 {{ user.get_full_name }}
             </div>
             <div class="col-xs-4 left" style="text-align: left; padding-left: 10px;">
-                <span class="badge">3</span>
+                <span class="badge">{{ notifications.count }}</span>
                 <img style="margin-right: 2px;" src="{% static "image/base/message.png" %}"/>
             </div>
         </div>
@@ -95,7 +95,7 @@
                             </div>
                         {% elif user.profile.role.name == 'superior' %}
                             <div class="row">
-                                <a href="{% url 'grant:track' %}">
+                                <a href="{% url 'superior:tasks' %}">
                                     پیگیری درخواستها
                                 </a>
                             </div>
