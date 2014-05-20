@@ -60,18 +60,21 @@
                 </tfoot>
 
             </table>
-            <div class="row new_guarantor" style="margin-top:35px;" id="new_real_guarantor">
-                <div class="col-xs-3">
-                    <span class="glyphicon glyphicon-plus" style="color:#00dd00;"></span>
-                    ضامن حقیقی جدید
+            {% if not readonly %}
+                <div class="row new_guarantor" style="margin-top:35px;" id="new_real_guarantor">
+                    <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-plus" style="color:#00dd00;"></span>
+                        ضامن حقیقی جدید
+                    </div>
                 </div>
-            </div>
-            <div class="row new_guarantor" style="margin-top:15px;" id="new_enterprise_guarantor">
-                <div class="col-xs-3">
-                    <span class="glyphicon glyphicon-plus" style="color:#00dd00;"></span>
-                  ضامن حقوقی جدید
+                <div class="row new_guarantor" style="margin-top:15px;" id="new_enterprise_guarantor">
+                    <div class="col-xs-3">
+                        <span class="glyphicon glyphicon-plus" style="color:#00dd00;"></span>
+                        ضامن حقوقی جدید
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+
         {% endif %}
     </div>
 
