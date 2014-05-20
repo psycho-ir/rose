@@ -1,0 +1,36 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.credittype",
+        "fields": {
+            "name": "vam",
+            "local_name": "وام"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.credittype",
+        "fields": {
+            "name": "mobadelei",
+            "local_name": "مبادله ای"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.credittype",
+        "fields": {
+            "name": "mosharekat",
+            "local_name": "مشارکت"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.credittype",
+        "fields": {
+            "name": "taahod",
+            "local_name": "تعهدات"
+
+        }
+    }
+
+]

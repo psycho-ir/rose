@@ -17,8 +17,6 @@ class Province(models.Model):
         ordering = ['local_name']
 
 
-
-
 class BusinessPart(models.Model):
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
@@ -42,12 +40,20 @@ class RefundType(models.Model):
     enable = models.BooleanField(default=True)
 
 
+class CreditType(models.Model):
+    name = models.CharField(max_length=50)
+    local_name = models.CharField(max_length=50)
+    description = models.CharField(max_length=60, default="")
+    enable = models.BooleanField(default=True)
+
+
 class LoanType(models.Model):
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
     enable = models.BooleanField(default=True)
     refund_types = models.ManyToManyField(RefundType)
+    credit_type = models.ForeignKey(CreditType, related_name='loan_types')
 
 
 class Town(models.Model):
@@ -95,6 +101,7 @@ class VasigheType(models.Model):
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
     enable = models.BooleanField(default=True)
+
 
 class CompanyType(models.Model):
     name = models.CharField(max_length=50)
