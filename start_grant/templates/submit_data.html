@@ -196,6 +196,14 @@
 
 {% block js %}
     <script type="text/javascript">
+        {% if readonly %}
+            $('input').prop('readonly', 'readonly');
+            $('button').hide();
+            $('select').prop('disabled', 'disabled');
+        {% else %}
+            $('input').prop('readonly', null);
+            $('select').prop('disabled', null);
+        {% endif %}
         function check_for_showing_next_level() {
             if ($('.pending').length == 0) {
                 $('#next_level').show('slow');

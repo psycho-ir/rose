@@ -13,6 +13,9 @@ from django.core import serializers
 
 class SubmitDataView(View):
     def get(self, request, request_id):
+        readonly = False
+        if request.user.profile.role.name == 'superior':
+            readonly = True
         customer_request = Request.objects.get(id=request_id)
         customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
         job_types = JobType.objects.all()
@@ -26,17 +29,19 @@ class SubmitDataView(View):
         vasighe_types = VasigheType.objects.all()
         template = loader.get_template('submit_data.html')
         context = RequestContext(request,
-                                 {'customer_info': customer_information,
-                                  'customer_request': customer_request,
-                                  'provinces': provinces,
-                                  'towns': towns,
-                                  'job_types': job_types,
-                                  'certificate_types': certificate_types,
-                                  'loan_types': loan_types,
-                                  'refund_types': refund_types,
-                                  'banks': banks,
-                                  'vasighe_types': vasighe_types,
-                                  'business_places': business_places})
+                                 {
+                                     'readonly': readonly,
+                                     'customer_info': customer_information,
+                                     'customer_request': customer_request,
+                                     'provinces': provinces,
+                                     'towns': towns,
+                                     'job_types': job_types,
+                                     'certificate_types': certificate_types,
+                                     'loan_types': loan_types,
+                                     'refund_types': refund_types,
+                                     'banks': banks,
+                                     'vasighe_types': vasighe_types,
+                                     'business_places': business_places})
         return HttpResponse(template.render(context))
 
     def post(self, request, request_id):
@@ -46,7 +51,6 @@ class SubmitDataView(View):
             return HttpResponseRedirect(reverse('grant:submit', args=[request_id]))
 
         createCheckList(customer_request)
-
 
         customer_request.status = 'ready_for_checklist'
         customer_request.save()
