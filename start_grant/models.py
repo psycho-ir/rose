@@ -11,7 +11,8 @@ REQUEST_STATUS = (
     ("intro", "intro"),
     ("req_info_completed", "req_info_completed"),
     ("ready_for_checklist", "ready_for_checklist"),
-    ("checklist_completed", "checklist_completed")
+    ("checklist_completed", "checklist_completed"),
+    ("enquiry_assigned", "enquiry_assigned")
 )
 
 
