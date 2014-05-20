@@ -5,7 +5,8 @@
         "fields": {
             "name": "gharzolhasane",
             "local_name": "قرض الحسنه",
-            "refund_types":[1,2]
+            "refund_types": [2],
+            "credit_type": 1
         }
     },
     {
@@ -13,7 +14,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "foroosh-aghsati",
-            "local_name": "فروش اقساطی"
+            "local_name": "فروش اقساطی",
+            "refund_types": [1, 2],
+            "credit_type": 2
         }
     },
     {
@@ -21,7 +24,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "jaale",
-            "local_name": "جعاله"
+            "local_name": "جعاله",
+            "refund_types": [1, 2],
+            "credit_type": 2
         }
     },
     {
@@ -29,7 +34,10 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "mosharekat-madani",
-            "local_name": "مشارکت مدنی"
+            "local_name": "مشارکت مدنی",
+            "refund_types": [1],
+            "credit_type": 3
+
         }
     },
     {
@@ -37,7 +45,10 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "mozarebe",
-            "local_name": "مضاربه"
+            "local_name": "مضاربه",
+            "refund_types": [1],
+            "credit_type": 3
+
         }
     },
     {
@@ -45,7 +56,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "ejare-be-shart-tamlik",
-            "local_name": "اجاره به شرط تملیک"
+            "local_name": "اجاره به شرط تملیک",
+            "refund_types": [2],
+            "credit_type": 2
         }
     },
     {
@@ -53,7 +66,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "kharid-dein",
-            "local_name": "خرید دین"
+            "local_name": "خرید دین",
+            "refund_types": [1, 2],
+            "credit_type": 2
         }
     },
     {
@@ -61,7 +76,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "salaf",
-            "local_name": "سلف"
+            "local_name": "سلف",
+            "refund_types": [1, 2],
+            "credit_type": 2
         }
     },
     {
@@ -69,7 +86,9 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "mozare",
-            "local_name": "مزارعه"
+            "local_name": "مزارعه",
+            "refund_types": [1],
+            "credit_type": 3
         }
     },
     {
@@ -77,7 +96,61 @@
         "model": "rose_config.loantype",
         "fields": {
             "name": "mosaghat",
-            "local_name": "مساقات"
+            "local_name": "مساقات",
+            "refund_types": [1],
+            "credit_type": 3
+
+
+        }
+    },
+    {
+        "pk": 11,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "morabehe",
+            "local_name": "مرابحه",
+            "refund_types": [1, 2],
+            "credit_type": 2
+
+
+        }
+    },
+    {
+        "pk": 12,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "estesna",
+            "local_name": "استصناع",
+            "refund_types": [1, 2],
+            "credit_type": 2
+
+
+        }
+    },
+    {
+        "pk": 13,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "etebar-asnadi",
+            "local_name": "اعتبار اسنادی",
+            "refund_types": [1],
+            "credit_type": 4
+
+
+        }
+    },
+    {
+        "pk": 13,
+        "model": "rose_config.loantype",
+        "fields": {
+            "name": "zamanat",
+            "local_name": "ضمانت نامه ها",
+            "refund_types": [1],
+            "credit_type": 4
+
+
         }
     }
+
+
 ]
