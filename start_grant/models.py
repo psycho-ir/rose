@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Q
 import datetime
 from customer.models.common import CUSTOMER_TYPE, Customer
+from customer.models.real_models import RealCustomerInformation
 from guarantor.models import Guarantor
 from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
 
@@ -10,7 +11,7 @@ REQUEST_STATUS = (
     ("intro", "intro"),
     ("req_info_completed", "req_info_completed"),
     ("ready_for_checklist", "ready_for_checklist"),
-    ("checklist_completed","checklist_completed")
+    ("checklist_completed", "checklist_completed")
 )
 
 
@@ -31,6 +32,7 @@ class Request(models.Model):
     request_amount = models.BigIntegerField(default=1000000)
     status = models.CharField(max_length=50, choices=REQUEST_STATUS, default='intro')
     guarantors = models.ManyToManyField(to=Guarantor, related_name='guaranted_requests')
+    agent = models.ForeignKey(RealCustomerInformation, related_name='agent_requests', blank=True, null=True)
 
     def need_guarantor(self):
         if self.vasighe_information.vasighe_types.filter(Q(id=2) | Q(id=3)).exists():
@@ -70,11 +72,15 @@ class Request(models.Model):
 
     @staticmethod
     def from_dic(dic, user):
+
         request = Request(type=dic['type'], cif=dic['cif'], deposit_number=dic['deposit_number'], user_id=user.id,
                           branch_code=user.profile.branch_code,
                           business_part_id=dic['business_part'], request_description_id=dic['request_description'],
                           has_loan_from_current_bank=dic['has_loan_from_current_bank'] == 'True',
                           request_amount=dic['request_amount'])
+
+        if dic.get('agent_national_number', None):
+            request.agent_id = dic['agent_national_number']
 
         return request
 
