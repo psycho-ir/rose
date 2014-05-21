@@ -7,7 +7,7 @@
                 <div class="panel-title"></div>
             </div>
             <div class="panel-body">
-                <form method="post" action="{% url 'superior:enquiry_assign' request_id %}" novalidate>
+                <form method="post" action="{% url 'assign:enquiry_assign' request_id %}" novalidate>
                     <div class="control-group">
                         {% csrf_token %}
                         <div class="row">
