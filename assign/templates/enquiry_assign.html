@@ -65,6 +65,23 @@
                                 {% endfor %}
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-xs-3">
+                                اقدامات اختصاصی:
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-6">
+                                {% for action in special_actions %}
+                                    <input name="selected_special_actions" value="{{ action.id }}"
+                                           type="checkbox">{{ action.local_name }}</input>
+                                    <br/>
+                                {% endfor %}
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-xs-12" style="text-align: center;">
                                 <button type="submit" style="width: 90%;" id="assign_button" class="btn btn-success">
@@ -86,7 +103,7 @@
 {% block js %}
     <script type="text/javascript">
         $(document).ready(function () {
-                    $('#expire_date,#expire_date_span').persianDatepicker();
-                });
+            $('#expire_date,#expire_date_span').persianDatepicker();
+        });
     </script>
 {% endblock %}

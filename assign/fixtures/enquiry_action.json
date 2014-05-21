@@ -159,6 +159,17 @@
             "customer_type": "hoghooghi"
         }
 
+    },
+    {
+        "model": "assign.enquiryaction",
+        "pk": 17,
+        "fields": {
+            "name": "انجام استعلام از لیست سیاه داخلی بانک ",
+            "local_name": "انجام استعلام از لیست سیاه داخلی بانک ",
+            "customer_type": "special"
+        }
+
     }
+
 
 ]
