@@ -31,7 +31,7 @@ INSTALLED_APPS = (
     'rose_config',
     'start_grant',
     'guarantor',
-    'superior',
+    'assign',
     'notification',
     'south',
     'compressor',

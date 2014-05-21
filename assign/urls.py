@@ -2,7 +2,7 @@ __author__ = 'soroosh'
 
 from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
-from superior.views import *
+from assign.views import *
 
 
 urlpatterns = patterns('',

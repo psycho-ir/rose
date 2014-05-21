@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.views.generic import View
 from start_grant.models import Request
-from superior.models import EnquiryAction, EnquiryAssign
+from assign.models import EnquiryAction, EnquiryAssign
 from utils.date_utils import greg_date_from_shamsi
 
 

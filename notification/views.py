@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.views.generic import View
-from superior.models import Assign
+from assign.models import Assign
 
 
 class NotificationView(View):

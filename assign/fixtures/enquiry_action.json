@@ -1,6 +1,6 @@
 [
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 1,
         "fields": {
             "name": "انجام استعلام  معوقات بانک مرکزی برای مشتری حقیقی",
@@ -10,7 +10,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 2,
         "fields": {
             "name": "انجام استعلام معوقات  بانک مرکزی برای مشتری حقوقی",
@@ -20,7 +20,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 3,
         "fields": {
             "name": "انجام استعلام از سامانه ایرانیان برای مشتری حقیقی",
@@ -30,7 +30,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 4,
         "fields": {
             "name": "انجام استعلام از سامانه ایرانیان برای مشتری حقوقی",
@@ -40,7 +40,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 5,
         "fields": {
             "name": "انجام استعلام هویتی از ثبت احوال برای افراد",
@@ -51,7 +51,7 @@
     },
 
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 6,
         "fields": {
             "name": "انجام استعلام از سامانه ثبت شرکتها برای اشخاص حقوقی",
@@ -61,7 +61,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 7,
         "fields": {
             "name": "بررسی صحت مجوز فعالیت",
@@ -71,7 +71,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 8,
         "fields": {
             "name": "بررسی صحت مدارک اشتغال به کار از مشتریان حقیقی",
@@ -81,7 +81,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 9,
         "fields": {
             "name": "انجام استعلام از لیست سیاه بانک مرکزی",
@@ -91,7 +91,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 10,
         "fields": {
             "name": "انجام استعلام از لیست سیاه بانک مرکزی",
@@ -101,7 +101,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 11,
         "fields": {
             "name": "انجام استعلام جهت مشخص نمودن ذینفع واحد",
@@ -111,7 +111,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 12,
         "fields": {
             "name": "انجام استعلام جهت مشخص نمودن ذینفع واحد",
@@ -121,7 +121,7 @@
 
     },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 13,
         "fields": {
             "name": "انجام استعلام  چک برگشتی بانک مرکزی برای مشتری حقیقی",
@@ -129,10 +129,9 @@
             "customer_type": "haghighi"
         }
 
-    }
-    ,
+    },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 14,
         "fields": {
             "name": "انجام استعلام  چک برگشتی  بانک مرکزی برای مشتری حقوقی",
@@ -140,10 +139,9 @@
             "customer_type": "hoghooghi"
         }
 
-    }
-    ,
+    },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 15,
         "fields": {
             "name": "بررسی مجددمدارک ارائه شده",
@@ -151,10 +149,9 @@
             "customer_type": "haghighi"
         }
 
-    }
-    ,
+    },
     {
-        "model": "superior.enquiryaction",
+        "model": "assign.enquiryaction",
         "pk": 16,
         "fields": {
             "name": "بررسی مجددمدارک ارائه شده",

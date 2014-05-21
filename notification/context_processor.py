@@ -1,4 +1,4 @@
-from superior.models import Assign
+from assign.models import Assign
 
 __author__ = 'soroosh'
 

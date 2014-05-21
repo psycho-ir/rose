@@ -9,6 +9,7 @@
             <tr>
                 <td>ارجاع از</td>
                 <td>تاریخ ارجاع</td>
+                <td>نوع ارجاع</td>
                 <td>حداکثر تاریخ انجام اقدامات</td>
                 <td>ارجحیت</td>
                 <td>عملیات</td>
@@ -22,6 +23,7 @@
             {% endif %}">{% endcomment %}
                     <td>{{ assign.source.get_full_name }}</td>
                     <td>{{ assign.get_persian_issue_date }}</td>
+                    <td>{{ assign.assign_type.local_name }}</td>
                     <td>{{ assign.get_persian_expire_date }}</td>
                     {#                    <td>{{ assign.request.id }}</td>#}
                     <td>{{ assign.priority }}</td>
@@ -39,10 +41,6 @@
 {% block js %}
     <script type="text/javascript">
         $(window).ready(function () {
-            $('#requests tbody tr').click(function () {
-                {#                window.alert($(this).attr('id'));#}
-            });
-
             $('#notifications').dataTable({
                 bPaginate: false,
                 bFilter: false,

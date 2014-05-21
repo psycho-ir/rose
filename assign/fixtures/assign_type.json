@@ -1,6 +1,6 @@
 [
     {
-        "model": "superior.assigntype",
+        "model": "assign.assigntype",
         "fields": {
             "name": "enquiry",
             "local_name": "استعلام"
