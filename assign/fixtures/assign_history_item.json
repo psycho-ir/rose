@@ -1,0 +1,18 @@
+[
+    {
+        "model": "assign.assignhistoryitem",
+        "fields": {
+            "name": "create",
+            "local_name": "ایجاد"
+        }
+
+    },
+     {
+        "model": "assign.assignhistoryitem",
+        "fields": {
+            "name": "see",
+            "local_name": "مشاهده"
+        }
+    }
+]
+
