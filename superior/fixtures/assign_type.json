@@ -1,0 +1,10 @@
+[
+    {
+        "model": "superior.assigntype",
+        "fields": {
+            "name": "enquiry",
+            "local_name": "استعلام"
+        }
+
+    }
+]
