@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'start_grant',
     'guarantor',
     'assign',
+    'superior',
     'notification',
     'south',
     'compressor',
