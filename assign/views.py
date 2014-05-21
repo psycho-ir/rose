@@ -10,14 +10,6 @@ from assign.models import EnquiryAction, EnquiryAssign
 from utils.date_utils import greg_date_from_shamsi
 
 
-class TaskListView(View):
-    def get(self, request):
-        if request.user.profile.role.name != 'superior':
-            return HttpResponse('No Access')
-        template = loader.get_template('tasks_list.html')
-        requests = Request.objects.filter(Q(status='checklist_completed') | Q(status='enquiry_assigned'), branch_code=request.user.profile.branch_code)
-        context = RequestContext(request, {'requests': requests})
-        return HttpResponse(template.render(context))
 
 
 class EnquiryAssignView(View):
