@@ -42,10 +42,12 @@
             <div class="col-xs-8" style="color: #cccccc;">
                 {{ user.get_full_name }}
             </div>
-            <div class="col-xs-4 left" style="text-align: left; padding-left: 10px;">
-                <span class="badge">{{ notifications.count }}</span>
-                <img style="margin-right: 2px;" src="{% static "image/base/message.png" %}"/>
-            </div>
+            <a href="{% url 'notification:list' %}">
+                <div class="col-xs-4 left" style="text-align: left; padding-left: 10px;">
+                    <span class="badge">{{ notifications.count }}</span>
+                    <img style="margin-right: 2px;" src="{% static "image/base/message.png" %}"/>
+                </div>
+            </a>
         </div>
         <div style="padding-left: 10px; padding-top: 10px; ">
             <form class="quick_search" style="padding-right: 10px;">
