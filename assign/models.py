@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
 from customer.models.common import CUSTOMER_TYPE
 from start_grant.models import Request
 from jdatetime import datetime as jalali_datetime
+from datetime import datetime
 
 
 class EnquiryAction(models.Model):
@@ -33,11 +35,48 @@ class Assign(models.Model):
         return jalali_datetime.fromgregorian(datetime=self.expire_date).strftime('%Y/%m/%d')
 
 
+class AssignHistoryItem(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    local_name = models.CharField(max_length=200)
+
+
+class AssignHistoryItemInstance(models.Model):
+    history_item = models.ForeignKey(AssignHistoryItem)
+    issue_date = models.DateTimeField()
+    comment = models.CharField(max_length=1000, default='')
+
+
+class AssignHistory(models.Model):
+    assign = models.OneToOneField(Assign)
+    items = models.ManyToManyField(AssignHistoryItemInstance)
+
+    def last_item(self):
+        return self.items.last()
+
+
 class EnquiryAssign(Assign):
-    def __init__(self):
-        self.assign_type = 'enquiry'
+    def __init__(self, *args, **kwargs):
+        super(EnquiryAssign, self).__init__(*args, **kwargs)
+        self.assign_type_id = 'enquiry'
 
     actions = models.ManyToManyField(EnquiryAction)
     request = models.ForeignKey(Request, related_name='enquiry_assigns')
     # special_actions
+
+
+def create_assign_history(sender, instance, created, **kwargs):
+    if not isinstance(instance, Assign):
+        return
+    if created:
+        assign, is_new = AssignHistory.objects.get_or_create(assign=instance)
+        if is_new:
+            history_instance = AssignHistoryItemInstance()
+            history_instance.history_item_id = 'create'
+            history_instance.issue_date = datetime.now()
+            history_instance.save()
+            assign.items.add(history_instance)
+            assign.save()
+
+
+post_save.connect(create_assign_history)
 
