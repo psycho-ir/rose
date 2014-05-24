@@ -17,94 +17,147 @@
                         {{ action.local_name }}
                     </div>
                 </div>
-
-                <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-xs-3">
-                        <form id="form-{{ action.id }}" action="{% url 'assign:enquiry_response_start' %}"
+                <div id="data_{{ action.id }}">
+                    <div class="row">
+                        <div class="col-xs-2">شماره مرجع اقدام</div>
+                        <div class="col-xs-3">
+                            <input type="text" name="reference_number" class="form-control" value="{{ action.response.reference_number}}"/>
+                        </div>
+                        <div class="col-xs-2">نتیجه اقدام</div>
+                        <div class="col-xs-3">
+                            <select style="width: 100%;" name="accepted"
+                                    value="{{ action.response.accepted }}">
+                                <option value="True">قابل قبول</option>
+                                <option value="False">مردود</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="col-xs-2">
+                            شرح اقدام
+                        </div>
+                        <div class="col-xs-9">
+                            <textarea name="comment" class="form-control">{{ action.response.comment }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 0px; padding-top: 10px;">
+                    <div class="col-xs-4">
+                        <form id="form-start-{{ action.id }}" action="{% url 'assign:enquiry_response_start' %}"
                               method="post">
                             {% csrf_token %}
                             <input type="hidden" name="action_response_id" value="{{ action.response.id }}"/>
-                            <button type="button" action-id="{{ action.id }}" class="start-action btn btn-success">
+                            <button type="button" style="width: 100%;" action-id="{{ action.id }}"
+                                    class="start-action btn btn-success">
                                 آغاز اقدام
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-xs-4">
+                        <form id="form-complete-{{ action.id }}" action="{% url 'assign:enquiry_response_complete' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action_response_id" value="{{ action.response.id }}"/>
+                            <button type="button" action-id="{{ action.id }}" style="width: 100%;"
+                                    class="complete-action btn btn-success">
+                                پایان اقدام
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <form id="form-stop-{{ action.id }}" action="{% url 'assign:enquiry_response_stop' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action_response_id" value="{{ action.response.id }}"/>
+                            <button type="button" action-id="{{ action.id }}" style="width: 100%;"
+                                    class="stop-action btn btn-danger">
+                                توقف
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-2">شماره مرجع اقدام</div>
-                    <div class="col-xs-3">
-                        <input type="text" class="form-control"/>
-                    </div>
-                    <div class="col-xs-2">نتیجه اقدام</div>
-                    <div class="col-xs-3">
-                        <select style="width: 100%;">
-                            <option>قابل قبول</option>
-                            <option>مردود</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row" style="margin-left: 0px; padding-top: 10px;">
-                    <div class="col-xs-6">
-                        <button action-id="{{ action.id }}" style="width: 100%;" class="end-action btn btn-success">
-                            پایان اقدام
-                        </button>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <button action-id="{{ action.id }}" style="width: 100%;" class="stop-action btn btn-danger">
-                            توقف
-                        </button>
-                    </div>
-                </div>
-
             </div>
         {% endfor %}
-        <div class="row">
-            <div class="col-xs-2">
-                توضیحات
+        <form action="{% url 'assign:enquiry_response' assign.id %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xs-2">
+                    توضیحات
+                </div>
+                <div class="col-xs-8">
+                    <textarea name="comment" class="form-control" value="{{ assign.comment }}"></textarea>
+                </div>
             </div>
-            <div class="col-xs-8">
-                <textarea class="form-control"></textarea>
+            <div class="row">
+                <div class="col-xs-2">نتیجه کلی اقدام کننده</div>
+                <div class="col-xs-3">
+                    <select name="accepted" style="width: 100%;" value="{{ assign.accepted }}">
+                        <option value="True">قابل قبول</option>
+                        <option value="False">مردود</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-2">نتیجه کلی اقدام کننده</div>
-            <div class="col-xs-3">
-                <select style="width: 100%;">
-                    <option>قابل قبول</option>
-                    <option>مردود</option>
-                </select>
+            <div class="row">
+                <div class="col-xs-12 center-block" style="text-align: center;">
+                    <button type="submit" style="width: 100%;" class="btn btn-success">
+                        ثبت ارجاع
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript">
         $(document).ready(function () {
+            $('select').each(function () {
+                var value = $(this).attr('value');
+                if (value) {
+                    $(this).val(value);
+                }
+            });
             $('.action').each(function () {
                 var status = $(this).attr('status');
                 var action_id = $(this).attr('id');
-                if (status != 'in_progress'){
-                    $('#'+action_id+' input').prop('readonly','readonly');
-                    $('#'+action_id+' select').prop('disabled','disabled');
+                if (status == 'done') {
+                    $('#' + action_id + ' input').prop('readonly', 'readonly');
+                    $('#' + action_id + ' select').prop('disabled', 'disabled');
+                    $('#' + action_id + ' textarea').prop('disabled', 'disabled');
+                    $('#' + action_id + ' .stop-action').hide();
+                    $('#' + action_id + ' .start-action').hide();
+                    $('#' + action_id + ' .complete-action').hide();
                 }
-                else{
-                    $('#'+action_id+' .start-action').hide();
+                else if (status != 'in_progress') {
+                    $('#' + action_id + ' input').prop('readonly', 'readonly');
+                    $('#' + action_id + ' select').prop('disabled', 'disabled');
+                    $('#' + action_id + ' textarea').prop('disabled', 'disabled');
+                    $('#' + action_id + ' .stop-action').hide();
+                    $('#' + action_id + ' .complete-action').hide();
+
+
+                }
+                else {
+                    $('#' + action_id + ' .start-action').hide();
+                    $('#' + action_id + ' .stop-action').show();
+                    $('#' + action_id + ' .complete-action').show();
+
                 }
             });
 
             $('.start-action').click(function () {
-
                 var action_id = $(this).attr('action-id');
-                var form = $('#form-' + action_id);
+                var form = $('#form-start-' + action_id);
                 $.post(form.attr('action'), form.serialize(), function (data, state) {
                     if (state == 'success') {
                         if (data == 'True') {
                             $('#action-' + action_id + ' input').prop('readonly', null);
                             $('#action-' + action_id + ' select').prop('disabled', null);
+                            $('#action-' + action_id + ' textarea').prop('disabled', null);
                             $('#action-' + action_id + ' .start-action').hide();
+                            $('#action-' + action_id + ' .stop-action').show();
+                            $('#action-' + action_id + ' .complete-action').show();
 
                         } else {
                             alert('خطا در اجرای درخواست');
@@ -112,6 +165,52 @@
                     }
                 });
 
+            });
+
+            $('.stop-action').click(function () {
+                var action_id = $(this).attr('action-id');
+                var form = $('#form-stop-' + action_id);
+                $.post(form.attr('action'), form.serialize(), function (data, state) {
+                    if (state == 'success') {
+                        if (data == 'True') {
+                            $('#action-' + action_id + ' input').prop('readonly', 'readonly');
+                            $('#action-' + action_id + ' select').prop('disabled', 'disabled');
+                            $('#action-' + action_id + ' textarea').prop('disabled', 'disabled');
+                            $('#action-' + action_id + ' .start-action').show();
+                            $('#action-' + action_id + ' .stop-action').hide();
+                            $('#action-' + action_id + ' .complete-action').hide();
+
+                        }
+                    } else {
+                        alert('خطا در اجرای درخواست');
+
+                    }
+                });
+            });
+
+            $('.complete-action').click(function () {
+                var action_id = $(this).attr('action-id');
+                var form = $('#form-complete-' + action_id);
+                var input_data = $('#data_' + action_id + ' input').serialize();
+                var select_data = $('#data_' + action_id + ' select').serialize();
+                var textarea_data = $('#data_' + action_id + ' textarea').serialize();
+
+
+                $.post(form.attr('action'), form.serialize() + '&' + input_data + '&' + select_data + '&' + textarea_data, function (data, state) {
+                    if (state == 'success') {
+                        if (data == 'True') {
+                            $('#action-' + action_id + ' input').prop('readonly', 'readonly');
+                            $('#action-' + action_id + ' select').prop('disabled', 'disabled');
+                            $('#action-' + action_id + ' textarea').prop('disabled', 'disabled');
+                            $('#action-' + action_id + ' .start-action').hide();
+                            $('#action-' + action_id + ' .stop-action').hide();
+                            $('#action-' + action_id + ' .complete-action').hide();
+                        }
+                    } else {
+                        alert('خطا در اجرای درخواست');
+
+                    }
+                });
             });
         });
     </script>
