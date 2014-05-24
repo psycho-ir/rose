@@ -1,0 +1,118 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <div style="padding-top:15px; padding-right: 30px; margin-right: 30px;padding-bottom:15px; margin-bottom: 15px; margin-left: 30px; border:solid 1px #102E37; border-radius: 6px;">
+
+        <div class="row">
+            <div class="col-xs-2">
+                <a href="{% url 'grant:submit' assign.request.id %}">مشاهده اطلاعات درخواست</a>
+            </div>
+        </div>
+        {% for action in assign.actions.all %}
+            <div class="row action" id="action-{{ action.id }}" status="{{ action.response.status }}"
+                 style="padding-top:15px; padding-right: 30px; margin-right: 30px;padding-bottom:15px; margin-bottom: 15px; margin-left: 30px; border:solid 1px #a3a3a3; border-radius: 6px; ">
+
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-xs-11">
+                        {{ action.local_name }}
+                    </div>
+                </div>
+
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-xs-3">
+                        <form id="form-{{ action.id }}" action="{% url 'assign:enquiry_response_start' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action_response_id" value="{{ action.response.id }}"/>
+                            <button type="button" action-id="{{ action.id }}" class="start-action btn btn-success">
+                                آغاز اقدام
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-2">شماره مرجع اقدام</div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-xs-2">نتیجه اقدام</div>
+                    <div class="col-xs-3">
+                        <select style="width: 100%;">
+                            <option>قابل قبول</option>
+                            <option>مردود</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 0px; padding-top: 10px;">
+                    <div class="col-xs-6">
+                        <button action-id="{{ action.id }}" style="width: 100%;" class="end-action btn btn-success">
+                            پایان اقدام
+                        </button>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <button action-id="{{ action.id }}" style="width: 100%;" class="stop-action btn btn-danger">
+                            توقف
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-xs-2">
+                توضیحات
+            </div>
+            <div class="col-xs-8">
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">نتیجه کلی اقدام کننده</div>
+            <div class="col-xs-3">
+                <select style="width: 100%;">
+                    <option>قابل قبول</option>
+                    <option>مردود</option>
+                </select>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.action').each(function () {
+                var status = $(this).attr('status');
+                var action_id = $(this).attr('id');
+                if (status != 'in_progress'){
+                    $('#'+action_id+' input').prop('readonly','readonly');
+                    $('#'+action_id+' select').prop('disabled','disabled');
+                }
+                else{
+                    $('#'+action_id+' .start-action').hide();
+                }
+            });
+
+            $('.start-action').click(function () {
+
+                var action_id = $(this).attr('action-id');
+                var form = $('#form-' + action_id);
+                $.post(form.attr('action'), form.serialize(), function (data, state) {
+                    if (state == 'success') {
+                        if (data == 'True') {
+                            $('#action-' + action_id + ' input').prop('readonly', null);
+                            $('#action-' + action_id + ' select').prop('disabled', null);
+                            $('#action-' + action_id + ' .start-action').hide();
+
+                        } else {
+                            alert('خطا در اجرای درخواست');
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+{% endblock %}
