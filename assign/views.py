@@ -87,3 +87,29 @@ class EnquiryActionResponseStartView(View):
 
         else:
             return HttpResponse("False")
+
+
+class EnquiryActionResponseStopView(View):
+    def post(self, request):
+        action_response_id = int(request.POST.get("action_response_id"))
+        action_response = EnquiryActionResponse.objects.get(id=action_response_id)
+        if action_response.response.enquiry_assign.target_id == request.user.id:
+            action_response.stop()
+            action_response.save()
+            return HttpResponse("True")
+
+        else:
+            return HttpResponse("False")
+
+
+class EnquiryActionResponseCompleteView(View):
+    def post(self, request):
+        action_response_id = int(request.POST.get("action_response_id"))
+        action_response = EnquiryActionResponse.objects.get(id=action_response_id)
+        if action_response.response.enquiry_assign.target_id == request.user.id:
+            action_response.complete()
+            action_response.save()
+            return HttpResponse("True")
+
+        else:
+            return HttpResponse("False")
