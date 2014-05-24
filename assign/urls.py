@@ -14,7 +14,11 @@ urlpatterns = patterns('',
                        url(r'^(?i)enquiry_response_start',
                            login_required(EnquiryActionResponseStartView.as_view(), login_url='/'),
                            name='enquiry_response_start'),
-
-
+                       url(r'^(?i)enquiry_response_stop',
+                           login_required(EnquiryActionResponseStopView.as_view(), login_url='/'),
+                           name='enquiry_response_stop'),
+                       url(r'^(?i)enquiry_response_complete',
+                           login_required(EnquiryActionResponseCompleteView.as_view(), login_url='/'),
+                           name='enquiry_response_complete'),
 )
 
