@@ -67,6 +67,16 @@ class EnquiryAssign(Assign):
 class EnquiryAssignResponse(models.Model):
     enquiry_assign = models.OneToOneField(EnquiryAssign, related_name='response')
     comment = models.CharField(max_length=1000)
+    status = models.CharField(max_length=200)
+    end_date = models.DateTimeField(null=True, blank=True)
+    accepted = models.BooleanField(default=False)
+
+    def complete(self):
+        if self.is_done() and self.is_accepted():
+            self.status = 'done'
+            self.end_date = datetime.now()
+        else:
+            raise Exception('Assign response is not ready for being complete')
 
 
     def is_done(self):
