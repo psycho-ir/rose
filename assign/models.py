@@ -102,6 +102,8 @@ class EnquiryActionResponse(models.Model):
     def start(self):
         if self.status == 'done':
             raise Exception("action_response has been done before")
+        if self.start_date is None or self.start_date == '':
+            self.start_date = datetime.now()
         self.status = 'in_progress'
 
     def stop(self):
@@ -112,7 +114,7 @@ class EnquiryActionResponse(models.Model):
     def complete(self):
         if self.status == 'done':
             raise Exception("action_response has been done before")
-
+        self.end_date = datetime.now()
         self.status = 'done'
 
 
