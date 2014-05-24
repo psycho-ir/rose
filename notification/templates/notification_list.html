@@ -27,7 +27,7 @@
                     <td>{{ assign.get_persian_expire_date }}</td>
                     {#                    <td>{{ assign.request.id }}</td>#}
                     <td>{{ assign.priority }}</td>
-                    <td><a href="#"> رسیدگی</a></td>
+                    <td><a href="{{ assign.assign_type.url }}{{ assign.id }}"> رسیدگی</a></td>
                 </tr>
             {% endfor %}
             </tbody>
