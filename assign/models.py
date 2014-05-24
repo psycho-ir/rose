@@ -16,6 +16,7 @@ class EnquiryAction(models.Model):
 class AssignType(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     local_name = models.CharField(max_length=200)
+    url = models.CharField(default="", max_length=200)
 
 
 class Assign(models.Model):
@@ -25,6 +26,7 @@ class Assign(models.Model):
     expire_date = models.DateTimeField()
     comment = models.CharField(max_length=1000)
     priority = models.IntegerField(max_length=30)
+    request = models.ForeignKey(Request, related_name='enquiry_assigns')
     assign_type = models.ForeignKey(AssignType, related_name='assigns')
 
 
@@ -60,8 +62,58 @@ class EnquiryAssign(Assign):
         self.assign_type_id = 'enquiry'
 
     actions = models.ManyToManyField(EnquiryAction)
-    request = models.ForeignKey(Request, related_name='enquiry_assigns')
-    # special_actions
+
+
+class EnquiryAssignResponse(models.Model):
+    enquiry_assign = models.OneToOneField(EnquiryAssign, related_name='response')
+    comment = models.CharField(max_length=1000)
+
+
+    def is_done(self):
+        for response in self.action_responses.all():
+            if not response.status == 'done':
+                return False
+        return True
+
+    def is_accepted(self):
+        for response in self.action_responses.all():
+            if not response.accepted:
+                return False
+            return True
+
+
+class EnquiryActionResponse(models.Model):
+    action = models.OneToOneField(EnquiryAction, related_name='response')
+    comment = models.CharField(max_length=1000)
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+
+    #not_started
+    #in_progress
+    #stopped
+    #done
+    status = models.CharField(max_length=50, default='not_started')
+    reference_number = models.CharField(max_length=20, null=True, blank=True)
+    #The result of every action can be accepted or rejected
+    accepted = models.BooleanField(default=False)
+    response = models.ForeignKey(EnquiryAssignResponse, related_name='action_responses')
+
+
+    def start(self):
+        if self.status == 'done':
+            raise Exception("action_response has been done before")
+        self.status = 'in_progress'
+
+    def stop(self):
+        if self.status == 'done':
+            raise Exception("action_response has been done before")
+        self.status = 'stopped'
+
+    def complete(self):
+        if self.status == 'done':
+            raise Exception("action_response has been done before")
+
+        self.status = 'done'
 
 
 def create_assign_history(sender, instance, created, **kwargs):
