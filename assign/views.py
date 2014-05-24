@@ -75,6 +75,14 @@ class EnquiryResponseView(View):
 
         return HttpResponse(template.render(context))
 
+    def post(self, request, assign_id):
+        assign = EnquiryAssign.objects.get(id=int(assign_id))
+        assign.response.comment = request.POST.get("comment", "")
+        assign.response.accepted = (request.POST.get("accepted", 'False') == 'True')
+        assign.response.complete()
+        assign.response.save()
+        return HttpResponse("Done")
+
 
 class EnquiryActionResponseStartView(View):
     def post(self, request):
@@ -107,6 +115,11 @@ class EnquiryActionResponseCompleteView(View):
         action_response_id = int(request.POST.get("action_response_id"))
         action_response = EnquiryActionResponse.objects.get(id=action_response_id)
         if action_response.response.enquiry_assign.target_id == request.user.id:
+            accepted = (request.POST.get('accepted', 'False') == 'True')
+            reference_number = request.POST.get('reference_number', '0')
+            action_response.reference_number = str(reference_number)
+            action_response.comment = request.POST.get('comment', '')
+            action_response.accepted = accepted
             action_response.complete()
             action_response.save()
             return HttpResponse("True")
