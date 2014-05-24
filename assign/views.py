@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.views.generic import View
 from start_grant.models import Request
-from assign.models import EnquiryAction, EnquiryAssign
+from assign.models import EnquiryAction, EnquiryAssign, EnquiryAssignResponse, EnquiryActionResponse
 from utils.date_utils import greg_date_from_shamsi
 
 
@@ -53,3 +53,37 @@ class EnquiryAssignView(View):
         customer_request.save()
 
         return HttpResponseRedirect(reverse('superior:tasks'))
+
+
+class EnquiryResponseView(View):
+    def get(self, request, assign_id):
+        assign = EnquiryAssign.objects.get(id=int(assign_id))
+        if not hasattr(assign, 'response'):
+            response = EnquiryAssignResponse()
+            response.enquiry_assign = assign
+            response.save()
+        else:
+            response = assign.response
+        for action in assign.actions.all():
+            if not hasattr(action, 'response'):
+                action_response = EnquiryActionResponse()
+                action_response.action = action
+                response.action_responses.add(action_response)
+
+        template = loader.get_template('enquiry_response.html')
+        context = RequestContext(request, {'assign': assign})
+
+        return HttpResponse(template.render(context))
+
+
+class EnquiryActionResponseStartView(View):
+    def post(self, request):
+        action_response_id = int(request.POST.get("action_response_id"))
+        action_response = EnquiryActionResponse.objects.get(id=action_response_id)
+        if action_response.response.enquiry_assign.target_id == request.user.id:
+            action_response.start()
+            action_response.save()
+            return HttpResponse("True")
+
+        else:
+            return HttpResponse("False")
