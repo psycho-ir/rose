@@ -3,7 +3,8 @@
         "model": "assign.assigntype",
         "fields": {
             "name": "enquiry",
-            "local_name": "استعلام"
+            "local_name": "استعلام",
+            "url": "/assign/enquiry_response/"
         }
 
     }
