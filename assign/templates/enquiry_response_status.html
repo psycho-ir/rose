@@ -1,0 +1,171 @@
+{% extends 'base_dashboard.html' %}
+{% load i18n %}
+
+{% block content %}
+    {% if not enquiry_assign.response %}
+        هنوز اقدامی صورت نگرفته است
+    {% else %}
+        <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    وضعیت اقدامات
+                </div>
+            </div>
+            <div class="panel-body">
+                <table id="action_table" style="width: 100%;" class="display" cellpadding="0" cellspacing="0"
+                       border="0">
+                    <thead>
+                    <tr>
+                        <td>نام اقدام</td>
+                        <td>وضعیت</td>
+                        <td>شماره مرجع</td>
+                        <td>نتیجه</td>
+                        <td>زمان شروع</td>
+                        <td>زمان پایان</td>
+                        <td>توضیحات</td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for action in enquiry_assign.actions.all %}
+                        <tr>
+                            <td>
+                                {{ action.local_name }}
+                            </td>
+                            <td>
+                                {% trans action.response.status %}
+                            </td>
+                            <td>
+                                {{ action.response.reference_number }}
+                            </td>
+                            <td>
+                                {% if action.response.status == 'done' %}
+                                    {% if action.response.accepted %}
+                                        تایید
+                                    {% else %}
+                                        مردود
+                                    {% endif %}
+                                {% else %}
+                                    نا مشخص
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ action.response.get_persian_start_date }}
+                            </td>
+                            <td>
+                                {{ action.response.get_persian_end_date }}
+                            </td>
+                            <td>
+                                {{ action.response.comment |linebreaksbr }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    تاریخچه عملیات
+                </div>
+            </div>
+            <div class="panel-body">
+                <table id="history_table" style="width: 100%;" class="display" cellpadding="0" cellspacing="0"
+                       border="0">
+                    <thead>
+                    <tr>
+                        <td>زمان</td>
+                        <td>عمل</td>
+                        <td>توضیحات</td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for history_item in enquiry_assign.history.items.all %}
+                        <tr>
+                            <td>
+                                {{ history_item.get_persian_issue_date }}
+                            </td>
+                            <td>
+                                {{ history_item.history_item.local_name }}
+                            </td>
+                            <td>
+                                {{ history_item.comment }}
+                            </td>
+
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    نتیجه نهایی کارشناسی
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-1">
+                        توضیحات
+                    </div>
+                    <div class="col-xs-7">
+                        {{ enquiry_assign.response.comment }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1">
+                        نتیجه نهایی
+                    </div>
+                    <div class="col-xs-3">
+                        {% if enquiry_assign.response.is_done %}
+                            {% if enquiry_assign.is_accepted %}
+                                <span style="color: green;">
+                                تمامی استعلام ها مورد تایید قرار گرفته
+                                </span>
+                            {% else %}
+                                <span style="color:red;">
+                                    نتیجه کلی استعلام ها مردود می باشد
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            <span style="color: orange;">
+                            استعلام ها هنوز به پایان نرسیده است
+                            </span>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#action_table').dataTable({
+                bPaginate: false,
+                bFilter: false,
+                bInfo: false
+            });
+            $('#history_table').dataTable({
+                bPaginate: false,
+                bFilter: false,
+                bInfo: false
+            });
+        });
+
+    </script>
+{% endblock %}
