@@ -44,6 +44,7 @@
 
                         {% elif request.status == 'enquiry_assigned' %}
                             ارجاع شده جهت استعلام
+                            <a href="{% url 'assign:enquiry_response_status' request.id %}">مشاهده وضعیت</a>
                         {% else %}
                             new
                         {% endif %}
