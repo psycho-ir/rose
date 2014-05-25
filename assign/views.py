@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -84,6 +85,15 @@ class EnquiryResponseView(View):
         return HttpResponse("Done")
 
 
+class EnquiryResponseStatusView(View):
+    def get(self, request, request_id):
+        enquiry_assgin = EnquiryAssign.objects.filter(request__id=request_id).last()
+
+        template = loader.get_template('enquiry_response_status.html')
+        context = RequestContext(request, {'enquiry_assign': enquiry_assgin})
+        return HttpResponse(template.render(context))
+
+
 class EnquiryActionResponseStartView(View):
     def post(self, request):
         action_response_id = int(request.POST.get("action_response_id"))
@@ -117,7 +127,8 @@ class EnquiryActionResponseCompleteView(View):
         if action_response.response.enquiry_assign.target_id == request.user.id:
             accepted = (request.POST.get('accepted', 'False') == 'True')
             reference_number = request.POST.get('reference_number', '0')
-            action_response.reference_number = str(reference_number)
+            action_response.reference_number = reference_number
+                # str(reference_number)
             action_response.comment = request.POST.get('comment', '')
             action_response.accepted = accepted
             action_response.complete()
