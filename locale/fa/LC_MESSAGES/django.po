@@ -2927,3 +2927,15 @@ msgstr "مشتری  با این شماره ملی در سیستم جامع وج�
 
 msgid "This request does not new guarantor"
 msgstr "این درخواست تسهیلات نیازی به ضامن ندارد"
+
+msgid "not_started"
+msgstr "شروع نشده"
+
+msgid "in_progress"
+msgstr "در حال انجام"
+
+msgid "stop"
+msgstr "متوقف"
+
+msgid "done"
+msgstr "پایان یافته"
