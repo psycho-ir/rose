@@ -47,9 +47,12 @@ class AssignHistoryItemInstance(models.Model):
     issue_date = models.DateTimeField()
     comment = models.CharField(max_length=1000, default='')
 
+    def get_persian_issue_date(self):
+        return jalali_datetime.fromgregorian(datetime=self.issue_date).strftime('%Y/%m/%d')
+
 
 class AssignHistory(models.Model):
-    assign = models.OneToOneField(Assign)
+    assign = models.OneToOneField(Assign, related_name='history')
     items = models.ManyToManyField(AssignHistoryItemInstance)
 
     def last_item(self):
@@ -69,10 +72,10 @@ class EnquiryAssignResponse(models.Model):
     comment = models.CharField(max_length=1000)
     status = models.CharField(max_length=200)
     end_date = models.DateTimeField(null=True, blank=True)
-    accepted = models.BooleanField(default=False)
+    # accepted = models.BooleanField(default=False)
 
     def complete(self):
-        if self.is_done() and self.is_accepted():
+        if self.is_done():
             self.status = 'done'
             self.end_date = datetime.now()
         else:
@@ -107,6 +110,12 @@ class EnquiryActionResponse(models.Model):
     #The result of every action can be accepted or rejected
     accepted = models.BooleanField(default=False)
     response = models.ForeignKey(EnquiryAssignResponse, related_name='action_responses')
+
+    def get_persian_start_date(self):
+        return jalali_datetime.fromgregorian(datetime=self.start_date).strftime('%Y/%m/%d')
+
+    def get_persian_end_date(self):
+        return jalali_datetime.fromgregorian(datetime=self.end_date).strftime('%Y/%m/%d')
 
 
     def start(self):
