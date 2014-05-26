@@ -7,8 +7,7 @@ from assign.models import Assign
 
 class NotificationView(View):
     def get(self, request):
-        assigns = Assign.objects.filter(target__id=request.user.id)
-
+        assigns = Assign.objects.filter(target__id=request.user.id, status='pending')
         template = loader.get_template('notification_list.html')
         context = RequestContext(request, {'assigns': assigns})
 
