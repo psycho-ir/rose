@@ -4,5 +4,5 @@ __author__ = 'soroosh'
 
 
 def notification(request):
-    assigns = Assign.objects.filter(target__id=request.user.id)
-    return {'notifications': assigns}
+    count = Assign.objects.filter(target__id=request.user.id, status='pending').count()
+    return {'notifications_count': count}
