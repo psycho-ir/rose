@@ -10,7 +10,8 @@ class TaskListView(View):
         if request.user.profile.role.name != 'superior':
             return HttpResponse('No Access')
         template = loader.get_template('tasks_list.html')
-        requests = Request.objects.filter(Q(status='checklist_completed') | Q(status='enquiry_assigned'),
+        requests = Request.objects.filter(Q(status='checklist_completed') | Q(status='enquiry_assigned')
+                                          | Q(status='enquiry_assign_completed'),
                                           branch_code=request.user.profile.branch_code)
 
         context = RequestContext(request, {'requests': requests})
