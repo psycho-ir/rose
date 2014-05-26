@@ -26,8 +26,12 @@ class Assign(models.Model):
     expire_date = models.DateTimeField()
     comment = models.CharField(max_length=1000)
     priority = models.IntegerField(max_length=30)
-    request = models.ForeignKey(Request, related_name='enquiry_assigns')
+    request = models.ForeignKey(Request, related_name='assigns')
     assign_type = models.ForeignKey(AssignType, related_name='assigns')
+    #done
+    #pending
+
+    status = models.CharField(max_length=200, default='pending')
 
 
     def get_persian_issue_date(self):
@@ -77,7 +81,16 @@ class EnquiryAssignResponse(models.Model):
     def complete(self):
         if self.is_done():
             self.status = 'done'
+            self.enquiry_assign.status = 'done'
+            self.enquiry_assign.save()
             self.end_date = datetime.now()
+            if not self.enquiry_assign.request.status == 'enquiry_assigned':
+                raise Exception(
+                    "Request status should be %s but is %s" % ('enquiry_assigned', self.enquiry_assign.request.status))
+
+            self.enquiry_assign.request.status = 'enquiry_assign_completed'
+            self.enquiry_assign.request.save()
+            self.save()
         else:
             raise Exception('Assign response is not ready for being complete')
 
