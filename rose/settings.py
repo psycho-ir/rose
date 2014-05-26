@@ -36,11 +36,12 @@ INSTALLED_APPS = (
     'notification',
     'south',
     'compressor',
+    'django_scheduler',
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 
 )
 
@@ -53,7 +54,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     #    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-     'notification.context_processor.notification'
+    'notification.context_processor.notification'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -127,6 +128,7 @@ LOCALE_PATHS = (
 )
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -145,3 +147,12 @@ STATICFILES_FINDERS = (
     # other finders..
     'compressor.finders.CompressorFinder',
 )
+
+
+##### CACHE config ##########
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
