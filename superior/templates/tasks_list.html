@@ -45,7 +45,11 @@
                         {% elif request.status == 'enquiry_assigned' %}
                             ارجاع شده جهت استعلام
                             <a href="{% url 'assign:enquiry_response_status' request.id %}">مشاهده وضعیت</a>
+                        {% elif request.status == 'enquiry_assign_completed' %}
+                            استعلام پایان یافت
+                            <a href="{% url 'assign:enquiry_response_status' request.id %}">مشاهده وضعیت</a>
                         {% else %}
+
                             new
                         {% endif %}
 
