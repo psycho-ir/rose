@@ -85,6 +85,7 @@ DATABASES = {
     #     'PASSWORD': 's5samens',
     #     'HOST': '192.168.101.20',
     #     'PORT': '1521',
+    # 'ATOMIC_REQUESTS': True
     # },
 
     'default': {
@@ -92,7 +93,8 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'rose'),
         'USER': os.environ.get('MYSQL_USER', 'root'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'root'),
-        'HOST': '127.0.0.1'
+        'HOST': '127.0.0.1',
+        'ATOMIC_REQUESTS': True
     },
 
     'core': {
