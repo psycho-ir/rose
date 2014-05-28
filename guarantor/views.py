@@ -66,6 +66,9 @@ class GuarantorListView(View):
             readonly = True
         customer_request = Request.objects.get(pk=request_id)
 
+        if customer_request.user_id != request.user.id:
+            readonly = True
+
         if customer_request.need_guarantor():
 
             context = RequestContext(request, {
