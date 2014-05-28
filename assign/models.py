@@ -119,7 +119,7 @@ class EnquiryActionResponse(models.Model):
     #stopped
     #done
     status = models.CharField(max_length=50, default='not_started')
-    reference_number = models.CharField(max_length=20, null=True, blank=True)
+    reference_number = models.CharField(max_length=20, default="", null=True, blank=True)
     #The result of every action can be accepted or rejected
     accepted = models.BooleanField(default=False)
     response = models.ForeignKey(EnquiryAssignResponse, related_name='action_responses')
