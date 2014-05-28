@@ -2948,3 +2948,21 @@ msgstr "متوسط"
 
 msgid "p_50"
 msgstr "بالا"
+
+msgid "checklist_completed"
+msgstr "آماده ارجاع"
+
+msgid "enquiry_assigned"
+msgstr "ارجاع شده جهت استعلام"
+
+msgid "enquiry_assign_completed"
+msgstr "استعلام پایان یافت"
+
+msgid "intro"
+msgstr "ثبت اولیه"
+
+msgid "req_info_completed"
+msgstr "ثبت تکمیلی"
+
+msgid "ready_for_checklist"
+msgstr "آماده پر کردن چک لیست"
