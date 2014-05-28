@@ -9,21 +9,25 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form action="{% url 'grant:check_list' request_id %}" method="post">
+                {% if not readonly %}
+                    <form action="{% url 'grant:check_list' request_id %}" method="post">
                     {% csrf_token %}
-                    <div class="row">
-                        {% for instance in checkListItems %}
+                {% endif %}
+                <div class="row">
+                    {% for instance in checkListItems %}
 
-                            <div class="col-xs-6">
-                                <input type="checkbox" name="{{ instance.id }}"
-                                        {% if instance.checked %} checked="checked" {% endif %}
-                                        >
-                                {{ instance.item.local_name }}
-                                </input>
-                            </div>
+                        <div class="col-xs-6">
+                            <input type="checkbox" name="{{ instance.id }}"
+                                    {% if instance.checked %} checked="checked" {% endif %}
+                                    {% if  readonly %} disabled="disabled" {% endif %}
+                                    >
+                            {{ instance.item.local_name }}
+                            </input>
+                        </div>
 
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
+                </div>
+                {% if not readonly %}
                     <div class="row">
                         <div class="col-xs-12" style="text-align: center;">
                             <button type="submit" style="width: 90%;" id="bank_income_info_button"
@@ -32,7 +36,9 @@
                             </button>
                         </div>
                     </div>
-                </form>
+
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div>
