@@ -95,6 +95,11 @@
                                     ثبت درخواست وام جدید
                                 </a>
                             </div>
+                            <div class="row">
+                                <a href="{% url 'grant:track' %}">
+                                    پیگیری درخواستها
+                                </a>
+                            </div>
                         {% elif user.profile.role.name == 'superior' %}
                             <div class="row">
                                 <a href="{% url 'superior:tasks' %}">
