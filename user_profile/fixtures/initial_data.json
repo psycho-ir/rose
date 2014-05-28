@@ -16,7 +16,7 @@
             "date_joined": "3256-09-26T10:52:34Z"
         }
     },
-        {
+    {
         "pk": 2,
         "model": "auth.user",
         "fields": {
@@ -31,6 +31,23 @@
             "user_permissions": [],
             "password": "pbkdf2_sha256$12000$gVH06OIVcCa0$nuzC+z8Ya74T+s8hw61a7KS5QqhUvPB7Gxh6ikYuTwk=",
             "email": "admin@yahoo.com",
+            "date_joined": "3256-09-26T10:52:34Z"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.user",
+        "fields": {
+            "username": "teller",
+            "first_name": "teller",
+            "last_name": "teller 2",
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2635-07-05T14:39:53.122Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$12000$gVH06OIVcCa0$nuzC+z8Ya74T+s8hw61a7KS5QqhUvPB7Gxh6ikYuTwk=",
+            "email": "teler@yahoo.com",
             "date_joined": "3256-09-26T10:52:34Z"
         }
     }

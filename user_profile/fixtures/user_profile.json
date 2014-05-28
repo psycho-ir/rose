@@ -18,5 +18,15 @@
             "role": "2",
             "default_login_url": "/superior/tasks"
         }
+    },
+    {
+        "pk": 3,
+        "model": "user_profile.userprofile",
+        "fields": {
+            "user": 3,
+            "branch_code": "0",
+            "role": "1",
+            "default_login_url": "/grant/track"
+        }
     }
 ]
