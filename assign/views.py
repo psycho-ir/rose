@@ -59,6 +59,8 @@ class EnquiryAssignView(View):
 class EnquiryResponseView(View):
     def get(self, request, assign_id):
         assign = EnquiryAssign.objects.get(id=int(assign_id))
+        if assign.target_id != request.user.id:
+            return HttpResponseRedirect(reverse('grant:track'))
         if assign.status == 'done':
             return HttpResponseRedirect(reverse('notification:list'))
         if not hasattr(assign, 'response'):
@@ -82,7 +84,7 @@ class EnquiryResponseView(View):
         assign = EnquiryAssign.objects.get(id=int(assign_id))
         assign.response.comment = request.POST.get("comment", "")
         assign.response.complete()
-        return HttpResponseRedirect(reverse('superior:tasks'))
+        return HttpResponseRedirect(reverse('grant:track'))
 
 
 class EnquiryResponseStatusView(View):
@@ -128,7 +130,7 @@ class EnquiryActionResponseCompleteView(View):
             accepted = (request.POST.get('accepted', 'False') == 'True')
             reference_number = request.POST.get('reference_number', '0')
             action_response.reference_number = reference_number
-                # str(reference_number)
+            # str(reference_number)
             action_response.comment = request.POST.get('comment', '')
             action_response.accepted = accepted
             action_response.complete()
