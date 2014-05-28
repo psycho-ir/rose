@@ -40,7 +40,7 @@
 
                         {% if request.status == 'checklist_completed' %}
                             آماده ارجاع
-                            <a href="{% url 'superior:enquiry_assign' request.id %}">ارجاع جهت استعلام</a>
+                            <a href="{% url 'assign:enquiry_assign' request.id %}">ارجاع جهت استعلام</a>
 
                         {% elif request.status == 'enquiry_assigned' %}
                             ارجاع شده جهت استعلام
