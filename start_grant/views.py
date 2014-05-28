@@ -45,9 +45,13 @@ class StartView(View):
 class CheckListView(View):
     def get(self, request, request_id):
         checklist = CheckList.objects.get(request__id=request_id)
+        readonly = False
+        if checklist.request.user_id != request.user.id:
+            readonly = True
 
         template = loader.get_template('check_list.html')
-        context = RequestContext(request, {'request_id': request_id, 'checkListItems': checklist.items.all()})
+        context = RequestContext(request, {'readonly': readonly, 'request_id': request_id,
+                                           'checkListItems': checklist.items.all()})
         return HttpResponse(template.render(context))
 
     def post(self, request, request_id):
