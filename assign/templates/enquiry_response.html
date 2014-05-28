@@ -5,13 +5,13 @@
 
         <div class="row">
             <div class="col-xs-4">
-                <a href="{% url 'grant:submit' assign.request.id %}">مشاهده اطلاعات درخواست</a>
+                <a target="_blank" href="{% url 'grant:submit' assign.request.id %}">مشاهده اطلاعات درخواست</a>
             </div>
             <div class="col-xs-4">
-                <a href="{% url 'guarantor:list' assign.request.id %}">مشاهده اطلاعات ضامنین</a>
+                <a target="_blank" href="{% url 'guarantor:list' assign.request.id %}">مشاهده اطلاعات ضامنین</a>
             </div>
             <div class="col-xs-4">
-                <a href="{% url 'grant:check_list' assign.request.id %}">مشاهده چک لیست</a>
+                <a target="_blank" href="{% url 'grant:check_list' assign.request.id %}">مشاهده چک لیست</a>
             </div>
         </div>
         {% for action in assign.actions.all %}
