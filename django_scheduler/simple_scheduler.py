@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+import logging
 import multiprocessing
 from time import sleep
 import uuid
@@ -28,7 +29,7 @@ class Scheduler:
 class ThreadSimpleScheduler(Scheduler):
     def run(self):
         thread = threading.Thread(name='SCHEDULER-' + str(uuid.uuid4()), target=self._decorate_task())
-        thread.daemon = True
+        thread.daemon = False
         thread.start()
         return thread
 
@@ -39,6 +40,28 @@ class ProcessSimpleScheduler(Scheduler):
         process.daemon = True
         process.start()
         return process
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO,
+                        format="[%(threadName)-15s] %(message)s")
+
+    def say_hi():
+        logging.info('hi')
+
+    logging.info("Running...")
+    # ts = ThreadSimpleScheduler(2, say_hi)
+    # ts.run()
+    # print threading.active_count()
+    # sleep(10)
+    # print threading.active_count()
+
+    ps = ProcessSimpleScheduler(2, say_hi)
+    ps.run()
+    children = multiprocessing.active_children()
+    print multiprocessing.cpu_count()
+    # multiprocessing.
+    print len(children)
 
 
 
