@@ -17,6 +17,12 @@ class EnquiryAssignView(View):
             return HttpResponse('No Access')
 
         customer_request = Request.objects.get(id=request_id)
+        existed_enquiry_assign = EnquiryAssign.objects.filter(request__id=1).count() > 0
+
+        #Currently every request should have just one enquiry assign
+        if existed_enquiry_assign:
+            return HttpResponseRedirect('superior:tasks')
+
         selectable_actions = EnquiryAction.objects.filter(customer_type=customer_request.type)
         special_actions = EnquiryAction.objects.filter(customer_type='special')
         guarantor_action = None
@@ -79,8 +85,9 @@ class EnquiryResponseView(View):
             response.save()
         else:
             response = assign.response
-        for action in assign.actions.all():
-            if not hasattr(action, 'response'):
+        if response.action_responses.count() < assign.actions.count():
+            for action in assign.actions.all():
+                # if not hasattr(action, 'response'):
                 action_response = EnquiryActionResponse()
                 action_response.action = action
                 response.action_responses.add(action_response)
