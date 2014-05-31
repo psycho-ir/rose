@@ -109,7 +109,7 @@ class EnquiryAssignResponse(models.Model):
 
 
 class EnquiryActionResponse(models.Model):
-    action = models.OneToOneField(EnquiryAction, related_name='response')
+    action = models.ForeignKey(EnquiryAction, related_name='response')
     comment = models.CharField(max_length=1000)
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
