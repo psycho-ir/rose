@@ -19,14 +19,24 @@ class EnquiryAssignView(View):
         customer_request = Request.objects.get(id=request_id)
         selectable_actions = EnquiryAction.objects.filter(customer_type=customer_request.type)
         special_actions = EnquiryAction.objects.filter(customer_type='special')
+        guarantor_action = None
+        account_related_action = None
+        if customer_request.need_guarantor():
+            guarantor_action = EnquiryAction.objects.get(customer_type='conditional', id=20)
+
+        if customer_request.complete_information.loan_type.name == 'foroosh-aghsati':
+            account_related_action = EnquiryAction.objects.get(customer_type='conditional', id=18)
 
         candidate_target_users = User.objects.filter(profile__branch_code=request.user.profile.branch_code,
                                                      profile__role__name='teller')
+
         template = loader.get_template('enquiry_assign.html')
         context = RequestContext(request, {'request_id': request_id,
                                            'actions': selectable_actions,
                                            'special_actions': special_actions,
-                                           'target_users': candidate_target_users})
+                                           'target_users': candidate_target_users,
+                                           'guarantor_action': guarantor_action,
+                                           'account_related_action': account_related_action})
         return HttpResponse(template.render(context))
 
 

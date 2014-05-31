@@ -81,6 +81,35 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        {% if guarantor_action %}
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    اقدامات درخواستی که حساب مرتبط دارند:
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-6">
+                                    <input name="selected_special_actions" value="{{ guarantor_action.id }}"
+                                           type="checkbox">{{ guarantor_action.local_name }}</input>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if account_related_action %}
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    اقدامات درخواستی که ضامن حقیقی دارد:
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-1"></div>
+                                <div class="col-xs-6">
+                                    <input name="selected_special_actions" value="{{ account_related_action.id }}"
+                                           type="checkbox">{{ account_related_action.local_name }}</input>
+                                </div>
+                            </div>
+                        {% endif %}
 
                         <div class="row">
                             <div class="col-xs-12" style="text-align: center;">
