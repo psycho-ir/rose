@@ -70,7 +70,6 @@ class GuarantorListView(View):
             readonly = True
 
         if customer_request.need_guarantor():
-
             context = RequestContext(request, {
                 'readonly': readonly,
                 'guarantors': customer_request.guarantors.all(),
