@@ -159,7 +159,8 @@
             "customer_type": "hoghooghi"
         }
 
-    },
+    }
+    ,
     {
         "model": "assign.enquiryaction",
         "pk": 17,
@@ -167,6 +168,47 @@
             "name": "انجام استعلام از لیست سیاه داخلی بانک ",
             "local_name": "انجام استعلام از لیست سیاه داخلی بانک ",
             "customer_type": "special"
+        }
+
+    },
+
+    {
+        "model": "assign.enquiryaction",
+        "pk": 18,
+        "fields": {
+            "name": "بررسی حساب مشتری برای وامهایی که به حساب وابسته هستند",
+            "local_name": "بررسی حساب مشتری برای وامهایی که به حساب وابسته هستند",
+            "customer_type": "conditional"
+        }
+
+    },
+    {
+        "model": "assign.enquiryaction",
+        "pk": 19,
+        "fields": {
+            "name": "انجام استعلام ضامن شخص حقیقی",
+            "local_name": "انجام استعلام ضامن شخص حقیقی",
+            "customer_type": "conditional"
+        }
+
+    },
+    {
+        "model": "assign.enquiryaction",
+        "pk": 20,
+        "fields": {
+            "name": "انجام استعلام ضامن شخص حقوقی",
+            "local_name": "انجام استعلام ضامن شخص حقوقی",
+            "customer_type": "conditional"
+        }
+
+    },
+    {
+        "model": "assign.enquiryaction",
+        "pk": 21,
+        "fields": {
+            "name": "انجام استعلام مدارک وثیقه ملکی",
+            "local_name": "انجام استعلام مدارک وثیقه ملکی",
+            "customer_type": "conditional"
         }
 
     }
