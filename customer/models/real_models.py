@@ -17,8 +17,8 @@ class RealCustomerInformation(Customer):
     bc_number = models.CharField(max_length=20)
     bc_serial_number = models.CharField(max_length=20)
     birth_date = models.DateTimeField()
-    bc_place = models.ForeignKey(Town, related_name='customer_bc_places')
-    birth_place = models.ForeignKey(Town, related_name='customer_birth_places')
+    bc_place = models.ForeignKey(Town, related_name='customer_bc_places',null=True,blank=True)
+    birth_place = models.ForeignKey(Town, related_name='customer_birth_places', null=True,blank=True)
     gender = models.CharField(max_length=10)
 
     def get_persian_birth_date(self):
