@@ -52,7 +52,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
-    #    'django.core.context_processors.request',
+    # 'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'notification.context_processor.notification'
 )
@@ -81,15 +81,15 @@ DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.oracle',
     #     'NAME': 'orcl',
-    #     'USER': 's5samens',
-    #     'PASSWORD': 's5samens',
-    #     'HOST': '192.168.101.20',
+    #     'USER': 'rose',
+    #     'PASSWORD': 'rose',
+    #     'HOST': '192.168.101.151',
     #     'PORT': '1521',
-    # 'ATOMIC_REQUESTS': True
+    #     'ATOMIC_REQUESTS': True
     # },
 
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+    'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DB_NAME', 'rose'),
         'USER': os.environ.get('MYSQL_USER', 'root'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'root'),
@@ -137,7 +137,7 @@ LOCALE_PATHS = (
 DEFAULT_LOGIN_URL = '/grant/track'
 DEFAULT_LOGOUT_URL = '/'
 
-#STATIC resources config
+# STATIC resources config
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'stat')
