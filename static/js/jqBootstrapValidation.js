@@ -141,7 +141,7 @@
                         //                                                 MAXLENGTH
                         // ---------------------------------------------------------
                         if ($this.attr("maxlength") !== undefined) {
-                            message = "Too long: Maximum of '" + $this.attr("maxlength") + "' characters<!-- data-validation-maxlength-message to override -->";
+                            message = "حداکثر " + $this.attr("maxlength") + " کاراکتر<!-- data-validation-maxlength-message to override -->";
                             if ($this.data("validationMaxlengthMessage")) {
                                 message = $this.data("validationMaxlengthMessage");
                             }
@@ -152,7 +152,7 @@
                         //                                                 MINLENGTH
                         // ---------------------------------------------------------
                         if ($this.attr("minlength") !== undefined) {
-                            message = "Too short: Minimum of '" + $this.attr("minlength") + "' characters<!-- data-validation-minlength-message to override -->";
+                            message = "حداقل " + $this.attr("minlength") + " کاراکتر<!-- data-validation-minlength-message to override -->";
                             if ($this.data("validationMinlengthMessage")) {
                                 message = $this.data("validationMinlengthMessage");
                             }
