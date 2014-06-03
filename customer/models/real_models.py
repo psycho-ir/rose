@@ -17,8 +17,8 @@ class RealCustomerInformation(Customer):
     bc_number = models.CharField(max_length=20)
     bc_serial_number = models.CharField(max_length=20)
     birth_date = models.DateTimeField()
-    bc_place = models.CharField(max_length=100)
-    birth_place = models.CharField(max_length=100)
+    bc_place = models.ForeignKey(Town, related_name='customer_bc_places')
+    birth_place = models.ForeignKey(Town, related_name='customer_birth_places')
     gender = models.CharField(max_length=10)
 
     def get_persian_birth_date(self):
@@ -27,12 +27,13 @@ class RealCustomerInformation(Customer):
     @staticmethod
     def from_dic(dic):
         from utils.date_utils import greg_date_from_shamsi
+
         gregorian_birth_date = greg_date_from_shamsi(dic['birth_date'], '/')
         c = RealCustomerInformation(type=dic['type'], customer_code=dic['national_number'],
                                     name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
                                     bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
-                                    birth_date=gregorian_birth_date, bc_place=dic['bc_place'],
-                                    birth_place=dic['birth_place'], gender=dic['gender'])
+                                    birth_date=gregorian_birth_date, bc_place_id=dic['bc_place_id'],
+                                    birth_place_id=dic['birth_place_id'], gender=dic['gender'])
 
         return c
 
