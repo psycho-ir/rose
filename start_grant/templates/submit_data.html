@@ -227,6 +227,7 @@
 
             /* form submission ajax */
             $('#submit_forms form').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
+                autoAdd: {helpBlocks: false},
                 submitSuccess: function ($form, event) {
                     var form_id = $form.attr('id');
                     var form_common = form_id.substr(0, form_id.lastIndexOf('_form'));
