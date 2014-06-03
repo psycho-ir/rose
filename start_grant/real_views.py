@@ -24,6 +24,7 @@ class SubmitDataView(View):
         certificate_types = JobCertificateType.objects.all()
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
+        all_towns = Town.objects.all()
         loan_types = LoanType.objects.all()
         refund_types = loan_types.first().refund_types.all()
         banks = Bank.objects.all()
@@ -43,7 +44,8 @@ class SubmitDataView(View):
                                      'refund_types': refund_types,
                                      'banks': banks,
                                      'vasighe_types': vasighe_types,
-                                     'business_places': business_places})
+                                     'business_places': business_places,
+                                     'all_towns': all_towns})
         return HttpResponse(template.render(context))
 
     def post(self, request, request_id):
