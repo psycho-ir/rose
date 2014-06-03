@@ -195,6 +195,7 @@
 
 
 {% block js %}
+    <script src="{% static 'js/select2.min.js' %}"></script>
     <script type="text/javascript">
         {% if readonly %}
             $('input').prop('readonly', 'readonly');
@@ -213,6 +214,8 @@
         $(window).ready(function () {
             check_for_showing_next_level();
             $('#birth_date,#birth_date_span').persianDatepicker();
+            $('#bc_place').select2();
+            $('#birth_place').select2();
             $('.rose-progress-bar-cell').click(function () {
                 var cell = $(this)
                 var container = $('#' + $(this).attr('id') + '_container');
@@ -357,4 +360,7 @@
         })
         ;
     </script>
+{% endblock %}
+{% block css %}
+    <link href="{% static 'css//select2.css' %}" rel="stylesheet">
 {% endblock %}
