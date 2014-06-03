@@ -100,9 +100,11 @@
                         محل صدور شناسنامه
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" value="{{ customer_info.bc_place }}" name="bc_place"
-                               required
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+                        <select id="bc_place" name="bc_place_id" value="{{ customer_info.bc_place.id }}" style="width: 100%; padding-bottom:10px; ">
+                            {% for town in all_towns %}
+                                <option value="{{ town.id }}">{{ town.local_name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
 
                     <div class="col-xs-2">
@@ -120,10 +122,13 @@
                         محل تولد
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" value="{{ customer_info.birth_place }}"
-                               name="birth_place"
-                               required
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"/>
+
+                          <select id="birth_place" name="birth_place_id" value="{{ customer_info.birth_place.id }}" style="width: 100%; padding-bottom:10px; ">
+                            {% for town in all_towns %}
+                                <option value="{{ town.id }}">{{ town.local_name }}</option>
+                            {% endfor %}
+                        </select>
+
                     </div>
                 </div>
             </div>
