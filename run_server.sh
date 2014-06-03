@@ -1,0 +1,1 @@
+nohup python2.7 manage.py runserver --settings=rose.settings-production
