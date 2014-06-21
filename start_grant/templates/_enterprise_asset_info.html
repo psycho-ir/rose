@@ -21,7 +21,7 @@
         صندوق
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="cash"
+        <input role="amount" class="form-control" name="cash"
                value="{{ customer_info.asset_info.cash }}"
                required
                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -50,7 +50,7 @@
         مواد اولیه
     </div>
     <div class="col-xs-3">
-        <input type="number" name="ingredient" class="form-control"
+        <input role="amount" name="ingredient" class="form-control"
                value="{{ customer_info.asset_info.ingredient }}" required/>
 
     </div>
@@ -58,7 +58,7 @@
         محصولات در جریان ساخت
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="current_develop_products_amount"
+        <input role="amount" class="form-control" name="current_develop_products_amount"
                value="{{ customer_info.asset_info.current_develop_products_amount }}"
                required/>
     </div>
@@ -68,7 +68,7 @@
         محصولات ساخته شده
     </div>
     <div class="col-xs-3">
-        <input type="number" name="current_products_amount" class="form-control"
+        <input role="amount" name="current_products_amount" class="form-control"
                value="{{ customer_info.asset_info.current_products_amount }}" required/>
 
     </div>
@@ -84,7 +84,7 @@
         از اشخاص
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="individual_credit_amount" value="{{ customer_info.asset_info.individual_credit_amount }}"
+        <input role="amount" class="form-control" name="individual_credit_amount" value="{{ customer_info.asset_info.individual_credit_amount }}"
                required
                data-validation-required-message="وارد کردن این فیلد الزامی است"
                 />
@@ -93,7 +93,7 @@
         از شرکتها و موسسات
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="company_credit_amount"
+        <input role="amount" class="form-control" name="company_credit_amount"
                value="{{ customer_info.asset_info.company_credit_amount }}"
                required
                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -105,7 +105,7 @@
         متفرقه
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="other_credit_amount"
+        <input role="amount" class="form-control" name="other_credit_amount"
                value="{{ customer_info.asset_info.other_credit_amount }}" required/>
     </div>
 </div>
@@ -121,7 +121,7 @@
         زمین و ساختمان
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="manghool_building_amount"
+        <input role="amount" class="form-control" name="manghool_building_amount"
                value="{{ customer_info.asset_info.manghool_building_amount }}"
                required
                 />
@@ -130,7 +130,7 @@
         تاسیسات
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="manghool_installation_amount"
+        <input role="amount" class="form-control" name="manghool_installation_amount"
                value="{{ customer_info.asset_info.manghool_installation_amount }}"
                required
                 />
@@ -142,7 +142,7 @@
         وسایط نقلیه
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="manghool_vehicle_amount"
+        <input role="amount" class="form-control" name="manghool_vehicle_amount"
                value="{{ customer_info.asset_info.manghool_vehicle_amount }}"
                required
                 />
@@ -159,7 +159,7 @@
         اوراق مشارکت بی نام
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="oragh_mosharekat_bi_nam_amount"
+        <input role="amount" class="form-control" name="oragh_mosharekat_bi_nam_amount"
                value="{{ customer_info.asset_info.oragh_mosharekat_bi_nam_amount }}"
                required
                 />
@@ -168,7 +168,7 @@
         اوراق سهام شرکت ها
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="oragh_saham_sherkat_amount"
+        <input role="amount" class="form-control" name="oragh_saham_sherkat_amount"
                value="{{ customer_info.asset_info.oragh_saham_sherkat_amount }}"
                required
                 />
@@ -180,7 +180,7 @@
         سهم الشرکه (بدون اوراق سهام(
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="sahm_sherke_amount"
+        <input role="amount" class="form-control" name="sahm_sherke_amount"
                value="{{ customer_info.asset_info.sahm_sherke_amount }}"
                required
                 />
@@ -203,7 +203,7 @@
         پرداخت شده
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="registered_payed"
+        <input role="amount" class="form-control" name="registered_payed"
                value="{{ customer_info.asset_info.registered_payed }}"
                required
                 />
@@ -212,7 +212,7 @@
         تعهد شده
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="registered_guarantied"
+        <input role="amount" class="form-control" name="registered_guarantied"
                value="{{ customer_info.asset_info.registered_guarantied }}"
                required
                 />
@@ -231,7 +231,7 @@
         مانده حساب سود زیان
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="remained_benefit_amount"
+        <input role="amount" class="form-control" name="remained_benefit_amount"
                value="{{ customer_info.asset_info.remained_benefit_amount }}"
                required
                 />
@@ -249,7 +249,7 @@
         به اشخاص و بازرگانان
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="loan_from_individual_amount"
+        <input role="amount" class="form-control" name="loan_from_individual_amount"
                value="{{ customer_info.asset_info.loan_from_individual_amount }}"
                required
                 />
@@ -258,7 +258,7 @@
         به شرکت ها و موسسات
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="loan_from_institutes_amount"
+        <input role="amount" class="form-control" name="loan_from_institutes_amount"
                value="{{ customer_info.asset_info.loan_from_institutes_amount }}"
                required
                 />
@@ -269,7 +269,7 @@
         به بانکها
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="loan_from_banks_amount"
+        <input role="amount" class="form-control" name="loan_from_banks_amount"
                value="{{ customer_info.asset_info.loan_from_banks_amount }}"
                required
                 />
@@ -287,7 +287,7 @@
         پیش دریافت ها
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="pish_daryaft_amount"
+        <input role="amount" class="form-control" name="pish_daryaft_amount"
                value="{{ customer_info.asset_info.pish_daryaft_amount }}"
                required
                 />
@@ -304,7 +304,7 @@
         بستانکاران
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="bestankaran_amount"
+        <input role="amount" class="form-control" name="bestankaran_amount"
                value="{{ customer_info.asset_info.bestankaran_amount }}"
                required
                 />
@@ -322,7 +322,7 @@
         اسناد پرداختی
     </div>
     <div class="col-xs-3">
-        <input type="number" class="form-control" name="payed_documents_amount"
+        <input role="amount" class="form-control" name="payed_documents_amount"
                value="{{ customer_info.asset_info.payed_documents_amount }}"
                required
                 />

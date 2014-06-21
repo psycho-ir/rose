@@ -242,12 +242,24 @@
         {% endif %}
 
         var table;
+
         function check_for_showing_next_level() {
             if ($('.pending').length == 0) {
                 $('#next_level').show('slow');
 
             }
         }
+
+        $("input[role=amount]").maskMoney({
+            allowZero: true, // Prevent users from inputing zero
+            allowNegative: false, // Prevent users from inputing negative values
+            defaultZero: true, // when the user enters the field, it sets a default mask using zero
+            thousands: ',', // The thousands separator
+            decimal: '.', // The decimal separator
+            precision: 0, // How many decimal places are allowed
+            affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
+            symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
+        }); //
 
 
         check_for_showing_next_level();
