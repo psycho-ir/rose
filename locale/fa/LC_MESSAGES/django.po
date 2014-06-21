@@ -2966,3 +2966,9 @@ msgstr "ثبت تکمیلی"
 
 msgid "ready_for_checklist"
 msgstr "آماده پر کردن چک لیست"
+
+msgid "guarantor and request owner cannot be the same"
+msgstr "ضامن و درخواست کننده تسهیلات نمیتوانند یکی باشند"
+
+msgid "Guarantor should not be in directors of company"
+msgstr "ضامن نمیتواند عضو هیات امنا باشد"
