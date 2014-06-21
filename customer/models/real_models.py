@@ -17,8 +17,8 @@ class RealCustomerInformation(Customer):
     bc_number = models.CharField(max_length=20)
     bc_serial_number = models.CharField(max_length=20)
     birth_date = models.DateTimeField()
-    bc_place = models.ForeignKey(Town, related_name='customer_bc_places',null=True,blank=True)
-    birth_place = models.ForeignKey(Town, related_name='customer_birth_places', null=True,blank=True)
+    bc_place = models.ForeignKey(Town, related_name='customer_bc_places', null=True, blank=True)
+    birth_place = models.ForeignKey(Town, related_name='customer_birth_places', null=True, blank=True)
     gender = models.CharField(max_length=10)
 
     def get_persian_birth_date(self):
@@ -67,7 +67,7 @@ class JobInformation(models.Model):
 
     customer = models.OneToOneField(RealCustomerInformation, related_name='job_info', primary_key=True)
     job = models.ForeignKey(JobType)
-    job_activity = models.CharField(max_length=100)
+    # job_activity = models.ForeignKey(max_length=100)
     Job_certificate = models.ForeignKey(JobCertificateType)
     job_certificate_number = models.CharField(max_length=25)
     job_province = models.ForeignKey(Province)
@@ -81,7 +81,7 @@ class JobInformation(models.Model):
         j = JobInformation(
             customer_id=dic['customer_id'],
             job_id=dic['job_id'],
-            job_activity=dic['job_activity'],
+            # job_activity=dic['job_activity'],
             Job_certificate_id=dic["Job_certificate_id"],
             job_certificate_number=dic["job_certificate_number"],
             job_province_id=dic[
