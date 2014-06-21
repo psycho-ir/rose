@@ -74,6 +74,12 @@ class JobType(models.Model):
     description = models.CharField(max_length=60)
     enable = models.BooleanField(default=True)
 
+# class JobActivityType(models.Model):
+#     name = models.CharField(max_length=50)
+#     local_name = models.CharField(max_length=50)
+#     description = models.CharField(max_length=60)
+#     enable = models.BooleanField(default=True)
+
 
 class JobCertificateType(models.Model):
     name = models.CharField(max_length=50)
