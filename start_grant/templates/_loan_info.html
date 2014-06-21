@@ -16,7 +16,7 @@
                         مبلغ تسهیلات
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" value="{{ customer_request.request_amount }}"
+                        <input role="amount" class="form-control" value="{{ customer_request.request_amount }}"
                                readonly="readonly"/>
                     </div>
                     <div class="col-xs-2">
@@ -41,7 +41,7 @@
                         مبلغ پیش پرداخت / سهم الشرکه
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="prepayed_amount"
+                        <input role="amount" class="form-control" name="prepayed_amount"
                                value="{{ customer_request.complete_information.prepayed_amount }}"
                                required
                                number

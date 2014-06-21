@@ -21,7 +21,7 @@
                         صندوق
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="cash"
+                        <input type="text" class="form-control" name="cash" id="cash" role="amount"
                                value="{{ customer_info.asset_info.cash }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -31,7 +31,7 @@
                         حسابهای بانکی
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="account"
+                        <input class="form-control" name="account" role="amount"
                                value="{{ customer_info.asset_info.account }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -59,7 +59,7 @@
                         ارزش
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="business_place_value"
+                        <input class="form-control" name="business_place_value" role="amount"
                                value="{{ customer_info.asset_info.business_place_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
@@ -76,8 +76,8 @@
                         از اشخاص
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="individual_credit_amount" value="
-{{ customer_info.asset_info.individual_credit_amount }}"
+                        <input class="form-control" name="individual_credit_amount" value="
+{{ customer_info.asset_info.individual_credit_amount }}" role="amount"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -86,7 +86,7 @@
                         از شرکتها و موسسات
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="company_credit_amount"
+                        <input role="amount" class="form-control" name="company_credit_amount"
                                value="{{ customer_info.asset_info.company_credit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -103,7 +103,7 @@
                         ارزش کالا و اموال منقول
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="manghool_value"
+                        <input role="amount" class="form-control" name="manghool_value"
                                value="{{ customer_info.asset_info.manghool_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -113,7 +113,7 @@
                         ارزش اموال غیر منقول
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="no_manghool_value"
+                        <input role="amount" class="form-control" name="no_manghool_value"
                                value="{{ customer_info.asset_info.no_manghool_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -125,7 +125,7 @@
                         وسایط نقلیه
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="vehicles_value"
+                        <input role="amount" class="form-control" name="vehicles_value"
                                value="{{ customer_info.asset_info.vehicles_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
@@ -141,7 +141,7 @@
                         به اشخاص
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="individual_debit_amount"
+                        <input role="amount" class="form-control" name="individual_debit_amount"
                                value="{{ customer_info.asset_info.individual_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -151,7 +151,7 @@
                         به شرکت ها و موسسات
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="company_debit_amount"
+                        <input role="amount" class="form-control" name="company_debit_amount"
                                value="{{ customer_info.asset_info.company_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
@@ -162,7 +162,7 @@
                         به بانک ها
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="bank_debit_amount"
+                        <input role="amount" class="form-control" name="bank_debit_amount"
                                value="{{ customer_info.asset_info.bank_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"

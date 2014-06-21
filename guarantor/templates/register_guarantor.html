@@ -129,9 +129,10 @@
             </div>
         </div>
         <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-            <form action="{% url 'guarantor:register' customer_request.id  %}" method="post">
+            <form action="{% url 'guarantor:register' customer_request.id %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="customer_id" value="{{ customer_id }}" />
+                <input type="hidden" name="customer_id" value="{{ customer_id }}"/>
+
                 <div class="col-xs-12" style="text-align: center;">
                     <button type="submit" style=" width: 90%;" id="register_guarantor" class="btn btn-success">
                         اکنون با کلیک بر روی این بخش می توانید این مشتری را به عنوان ضامن درخواست وام
@@ -175,6 +176,17 @@
             }
         }
         $(window).ready(function () {
+
+            $("input[role=amount]").maskMoney({
+                allowZero: true, // Prevent users from inputing zero
+                allowNegative: false, // Prevent users from inputing negative values
+                defaultZero: true, // when the user enters the field, it sets a default mask using zero
+                thousands: ',', // The thousands separator
+                decimal: '.', // The decimal separator
+                precision: 0, // How many decimal places are allowed
+                affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
+                symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
+            }); //
 
             {% if customer_id != None and message == None %}
                 $('#customer_id').val('{{ customer_id }}');

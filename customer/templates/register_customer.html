@@ -130,19 +130,19 @@
         </div>
         <div id="submit_forms" class="form-group">
             <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
-                    <div class="rose-submit-container" id="customer_info_container">
-                        {% include '_guarantor_customer_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="contact_info_container">
-                        {% include '_guarantor_contact_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="job_info_container">
-                        {% include '_guarantor_job_info.html' %}
-                    </div>
-                    <div class="rose-submit-container collapse" id="bank_income_info_container">
-                        {% include '_guarantor_bank_income_info.html' %}
-                    </div>
-                    </div>
+                <div class="rose-submit-container" id="customer_info_container">
+                    {% include '_guarantor_customer_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="contact_info_container">
+                    {% include '_guarantor_contact_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="job_info_container">
+                    {% include '_guarantor_job_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="bank_income_info_container">
+                    {% include '_guarantor_bank_income_info.html' %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -157,6 +157,17 @@
             }
         }
         $(window).ready(function () {
+
+            $("input[role=amount]").maskMoney({
+                allowZero: true, // Prevent users from inputing zero
+                allowNegative: false, // Prevent users from inputing negative values
+                defaultZero: true, // when the user enters the field, it sets a default mask using zero
+                thousands: ',', // The thousands separator
+                decimal: '.', // The decimal separator
+                precision: 0, // How many decimal places are allowed
+                affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
+                symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
+            }); //
 
             {% if customer_id != None and message == None %}
                 $('#customer_id').val('{{ customer_id }}');

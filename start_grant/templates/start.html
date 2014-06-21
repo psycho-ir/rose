@@ -61,7 +61,7 @@
 {#                                       minlength="8"#}
                                        data-validation-required-message="وارد کردن نام الزامی است"
                                        data-validation-maxlength-message="بیش از اندازه بلند است"
-                                       data-validation-minlength-message="بیش از اندازه کوتاه است"
+{#                                       data-validation-minlength-message="بیش از اندازه کوتاه است"#}
                                        required/>
                             </div>
                             <div class="col-xs-1" style="padding-top: 10px; padding-right: 0px;padding-left: 15px;">
@@ -149,14 +149,9 @@
                                 مبلغ درخواستی
                             </div>
                             <div class="col-xs-4">
-                                <input type="number" class="form-control" name="request_amount" id="request_amount"
+                                <input role="amount" class="form-control" name="request_amount" id="request_amount"
                                        pattern="^[0-9]+$"
-                                       maxlength="20"
-                                       minlength="6"
-                                       data-validation-pattern-message="فرمت مبلغ صحیح نمی باشد"
-                                       data-validation-required-message="وارد کردن مبلغ الزامی است"
-                                       data-validation-maxlength-message="بیش از اندازه بلند است"
-                                       data-validation-minlength-message="بیش از اندازه کوتاه است"
+
                                        required
                                         />
                             </div>
@@ -276,6 +271,17 @@
         }
 
         $(window).ready(function () {
+              $("#request_amount").maskMoney({
+                allowZero: true, // Prevent users from inputing zero
+                allowNegative: false, // Prevent users from inputing negative values
+                defaultZero: true, // when the user enters the field, it sets a default mask using zero
+                thousands: ',', // The thousands separator
+                decimal: '.', // The decimal separator
+                precision: 0, // How many decimal places are allowed
+                affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
+                symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
+            }); //
+
             $('.btn').not('[type=submit]').click(function () {
                 $(this).siblings().each(function (obj) {
                     $(this).css({'color': '#000000'});
@@ -284,7 +290,7 @@
                 $('#has_loan_from_current_bank').val($(this).val());
             });
 
-            $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}')
+{#            $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}');#}
 
             $('#cif').focusout(function () {
                 check_cif();
@@ -310,24 +316,24 @@
                     return false;
                 }
                 var req_amount = $('#request_amount');
-
-                if (parseFloat(req_amount.val()) > parseFloat(req_amount.attr('max'))) {
-                    window.alert('حد اکثر مبلغ درخواستی قابل قبول ' + req_amount.attr('max') + ' میباشد.');
-                    return false;
-                }
+{##}
+{#                if (parseFloat(req_amount.val()) > parseFloat(req_amount.attr('max'))) {#}
+{#                    window.alert('حد اکثر مبلغ درخواستی قابل قبول ' + req_amount.attr('max') + ' میباشد.');#}
+{#                    return false;#}
+{#                }#}
                 return true;
             });
 
-            $('#customer_type').change(function (v, y) {
-                type = $(this).val();
-                if (type == "haghighi") {
-                    $('#request_amount').attr('max', '{{ haghighi_max_loan_amount.value }}');
-                }
-                else {
-                    $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}');
-                }
-
-            });
+{#            $('#customer_type').change(function (v, y) {#}
+{#                type = $(this).val();#}
+{#                if (type == "haghighi") {#}
+{#                    $('#request_amount').attr('max', '{{ haghighi_max_loan_amount.value }}');#}
+{#                }#}
+{#                else {#}
+{#                    $('#request_amount').attr('max', '{{ hoghooghi_max_loan_amount.value }}');#}
+{#                }#}
+{##}
+{#            });#}
 
         });
 
