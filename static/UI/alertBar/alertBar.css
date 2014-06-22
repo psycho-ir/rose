@@ -14,6 +14,7 @@
 }
 
 .alertBar-error {
-    background-color: #aa0000;
-    color: #ffffff;
+    background-color: pink;
+    border: solid #ff0000 1px;
+    color: #ff0033;
 }
