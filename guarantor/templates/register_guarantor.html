@@ -6,7 +6,7 @@
     <div style="border: 1px solid #dddddd;border-radius: 5px;"
          class="form-group">
         <form method="get" action="{% url 'guarantor:register' customer_request.id %}">
-            <div class="row"
+            <div class="row control-group"
                  style="background-color: #f5e79e; margin-bottom: 0px; margin-left: 0px;margin-right: 0px; padding-bottom: 20px;">
                 <div class="row" style="margin-bottom: 0px; padding-top: 5px; padding-bottom: 5px; text-align: center">
                     <div class="col-xs-4"></div>
@@ -14,7 +14,7 @@
                         کد ملی
                     </div>
                     <div class="col-xs-2">
-                        <input type="number" name="customer_id" id="customer_id" class="form-control"/>
+                        <input minlength="10" maxlength="10" pattern="^[0-9]*$" name="customer_id" id="customer_id" class="form-control"/>
                     </div>
                     <div class="col-xs-3"></div>
                 </div>
@@ -168,6 +168,8 @@
 
 
 {% block js %}
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script src="{% static  'js/submission_utils.js' %}"></script>
     <script type="text/javascript">
         function check_for_showing_next_level() {
             if ($('.pending').length == 0) {
@@ -176,6 +178,8 @@
             }
         }
         $(window).ready(function () {
+            $('#bc_place').select2();
+            $('#birth_place').select2();
 
             $("input[role=amount]").maskMoney({
                 allowZero: true, // Prevent users from inputing zero
@@ -212,38 +216,9 @@
             });
 
             /* form submission ajax */
-            $('#submit_forms form').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
-                submitSuccess: function ($form, event) {
-                    var form_id = $form.attr('id');
-                    var form_common = form_id.substr(0, form_id.lastIndexOf('_form'));
-                    var loader_id = form_common + '_loader';
-                    var state_id = form_common + '_state';
-                    $('#' + loader_id).html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
-                    var form = $form;
-                    $.post(form.attr('action'), form.serialize(),
-                            function (data, state) {
-                                if (state == 'success') {
-                                    if (data == 'True') {
-
-                                        $('#' + state_id + ' #failed').hide();
-                                        $('#' + state_id + ' #ok').show();
-                                        $('#' + state_id).parent().parent().removeClass('pending').addClass('completed')
-                                        check_for_showing_next_level();
-                                    }
-                                    else {
-                                        $('#' + state_id + ' #failed').show();
-                                        $('#' + state_id + ' #ok').hide();
-                                    }
-                                } else {
-                                    alert('خطا در برقراری ارتباط با سرور. لطفا مجددا تلاش کنید');
-                                }
-                                $('#' + loader_id).empty();
-                            });
-
-
-                    event.preventDefault();
-                }
-
+            initialize_form_validation({
+                ajaxLoaderSource: '{% static "image/ajax-loader.gif" %}',
+                afterSuccess: check_for_showing_next_level
             });
 
             $('#loan_type').change(function () {
@@ -348,3 +323,10 @@
         ;
     </script>
 {% endblock %}
+
+
+
+{% block css %}
+    <link href="{% static 'css//select2.css' %}" rel="stylesheet">
+{% endblock %}
+
