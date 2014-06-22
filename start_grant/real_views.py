@@ -6,6 +6,7 @@ from django.views.generic import View
 from customer.models.real_models import RealCustomerInformation
 from rose_config.models import JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
     VasigheType, BusinessPlace
+from rose_config.response import generate_error_response, generate_ok_response
 from start_grant.checklist import createCheckList
 from start_grant.models import Request, RequestDescription, RequestCompleteInformation
 from django.core import serializers
@@ -71,10 +72,10 @@ class ReqCompleteView(View):
         try:
             complete_info = RequestCompleteInformation.from_dic(request.POST)
             complete_info.save()
-            return HttpResponse("True")
+            return generate_ok_response()
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class RequestDescriptionsView(View):
