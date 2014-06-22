@@ -2984,3 +2984,12 @@ msgstr "تاریخ اعتبار نمی تواند قبل از تاریخ صدو�
 
 msgid "Certificate expired"
 msgstr "مدرک منقضی شده است"
+
+msgid "Customer does not exist"
+msgstr "مشتری با این شماره در سیستم جامع موجود نمی باشد"
+
+msgid "Deposit and customer are not compatible"
+msgstr "شماره سپرده و شماره مشتری با یکدیگر تطابق ندارند"
+
+msgid "Request amount is more than max"
+msgstr "مبلغ درخواستی بیش از سقف تعریف شده است"

@@ -2,10 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
 import datetime
+from core_connection import customer_repository, deposit_repository
 from customer.models.common import CUSTOMER_TYPE, Customer
 from customer.models.real_models import RealCustomerInformation
 from guarantor.models import Guarantor
-from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType
+from rose_config.exceptions import ValidationException
+from rose_config.models import BusinessPart, RequestDescription, LoanType, RefundType, Bank, VasigheType, config
 
 REQUEST_STATUS = (
     ("intro", "intro"),
@@ -73,6 +75,25 @@ class Request(models.Model):
 
     @staticmethod
     def from_dic(dic, user):
+        haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
+        hoghooghi_max_loan_amount = config.objects.get(pk='HOGHOOGHI_MAX_LOAN_AMOUNT')
+        customer = customer_repository.find_customer(dic['cif'])
+        if len(customer) == 0:
+            raise ValidationException("Customer does not exist")
+
+        deposit = deposit_repository.find_deposit(dic['cif'], dic['deposit_number'])
+        if len(deposit) == 0:
+            raise ValidationException("Deposit and customer are not compatible")
+
+        amount = int(dic['request_amount'])
+        print amount
+        if dic['type'] == 'haghighi':
+            if amount > int(haghighi_max_loan_amount.value):
+                raise ValidationException("Request amount is more than max")
+
+        if dic['type'] == 'hoghooghi':
+            if amount > int(hoghooghi_max_loan_amount.value):
+                raise ValidationException("Request amount is more than max")
 
         request = Request(type=dic['type'], cif=dic['cif'], deposit_number=dic['deposit_number'], user_id=user.id,
                           branch_code=user.profile.branch_code,

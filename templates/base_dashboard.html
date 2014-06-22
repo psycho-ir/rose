@@ -166,6 +166,9 @@
 {#<script type="text/javascript" src="{% static 'js/jquery.maskMoney.min.js' %}"></script>#}
 <script>
     $(window).ready(function () {
+        {% if error_message %}
+            alertBar('{{ error_message }}');
+        {% endif %}
         $('#content').css({'height': $(window).height()});
         $('#right-panel').css({'height': $(window).height() + 'px'});
 
