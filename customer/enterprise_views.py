@@ -4,6 +4,7 @@ from django.http.response import HttpResponse
 from django.views.generic import View
 from customer.models.enterprise_models import *
 import json
+from rose_config.response import generate_error_response, generate_ok_response
 
 __author__ = 'soroosh'
 
@@ -14,11 +15,11 @@ class EnterpriseCustomerInfoView(View):
             customer = EnterpriseCustomerInformation.from_dic(request.POST)
             customer.save()
 
-            return HttpResponse("True")
+            return generate_ok_response()
 
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class BoardOfDirectorView(View):
@@ -27,11 +28,13 @@ class BoardOfDirectorView(View):
             board = BoardOfDirector.from_dic(request.POST)
             board.save()
 
-            return HttpResponse("True")
+            return generate_ok_response()
 
+        except ValidationException as e:
+            return generate_error_response(e.message)
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class BoardOfDirectorListView(View):
@@ -60,11 +63,11 @@ class EnterpriseContactInformationView(View):
             contact = EnterpriseContactInformation.from_dic(request.POST)
             contact.save()
 
-            return HttpResponse("True")
+            return generate_ok_response()
 
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class EnterpriseActivityView(View):
@@ -73,11 +76,11 @@ class EnterpriseActivityView(View):
             activity = EnterpriseActivity.from_dic(request.POST)
             activity.save()
 
-            return HttpResponse("True")
+            return generate_ok_response()
 
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class EnterpriseActivityListView(View):
@@ -107,10 +110,10 @@ class EnterpriseActivityDeleteView(View):
                                                       id=request.GET.get('activity_id'))
             print activity
             activity.delete()
-            return HttpResponse("True")
+            return generate_ok_response()
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class EnterpriseAssetInfoView(View):
@@ -118,7 +121,7 @@ class EnterpriseAssetInfoView(View):
         try:
             asset = EnterpriseAssetInformation.from_dic(request.POST)
             asset.save()
-            return HttpResponse("True")
+            return generate_ok_response()
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
