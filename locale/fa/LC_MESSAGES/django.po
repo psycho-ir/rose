@@ -2972,3 +2972,9 @@ msgstr "ضامن و درخواست کننده تسهیلات نمیتوانند 
 
 msgid "Guarantor should not be in directors of company"
 msgstr "ضامن نمیتواند عضو هیات امنا باشد"
+
+msgid "Customer Code is not ok"
+msgstr"کد مشتری معتبر نیست"
+
+msgid "Real customer does not exist"
+msgstr "مشتری حقیقی با این کدملی وجود ندارد"
