@@ -5,7 +5,9 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
 from core_connection.customer_repository import find_customer
-from rose_config.models import VasigheType
+from rose_config.exceptions import ValidationException
+from django.utils.translation import ugettext as _
+from rose_config.response import generate_error_response, generate_ok_response
 from start_grant.models import BankVasigheInformation, SanadMelkiInformation
 from customer.models.real_models import *
 
@@ -27,8 +29,10 @@ class RegisterRealCustomerView(View):
 
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
+        all_towns = Town.objects.all()
         job_types = JobType.objects.all()
         certificate_types = JobCertificateType.objects.all()
+
         context = RequestContext(request, {'customer_type': 'haghighi',
                                            'customer': customer,
                                            'provinces': provinces,
@@ -36,7 +40,8 @@ class RegisterRealCustomerView(View):
                                            'job_types': job_types,
                                            'certificate_types': certificate_types,
                                            'customer_id': customer_id,
-                                           'message': message
+                                           'message': message,
+                                           'all_towns': all_towns
         })
 
         template = loader.get_template('register_customer.html')
@@ -49,11 +54,13 @@ class CustomerInfoView(View):
         try:
             customer_info = RealCustomerInformation.from_dic(request.POST)
             customer_info.save()
-            return HttpResponse("True")
+            return generate_ok_response()
 
+        except ValidationException as e:
+            return generate_error_response(e.message)
         except Exception as e:
             print(e)
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class ContactInfoView(View):
@@ -61,10 +68,10 @@ class ContactInfoView(View):
         try:
             contact_info = ContactInformation.from_dic(request.POST)
             contact_info.save()
-            return HttpResponse("True")
+            return generate_ok_response()
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class JobInfoView(View):
@@ -73,10 +80,10 @@ class JobInfoView(View):
             job_info = JobInformation.from_dic(request.POST)
             job_info.save()
 
-            return HttpResponse("True")
+            return generate_ok_response()
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class AssetInfoView(View):
@@ -84,11 +91,11 @@ class AssetInfoView(View):
         try:
             asset = AssetInformation.from_dic(request.POST)
             asset.save()
-            return HttpResponse("True")
+            return generate_ok_response()
 
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class BankIncomeView(View):
@@ -108,13 +115,13 @@ class BankIncomeView(View):
                 vasighes = request.POST.getlist('vasighe_types')
                 if len(vasighes) == 0:
                     print "There is no selected vasighe_type"
-                    return HttpResponse("False")
+                    return generate_error_response("There is no selected vasighe_type")
 
                 banks = request.POST.getlist('banks')
 
                 if len(banks) == 0:
                     print "There is no selected bank"
-                    return HttpResponse("False")
+                    return generate_error_response("There is no selected bank")
 
                 maskan_vasighe_type = VasigheType.objects.filter(name='melki').first()
                 sanad = None
@@ -126,8 +133,8 @@ class BankIncomeView(View):
                 SanadMelkiInformation.objects.exclude(
                     bankvasigheinformation__in=BankVasigheInformation.objects.all()).delete()
 
-            return HttpResponse("True")
+            return generate_ok_response()
 
         except Exception as e:
             print e
-            return HttpResponse("False")
+            return generate_error_response()

@@ -49,12 +49,14 @@ class RegisterGuarantorView(View):
 
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
+        all_towns = Town.objects.all()
         job_types = JobType.objects.all()
         certificate_types = JobCertificateType.objects.all()
         context = RequestContext(request, {'customer_type': 'haghighi', 'customer_request': customer_request,
                                            'customer': customer,
                                            'provinces': provinces,
                                            'towns': towns,
+                                           'all_towns': all_towns,
                                            'job_types': job_types,
                                            'certificate_types': certificate_types,
                                            'customer_id': customer_id,

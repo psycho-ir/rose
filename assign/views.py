@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.views.generic import View
+from rose_config.response import *
 from start_grant.models import Request
 from assign.models import EnquiryAction, EnquiryAssign, EnquiryAssignResponse, EnquiryActionResponse
 from utils.date_utils import greg_date_from_shamsi
@@ -120,10 +121,10 @@ class EnquiryActionResponseStartView(View):
         if action_response.response.enquiry_assign.target_id == request.user.id:
             action_response.start()
             action_response.save()
-            return HttpResponse("True")
+            return generate_ok_response()
 
         else:
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class EnquiryActionResponseStopView(View):
@@ -133,10 +134,10 @@ class EnquiryActionResponseStopView(View):
         if action_response.response.enquiry_assign.target_id == request.user.id:
             action_response.stop()
             action_response.save()
-            return HttpResponse("True")
+            return generate_ok_response()
 
         else:
-            return HttpResponse("False")
+            return generate_error_response()
 
 
 class EnquiryActionResponseCompleteView(View):
@@ -152,7 +153,7 @@ class EnquiryActionResponseCompleteView(View):
             action_response.accepted = accepted
             action_response.complete()
             action_response.save()
-            return HttpResponse("True")
+            return generate_ok_response()
 
         else:
-            return HttpResponse("False")
+            return generate_error_response()
