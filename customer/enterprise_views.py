@@ -78,6 +78,8 @@ class EnterpriseActivityView(View):
 
             return generate_ok_response()
 
+        except ValidationException as e:
+            return generate_error_response(e.message)
         except Exception as e:
             print e
             return generate_error_response()

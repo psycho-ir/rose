@@ -149,6 +149,11 @@ class EnterpriseActivity(models.Model):
     def from_dic(dic):
         certificate_start_date = greg_date_from_shamsi(dic['certificate_start_date'], '/')
         certificate_expire_date = greg_date_from_shamsi(dic['certificate_expire_date'], '/')
+        if certificate_start_date >= certificate_expire_date:
+            raise ValidationException("Expire date cannot be lower than start date")
+        import datetime
+        if certificate_expire_date < datetime.datetime.now():
+            raise ValidationException("Certificate expired")
         ea = EnterpriseActivity(
             company_id=dic['company_id'],
             activity_type=dic['activity_type'],
