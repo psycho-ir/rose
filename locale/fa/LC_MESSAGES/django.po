@@ -2978,3 +2978,9 @@ msgstr"کد مشتری معتبر نیست"
 
 msgid "Real customer does not exist"
 msgstr "مشتری حقیقی با این کدملی وجود ندارد"
+
+msgid "Expire date cannot be lower than start date"
+msgstr "تاریخ اعتبار نمی تواند قبل از تاریخ صدور باشد"
+
+msgid "Certificate expired"
+msgstr "مدرک منقضی شده است"
