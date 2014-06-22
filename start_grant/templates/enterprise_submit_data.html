@@ -230,6 +230,7 @@
 
 
 {% block js %}
+    <script src="{% static  'js/submission_utils.js' %}"></script>
     <script type="text/javascript">
     $(window).ready(function () {
         {% if readonly %}
@@ -280,41 +281,17 @@
         });
 
         /* form submission ajax */
-        $('#submit_forms form').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
-            submitSuccess: function ($form, event) {
-                var form_id = $form.attr('id');
-                var form_common = form_id.substr(0, form_id.lastIndexOf('_form'));
-                var loader_id = form_common + '_loader';
-                var state_id = form_common + '_state';
-                $('#' + loader_id).html('<img src=\'{% static "image/ajax-loader.gif" %}\' />');
-                var form = $form;
-                $.post(form.attr('action'), form.serialize(),
-                        function (data, state) {
-                            if (state == 'success') {
-                                if (data == 'True') {
+        function after_request() {
+            $('#director_table').dataTable().fnReloadAjax();
+            $('#activity_table').dataTable().fnReloadAjax();
+        }
 
-                                    $('#' + state_id + ' #failed').hide();
-                                    $('#' + state_id + ' #ok').show();
-                                    $('#' + state_id).parent().parent().removeClass('pending').addClass('completed')
-                                    check_for_showing_next_level();
-                                }
-                                else {
-                                    $('#' + state_id + ' #failed').show();
-                                    $('#' + state_id + ' #ok').hide();
-                                }
-                                $('#director_table').dataTable().fnReloadAjax();
-                                $('#activity_table').dataTable().fnReloadAjax();
-                            } else {
-                                alert('خطا در برقراری ارتباط با سرور. لطفا مجددا تلاش کنید');
-                            }
-                            $('#' + loader_id).empty();
-                        });
-
-
-                event.preventDefault();
-            }
-
+        initialize_form_validation({
+            ajaxLoaderSource: '{% static "image/ajax-loader.gif" %}',
+            afterRquest: after_request,
+            afterSuccess: check_for_showing_next_level
         });
+
 
         $('#loan_type').change(function () {
             var depend_id = '#' + $(this).attr('depend');
