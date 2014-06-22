@@ -3,24 +3,24 @@
         "pk": 1,
         "model": "rose_config.businesspart",
         "fields": {
-            "name": "tolid",
-            "local_name": "تولید"
+            "name": "sanat-madan",
+            "local_name": "صنعت و معدن"
         }
     },
     {
         "pk": 2,
         "model": "rose_config.businesspart",
         "fields": {
-            "name": "bazargani-dakheli",
-            "local_name": "بازرگانی داخلی"
+            "name": "keshavarzi",
+            "local_name": "کشاورزی"
         }
     },
     {
         "pk": 3,
         "model": "rose_config.businesspart",
         "fields": {
-            "name": "bazargani-saderat",
-            "local_name": "بازرگانی صادرات"
+            "name": "bazargani-dakheli",
+            "local_name": "بازرگانی داخلی"
         }
     },
 
@@ -29,23 +29,23 @@
         "model": "rose_config.businesspart",
         "fields": {
             "name": "bazargani-saderat",
-            "local_name": "بازرگانی واردات"
+            "local_name": "بازرگانی صادرات"
         }
     },
     {
         "pk": 5,
         "model": "rose_config.businesspart",
         "fields": {
-            "name": "sakhteman",
-            "local_name": "ساختمان"
+            "name": "bazargani-varedat",
+            "local_name": "بازرگانی واردات"
         }
     },
     {
         "pk": 6,
         "model": "rose_config.businesspart",
         "fields": {
-            "name": "keshavarzi",
-            "local_name": "کشاورزی"
+            "name": "sakhteman",
+            "local_name": "ساختمان"
         }
     },
     {
@@ -58,22 +58,6 @@
     },
     {
         "pk": 8,
-        "model": "rose_config.businesspart",
-        "fields": {
-            "name": "sanat",
-            "local_name": "صنعت"
-        }
-    },
-    {
-        "pk": 9,
-        "model": "rose_config.businesspart",
-        "fields": {
-            "name": "madan",
-            "local_name": "معدن"
-        }
-    },
-    {
-        "pk": 10,
         "model": "rose_config.businesspart",
         "fields": {
             "name": "niaz-shakhsi",
