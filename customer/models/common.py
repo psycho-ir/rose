@@ -13,5 +13,5 @@ class Customer(models.Model):
         app_label = 'customer'
 
     type = models.CharField(choices=CUSTOMER_TYPE, max_length=30)
-    customer_code = models.CharField(max_length=10, primary_key=True)
+    customer_code = models.CharField(max_length=10, primary_key=True,null=False,blank=False)
 

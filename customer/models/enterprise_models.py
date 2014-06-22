@@ -1,7 +1,9 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from jdatetime import datetime as jalali_datetime
 from customer.models import Customer
 from customer.models.real_models import RealCustomerInformation
+from rose_config.exceptions import ValidationException
 from rose_config.models import CompanyType, Province, Town, JobCertificateType
 from utils.date_utils import greg_date_from_shamsi
 
@@ -84,6 +86,10 @@ class BoardOfDirector(models.Model):
 
     @staticmethod
     def from_dic(dic):
+        try:
+            RealCustomerInformation.objects.get(customer_code=dic['customer_id'])
+        except ObjectDoesNotExist as e:
+            raise ValidationException("Real customer does not exist")
         sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
         if BoardOfDirector.objects.filter(company_id=dic['company_id'], customer_id=dic['customer_id']).exists():
             b = BoardOfDirector.objects.get(company_id=dic['company_id'], customer_id=dic['customer_id'])
