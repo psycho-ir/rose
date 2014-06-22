@@ -1,4 +1,5 @@
 from customer.models.common import Customer
+from rose_config.exceptions import ValidationException
 
 __author__ = 'soroosh'
 
@@ -29,6 +30,9 @@ class RealCustomerInformation(Customer):
         from utils.date_utils import greg_date_from_shamsi
 
         gregorian_birth_date = greg_date_from_shamsi(dic['birth_date'], '/')
+        customer_code = dic['national_number']
+        if customer_code is None or customer_code == 'None' or not customer_code.isdigit():
+            raise ValidationException("Customer Code is not ok")
         c = RealCustomerInformation(type=dic['type'], customer_code=dic['national_number'],
                                     name=dic['name'], last_name=dic['last_name'], father_name=dic['father_name'],
                                     bc_number=dic['bc_number'], bc_serial_number=dic['bc_serial_number'],
