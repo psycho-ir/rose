@@ -95,6 +95,14 @@ class Request(models.Model):
             if amount > int(hoghooghi_max_loan_amount.value):
                 raise ValidationException("Request amount is more than max")
 
+        if customer[0]["F51"] =='0' and dic['type'] == 'hoghooghi':
+            raise ValidationException("Customer is enterprise but request is real")
+
+        if customer[0]["F51"] =='1' and dic['type'] == 'haghighi':
+            raise ValidationException("Customer is real but request is enterprise")
+
+
+
         request = Request(type=dic['type'], cif=dic['cif'], deposit_number=dic['deposit_number'], user_id=user.id,
                           branch_code=user.profile.branch_code,
                           business_part_id=dic['business_part'], request_description_id=dic['request_description'],

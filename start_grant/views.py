@@ -29,12 +29,9 @@ class StartView(View):
         return HttpResponse(template.render(context))
 
     def post(self, request):
-        haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
-        hoghooghi_max_loan_amount = config.objects.get(pk='HOGHOOGHI_MAX_LOAN_AMOUNT')
-
         try:
             request = Request.from_dic(request.POST, request.user)
-        except ValidationException  as e:
+        except ValidationException as e:
             haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
             hoghooghi_max_loan_amount = config.objects.get(pk='HOGHOOGHI_MAX_LOAN_AMOUNT')
             business_parts = BusinessPart.objects.all()
