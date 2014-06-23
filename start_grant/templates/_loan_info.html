@@ -17,13 +17,14 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" value="{{ customer_request.request_amount }}"
-                               readonly="readonly"/>
+                               readonly="readonly" disabled="disabled"/>
                     </div>
                     <div class="col-xs-2">
                         نوع تسهیلات
                     </div>
                     <div class="col-xs-3">
-                        <select style="width: 100%;" name="loan_type_id" id="loan_type" depend="refund_type_id" value="{{ customer_request.complete_information.loan_type_id }}">
+                        <select style="width: 100%;" name="loan_type_id" id="loan_type" depend="refund_type_id"
+                                value="{{ customer_request.complete_information.loan_type_id }}">
                             {% for loan_type in loan_types %}
                                 <option value="{{ loan_type.id }}">{{ loan_type.local_name }}</option>
                             {% endfor %}
@@ -35,7 +36,8 @@
                         مدت بازپرداخت
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="refund_duration" value="{{ customer_request.complete_information.refund_duration }}" />
+                        <input type="number" class="form-control" name="refund_duration"
+                               value="{{ customer_request.complete_information.refund_duration }}"/>
                     </div>
                     <div class="col-xs-2">
                         مبلغ پیش پرداخت / سهم الشرکه
@@ -44,7 +46,6 @@
                         <input role="amount" class="form-control" name="prepayed_amount"
                                value="{{ customer_request.complete_information.prepayed_amount }}"
                                required
-                               number
                                 />
                     </div>
                 </div>
@@ -54,14 +55,14 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" value="{{ customer_request.business_part.local_name }}"
-                               readonly="readonly"/>
+                               readonly="readonly" disabled="disabled"/>
                     </div>
                     <div class="col-xs-2">
                         هدف از دریافت تسهیلات
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control"
-                               value="{{ customer_request.request_description.local_name }}" readonly="readonly"/>
+                               value="{{ customer_request.request_description.local_name }}" readonly="readonly" disabled="disabled"/>
                     </div>
                 </div>
                 <div class="row">
@@ -80,8 +81,8 @@
                     <div class="col-xs-3">
                         <select style="width: 100%;" name="refund_type_id" id="refund_type_id"
                                 value="{{ customer_request.complete_information.refund_type_id }}">
-                     {% for refund_type in refund_types %}
-                             <option value="{{ refund_type.id }}">{{ refund_type.local_name }}</option>
+                            {% for refund_type in refund_types %}
+                                <option value="{{ refund_type.id }}">{{ refund_type.local_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
