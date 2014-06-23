@@ -77,7 +77,7 @@ class RegisterGuarantorView(View):
             return HttpResponseRedirect(reverse('guarantor:register', args=[request_id]))
 
         guarantor.save()
-        request.guarantors.add(guarantor)
+        customer_request.guarantors.add(guarantor)
 
         return HttpResponseRedirect(reverse('guarantor:list', args=[request_id]))
 
