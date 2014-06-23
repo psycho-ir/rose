@@ -18,7 +18,7 @@ class RegisterGuarantorView(View):
         customer_id = request.GET.get('customer_id')
         customer_request = Request.objects.get(id=request_id)
 
-        customer = None
+        guarantor = None
         message = None
         context = None
 
@@ -27,7 +27,7 @@ class RegisterGuarantorView(View):
                 if len(find_customer(customer_id)) == 0:
                     message = 'customer does not exist'
                 else:
-                    guarantor = Customer.objects.get(customer_code=customer_id)
+                    guarantor = RealCustomerInformation.objects.get(customer_code=customer_id)
                     checker.check_guarantor(customer_request, guarantor)
                     # if customer_request.cif == customer_id:
                     # message = 'guarantor and request owner cannot be the same'
@@ -53,7 +53,7 @@ class RegisterGuarantorView(View):
         job_types = JobType.objects.all()
         certificate_types = JobCertificateType.objects.all()
         context = RequestContext(request, {'customer_type': 'haghighi', 'customer_request': customer_request,
-                                           'customer': customer,
+                                           'customer': guarantor,
                                            'provinces': provinces,
                                            'towns': towns,
                                            'all_towns': all_towns,

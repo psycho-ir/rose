@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'orcl',
         'USER': 'rose',
         'PASSWORD': 'rose',
-        'HOST': 'dbserver',
+        'HOST': '192.168.101.151',
         'PORT': '1521',
     },
 
@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'orcl',
         'USER': 's5samens',
         'PASSWORD': 's5samens',
-        'HOST': 'dbserver',
+        'HOST': '192.168.101.151',
         'PORT': '1521',
         'OPTIONS': {
             'threaded': True,
