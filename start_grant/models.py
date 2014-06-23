@@ -95,13 +95,11 @@ class Request(models.Model):
             if amount > int(hoghooghi_max_loan_amount.value):
                 raise ValidationException("Request amount is more than max")
 
-        if customer[0]["F51"] =='0' and dic['type'] == 'hoghooghi':
+        if customer[0]["F51"] == '0' and dic['type'] == 'hoghooghi':
             raise ValidationException("Customer is enterprise but request is real")
 
-        if customer[0]["F51"] =='1' and dic['type'] == 'haghighi':
+        if customer[0]["F51"] == '1' and dic['type'] == 'haghighi':
             raise ValidationException("Customer is real but request is enterprise")
-
-
 
         request = Request(type=dic['type'], cif=dic['cif'], deposit_number=dic['deposit_number'], user_id=user.id,
                           branch_code=user.profile.branch_code,
@@ -142,6 +140,10 @@ class RequestCompleteInformation(models.Model):
 
     @staticmethod
     def from_dic(dic):
+        request = Request.objects.get(id=dic['request_id'])
+        if request.request_amount < int(dic['prepayed_amount']):
+            raise ValidationException("Prepayed amount cannot be more than request amount")
+
         rci = RequestCompleteInformation(request_id=dic['request_id'], prepayed_amount=dic['prepayed_amount'],
                                          loan_type_id=dic['loan_type_id'], refund_duration=dic['refund_duration'],
                                          refund_type_id=dic['refund_type_id'],

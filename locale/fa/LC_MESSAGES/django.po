@@ -2999,3 +2999,6 @@ msgstr "مشتری انتخابی حقوقی است ولی درخواست حقی
 
 msgid "Customer is real but request is enterprise"
 msgstr "مشتری انتخابی حقیقی است ولی درخواست حقوقی انتخاب شده است"
+
+msgid "Prepayed amount cannot be more than request amount"
+msgstr "مبلغ پیش پرداخت / سهم الشرکه نمی تواند بیش از مبلغ تسهیلات درخواستی باشد"

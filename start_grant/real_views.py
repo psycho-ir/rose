@@ -4,6 +4,7 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
 from customer.models.real_models import RealCustomerInformation
+from rose_config.exceptions import ValidationException
 from rose_config.models import JobType, JobCertificateType, Province, Town, LoanType, RefundType, Bank, \
     VasigheType, BusinessPlace
 from rose_config.response import generate_error_response, generate_ok_response
@@ -73,6 +74,10 @@ class ReqCompleteView(View):
             complete_info = RequestCompleteInformation.from_dic(request.POST)
             complete_info.save()
             return generate_ok_response()
+
+        except ValidationException as e:
+            return generate_error_response(e.message)
+        
         except Exception as e:
             print e
             return generate_error_response()
