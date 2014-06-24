@@ -33,6 +33,18 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-2">
+                        واحد محاسبه بازپرداخت
+                    </div>
+                    <div class="col-xs-3">
+                         <select style="width: 100%;" name="refund_period_type" id="loan_type"
+                                value="{{ customer_request.complete_information.refund_period_type }}">
+                                <option value="month">ماهانه</option>
+                                <option value="day">روزانه</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
                         مدت بازپرداخت
                     </div>
                     <div class="col-xs-3">
@@ -62,7 +74,8 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control"
-                               value="{{ customer_request.request_description.local_name }}" readonly="readonly" disabled="disabled"/>
+                               value="{{ customer_request.request_description.local_name }}" readonly="readonly"
+                               disabled="disabled"/>
                     </div>
                 </div>
                 <div class="row">

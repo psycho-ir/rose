@@ -135,19 +135,30 @@ class RequestCompleteInformation(models.Model):
     prepayed_amount = models.BigIntegerField(default=0)
     loan_type = models.ForeignKey(LoanType)
     refund_duration = models.IntegerField(default=12)
+    refund_period_type = models.CharField(default='month', max_length='20')
     refund_type = models.ForeignKey(RefundType)
     number_of_installments = models.IntegerField(default=12)
 
     @staticmethod
     def from_dic(dic):
         request = Request.objects.get(id=dic['request_id'])
+        number_of_installments = int(dic['number_of_installments'])
         if request.request_amount < int(dic['prepayed_amount']):
             raise ValidationException("Prepayed amount cannot be more than request amount")
+        refund_period_type = dic['refund_period_type']
+
+        if refund_period_type != 'month' and refund_period_type != 'day':
+            raise ValidationException("Refund period type can be month or day")
+
+        if refund_period_type == 'day':
+            if number_of_installments > 4:
+                raise ValidationException("Number of installments cannot be more than 4 for daily")
 
         rci = RequestCompleteInformation(request_id=dic['request_id'], prepayed_amount=dic['prepayed_amount'],
                                          loan_type_id=dic['loan_type_id'], refund_duration=dic['refund_duration'],
                                          refund_type_id=dic['refund_type_id'],
-                                         number_of_installments=dic['number_of_installments'])
+                                         number_of_installments=number_of_installments,
+                                         refund_period_type = dic['refund_period_type'])
         return rci
 
     def save(self, *args, **kwargs):

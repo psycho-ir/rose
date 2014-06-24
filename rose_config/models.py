@@ -56,6 +56,15 @@ class LoanType(models.Model):
     credit_type = models.ForeignKey(CreditType, related_name='loan_types')
 
 
+class LoanPolicy(models.Model):
+    loan_type = models.OneToOneField(LoanType, related_name='policy')
+    real_max_duration = models.IntegerField(default=90)  # Unit is month
+    real_max_amount = models.BigIntegerField(default=99999999999)
+
+    enterprise_max_duration = models.IntegerField(default=90)
+    enterprise_max_amount = models.BigIntegerField(default=999999999)
+
+
 class Town(models.Model):
     class Meta:
         ordering = ['local_name']
@@ -74,9 +83,10 @@ class JobType(models.Model):
     description = models.CharField(max_length=60)
     enable = models.BooleanField(default=True)
 
+
 # class JobActivityType(models.Model):
-#     name = models.CharField(max_length=50)
-#     local_name = models.CharField(max_length=50)
+# name = models.CharField(max_length=50)
+# local_name = models.CharField(max_length=50)
 #     description = models.CharField(max_length=60)
 #     enable = models.BooleanField(default=True)
 
