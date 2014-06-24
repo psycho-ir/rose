@@ -6,6 +6,7 @@ from customer.models.real_models import RealCustomerInformation
 from rose_config.exceptions import ValidationException
 from rose_config.models import CompanyType, Province, Town, JobCertificateType
 from utils.date_utils import greg_date_from_shamsi
+from datetime import datetime
 
 __author__ = 'soroosh'
 
@@ -90,7 +91,13 @@ class BoardOfDirector(models.Model):
             RealCustomerInformation.objects.get(customer_code=dic['customer_id'])
         except ObjectDoesNotExist as e:
             raise ValidationException("Real customer does not exist")
+
         sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
+        if datetime.now() > sign_expire_date:
+            raise ValidationException("Sign expire date should be more than one month")
+        if datetime.now().month > sign_expire_date.month:
+            raise ValidationException("Sign expire date should be more than one month")
+
         if BoardOfDirector.objects.filter(company_id=dic['company_id'], customer_id=dic['customer_id']).exists():
             b = BoardOfDirector.objects.get(company_id=dic['company_id'], customer_id=dic['customer_id'])
         else:
@@ -152,6 +159,7 @@ class EnterpriseActivity(models.Model):
         if certificate_start_date >= certificate_expire_date:
             raise ValidationException("Expire date cannot be lower than start date")
         import datetime
+
         if certificate_expire_date < datetime.datetime.now():
             raise ValidationException("Certificate expired")
         ea = EnterpriseActivity(

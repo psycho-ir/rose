@@ -3002,3 +3002,9 @@ msgstr "مشتری انتخابی حقیقی است ولی درخواست حقو
 
 msgid "Prepayed amount cannot be more than request amount"
 msgstr "مبلغ پیش پرداخت / سهم الشرکه نمی تواند بیش از مبلغ تسهیلات درخواستی باشد"
+
+msgid "Number of installments cannot be more than 4 for daily"
+msgstr "تعداد اقساط با واحد محاسبه بازپرداخت روزانه نمی تواند بیش از ۴ باشد"
+
+msgid "Sign expire date should be more than one month"
+msgstr "اعتبار امضا می بایست بیش از یک ماه باشد"
