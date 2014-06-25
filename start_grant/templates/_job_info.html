@@ -11,6 +11,23 @@
             <input type="hidden" name="customer_id" value="{{ customer_request.cif }}">
 
             <div class="control-group">
+                <div class="row">
+                    <div class="col-xs-2">
+                        بخش اقتصادی
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control" value="{{ customer_request.business_part.local_name }}"
+                               readonly="readonly" disabled="disabled">
+                    </div>
+                    <div class="col-xs-2">
+                        شرح درخواست
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control"
+                               value="{{ customer_request.request_description.local_name }}"
+                               readonly="readonly" disabled="disabled">
+                    </div>
+                </div>
                 <div class="row controls">
                     <div class="col-xs-2">
                         شفل
@@ -22,16 +39,16 @@
                             {% endfor %}
                         </select>
                     </div>
-{#                    <div class="col-xs-2">#}
-{#                        نوع فعالیت#}
-{#                    </div>#}
-{#                    <div class="col-xs-3">#}
-{#                        <input type="text" class="form-control" name="job_activity"#}
-{#                               value="{{ customer_info.job_info.job_activity }}"#}
-{#                               required#}
-{#                               data-validation-required-message="وارد کردن این فیلد الزامی است"#}
-{#                                />#}
-{#                    </div>#}
+                    {#                    <div class="col-xs-2">#}
+                    {#                        نوع فعالیت#}
+                    {#                    </div>#}
+                    {#                    <div class="col-xs-3">#}
+                    {#                        <input type="text" class="form-control" name="job_activity"#}
+                    {#                               value="{{ customer_info.job_info.job_activity }}"#}
+                    {#                               required#}
+                    {#                               data-validation-required-message="وارد کردن این فیلد الزامی است"#}
+                    {#                                />#}
+                    {#                    </div>#}
                 </div>
                 <div class="row">
                     <div class="col-xs-2">
