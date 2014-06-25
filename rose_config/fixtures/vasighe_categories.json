@@ -1,0 +1,36 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.vasighecategory",
+        "fields": {
+            "name": "cash",
+            "local_name": "نقد"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.vasighecategory",
+        "fields": {
+            "name": "no-manghool",
+            "local_name": "اموال غیر منقول"
+        }
+
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.vasighecategory",
+        "fields": {
+            "name": "manghool",
+            "local_name": "اموال منقول"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.vasighecategory",
+        "fields": {
+            "name": "tejari",
+            "local_name": "اسناد تجاری"
+        }
+
+    }
+]

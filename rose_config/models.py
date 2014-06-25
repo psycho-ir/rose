@@ -87,8 +87,8 @@ class JobType(models.Model):
 # class JobActivityType(models.Model):
 # name = models.CharField(max_length=50)
 # local_name = models.CharField(max_length=50)
-#     description = models.CharField(max_length=60)
-#     enable = models.BooleanField(default=True)
+# description = models.CharField(max_length=60)
+# enable = models.BooleanField(default=True)
 
 
 class JobCertificateType(models.Model):
@@ -106,6 +106,16 @@ class BusinessPlace(models.Model):
 
 
 class Bank(models.Model):
+    class Meta:
+        ordering = ['local_name']
+
+    name = models.CharField(max_length=50)
+    local_name = models.CharField(max_length=50)
+    description = models.CharField(max_length=60, default="")
+    enable = models.BooleanField(default=True)
+
+
+class VasigheCategory(models.Model):
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
@@ -113,9 +123,16 @@ class Bank(models.Model):
 
 
 class VasigheType(models.Model):
+    category = models.ForeignKey(VasigheCategory, related_name='vasighe_types')
     name = models.CharField(max_length=50)
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
+    nesbat_naghd_shavandegi = models.SmallIntegerField()
+    # naghdi_value = models.SmallIntegerField()
+    tarhin_value = models.SmallIntegerField()
+    cover_value = models.SmallIntegerField()
+    need_assessment = models.BooleanField(default=True)
+
     enable = models.BooleanField(default=True)
 
 

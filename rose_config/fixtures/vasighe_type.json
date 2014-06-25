@@ -1,54 +1,335 @@
 [
+
     {
         "pk": 1,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "melki",
-            "local_name": "ملکی"
+            "category": 1,
+            "name": "cash",
+            "local_name": "وجه نقد",
+            "nesbat_naghd_shavandegi": 100,
+            "tarhin_value": 100,
+            "cover_value": 100,
+            "need_assessment": false
+
         }
     },
     {
         "pk": 2,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "safte",
-            "local_name": "سفته"
+            "category": 1,
+            "name": "gold",
+            "local_name": "طلا و جواهر",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 70,
+            "cover_value": 120,
+            "need_assessment": true
         }
-
     },
     {
         "pk": 3,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "cheque",
-            "local_name": "چک"
+            "category": 1,
+            "name": "seporde-nazd-shobe",
+            "local_name": "سپرده بلند مدت نزد موسسه",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 100,
+            "need_assessment": false
         }
     },
     {
         "pk": 4,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "sepordeh-boland-moddat",
-            "local_name": "سپرده بلند مدت"
+            "category": 1,
+            "name": "seporde-other-shobe",
+            "local_name": " سپرده بانکی نزد سایر موسسات",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 110,
+            "need_assessment": false
         }
-
     },
     {
         "pk": 5,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "govahi-sepordeh",
-            "local_name": "گواهی سپرده"
-
+            "category": 1,
+            "name": "zamanat-other-bank",
+            "local_name": "ضمانت نامه های بانکی، بانکهای دیگر",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 110,
+            "need_assessment": false
         }
     },
     {
         "pk": 6,
         "model": "rose_config.vasighetype",
         "fields": {
-            "name": "saham",
-            "local_name": "سهام"
+            "category": 1,
+            "name": "oragh",
+            "local_name": "اوراق مشارکت - اوراق قرضه",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 110,
+            "need_assessment": false
+        }
+    },
+
+    {
+        "pk": 7,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 1,
+            "name": "other-deposit",
+            "local_name": "سایر سپرده های بانکی",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 110,
+            "need_assessment": false
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 1,
+            "name": "zamanat-foregin-banks",
+            "local_name": "ضمانت نامه های بانکی بانکهای خارجی",
+            "nesbat_naghd_shavandegi": 110,
+            "tarhin_value": 90,
+            "cover_value": 110,
+            "need_assessment": false
+        }
+    },
+    {
+        "pk": 9,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "amlak-sahl",
+            "local_name": "املاک مسکونی سهل البیع",
+            "nesbat_naghd_shavandegi": 130,
+            "tarhin_value": 80,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 10,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "melk-tejari-edari",
+            "local_name": "ملک تجاری اداری",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 70,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 11,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "factory",
+            "local_name": "کارخانجات",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 12,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "machine-mansoob",
+            "local_name": "ماشین آلات منصوب",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+
+
+    {
+        "pk": 13,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "garden",
+            "local_name": "باغ",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 50,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 14,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 2,
+            "name": "ground",
+            "local_name": "زمین",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 40,
+            "cover_value": 120,
+            "need_assessment": true
         }
 
+    },
+    {
+        "pk": 15,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "vehicle",
+            "local_name": "وسائط نقلیه",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 16,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "nesbat_naghd_shavandegi": 160,
+            "name": "car",
+            "local_name": "خودرو",
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+
+    },
+    {
+        "pk": 17,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "shenavar",
+            "local_name": "شناور",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 18,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "plane",
+            "local_name": "هواپیما",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 19,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "resid-anbar",
+            "local_name": "رسید انبارهای عمومی",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 20,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "machine-not-assigned",
+            "local_name": "ماشین آلات غیر منصوب",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 21,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 3,
+            "name": "resid-sardkhane",
+            "local_name": "رسید کالاهای موجود در سردخانه ها",
+            "nesbat_naghd_shavandegi": 160,
+            "tarhin_value": 60,
+            "cover_value": 120,
+            "need_assessment": true
+        }
+    },
+    {
+        "pk": 22,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 4,
+            "name": "safte",
+            "local_name": "سفته ",
+            "nesbat_naghd_shavandegi": 120,
+            "tarhin_value": 100,
+            "cover_value": 120,
+            "need_assessment": false
+        }
+    },
+    {
+        "pk": 23,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 4,
+            "name": "barat",
+            "local_name": "برات",
+            "nesbat_naghd_shavandegi": 120,
+            "tarhin_value": 100,
+            "cover_value": 120,
+            "need_assessment": false
+        }
+    },
+    {
+        "pk": 24,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 4,
+            "name": "cheque",
+            "local_name": "چک",
+            "nesbat_naghd_shavandegi": 120,
+            "tarhin_value": 100,
+            "cover_value": 120,
+            "need_assessment": false
+        }
+    },
+    {
+        "pk": 25,
+        "model": "rose_config.vasighetype",
+        "fields": {
+            "category": 4,
+            "name": "oragh-saham",
+            "local_name": "اوراق سهام",
+            "nesbat_naghd_shavandegi": 150,
+            "tarhin_value": 100,
+            "cover_value": 120,
+            "need_assessment": true
+        }
     }
+
 ]

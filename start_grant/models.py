@@ -38,7 +38,7 @@ class Request(models.Model):
     agent = models.ForeignKey(RealCustomerInformation, related_name='agent_requests', blank=True, null=True)
 
     def need_guarantor(self):
-        if self.vasighe_information.vasighe_types.filter(Q(id=2) | Q(id=3)).exists():
+        if self.vasighe_information.vasighe_types.filter(Q(name='safte') | Q(name='cheque')).exists():
             return True
         else:
             return False

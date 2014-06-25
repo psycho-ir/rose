@@ -96,7 +96,7 @@ class RealCustomerCheckListGenerator:
         if self.request.need_guarantor():
             source.add(19)
 
-        if self.request.vasighe_information.vasighe_types.exclude(Q(id=2) | Q(id=3)).exists():
+        if self.request.vasighe_information.vasighe_types.exclude(Q(name='safte') | Q(name='cheque')).exists():
             source.add(18)
 
 

@@ -123,7 +123,7 @@ class BankIncomeView(View):
                     print "There is no selected bank"
                     return generate_error_response("There is no selected bank")
 
-                maskan_vasighe_type = VasigheType.objects.filter(name='melki').first()
+                maskan_vasighe_type = VasigheType.objects.filter(name='melk-tejari-edari').first()
                 sanad = None
                 if str(maskan_vasighe_type.id) in vasighes:
                     sanad = SanadMelkiInformation.from_dic(request.POST)
