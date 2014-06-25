@@ -70,5 +70,190 @@
             "name": "sarmaye",
             "local_name": "بانک سرمایه"
         }
+    },
+    {
+        "pk": 10,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "sepah",
+            "local_name": "بانک سپه"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "post",
+            "local_name": "پست بانک"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "sanat-madan",
+            "local_name": "بانک صنعت و معدن"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "keshavarzi",
+            "local_name": "بانک کشاورزی"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "tose",
+            "local_name": "موسسه اعتباری توسعه"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "parsian",
+            "local_name": "بانک پارسیان"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "saman",
+            "local_name": "بانک سامان"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "pasargad",
+            "local_name": "بانک پاسارگاد"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "sina",
+            "local_name": "بانک سینا"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "shahr",
+            "local_name": "بانک شهر"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "dey",
+            "local_name": "بانک دی"
+        }
     }
+    ,
+    {
+        "pk": 21,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "ansar",
+            "local_name": "بانک انصار"
+        }
+    },
+    {
+        "pk": 22,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "refah",
+            "local_name": "بانک رفاه کارگران"
+        }
+    }
+    ,
+    {
+        "pk": 23,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "hekmat",
+            "local_name": "بانک حکمت ایرانیان"
+        }
+    },
+    {
+        "pk": 24,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "gardeshgari",
+            "local_name": "بانک گردشگری"
+        }
+    },
+    {
+        "pk": 25,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "iranzamin",
+            "local_name": "بانک ایران زمین"
+        }
+    },
+    {
+        "pk": 26,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "ghavamin",
+            "local_name": "بانک قوامین "
+        }
+    } ,
+    {
+        "pk": 27,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "khavar-miane",
+            "local_name": "بانک خاورمیانه"
+        }
+    }
+    ,
+    {
+        "pk": 28,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "ayandeh",
+            "local_name": "بانک آینده"
+        }
+    }
+    ,
+    {
+        "pk": 29,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "mehr-eghtesad",
+            "local_name": "بانک مهر اقتصاد"
+        }
+    }
+    ,
+    {
+        "pk": 30,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "qmehr",
+            "local_name": "بانک قرض الحسنه  مهر ایران"
+        }
+    }
+    ,
+    {
+        "pk": 31,
+        "model": "rose_config.bank",
+        "fields": {
+            "name": "resalat",
+            "local_name": "بانک قرض الحسنه رسالت"
+        }
+    }
+
+
+
 ]
