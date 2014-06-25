@@ -51,10 +51,18 @@ class EnterpriseCustomerInformation(Customer):
 
     @staticmethod
     def from_dic(dic):
-        print dic
         register_date = greg_date_from_shamsi(dic['register_date'], '/')
-        print register_date
         newspaper_date = greg_date_from_shamsi(dic['newspaper_date'], '/')
+        current_date = datetime.now()
+
+        if newspaper_date < register_date:
+            raise ValidationException("Newspaper date cannot be before register date")
+
+        if newspaper_date >= current_date:
+            raise ValidationException("Newspaper date cannot be after today")
+
+        if register_date >= current_date:
+            raise ValidationException("Register date cannot be after today")
         c = EnterpriseCustomerInformation(
             type='hoghooghi',
             customer_code=dic['company_id'],

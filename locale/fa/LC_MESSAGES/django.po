@@ -3012,3 +3012,12 @@ msgstr "اعتبار امضا می بایست بیش از یک ماه باشد"
 
 msgid "Customer age cannot be less than 18 years"
 msgstr "سن مشتری نمی تواند زیر ۱۸ سال باشد"
+
+msgid "Newspaper date cannot be before register date"
+msgstr "تاریخ روزنامه نمی تواند قبل از تاریخ ثبت باشد"
+
+msgid "Newspaper date cannot be after today"
+msgstr "تاریخ روزنامه می بایست قبل از امروز باشد"
+
+msgid "Register date cannot be after today"
+msgstr "تاریخ ثبت می بایست قبل از امروز باشد"
