@@ -6,6 +6,7 @@ __author__ = 'soroosh'
 from django.db import models
 from jdatetime import datetime as jalali_datetime
 from rose_config.models import Town, Province, JobType, JobCertificateType, Bank, VasigheType, BusinessPlace
+from datetime import datetime, timedelta
 
 
 class RealCustomerInformation(Customer):
@@ -30,6 +31,10 @@ class RealCustomerInformation(Customer):
         from utils.date_utils import greg_date_from_shamsi
 
         gregorian_birth_date = greg_date_from_shamsi(dic['birth_date'], '/')
+        # timedelta(days=365*18)
+        if gregorian_birth_date > datetime.now() - timedelta(days=365 * 18):
+            raise ValidationException("Customer age cannot be less than 18 years")
+
         customer_code = dic['national_number']
         if customer_code is None or customer_code == 'None' or not customer_code.isdigit():
             raise ValidationException("Customer Code is not ok")

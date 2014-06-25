@@ -3008,3 +3008,7 @@ msgstr "تعداد اقساط با واحد محاسبه بازپرداخت رو
 
 msgid "Sign expire date should be more than one month"
 msgstr "اعتبار امضا می بایست بیش از یک ماه باشد"
+
+
+msgid "Customer age cannot be less than 18 years"
+msgstr "سن مشتری نمی تواند زیر ۱۸ سال باشد"
