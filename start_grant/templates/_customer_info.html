@@ -9,6 +9,7 @@
               action="{% url 'customer:customer_info' %}" novalidate>
             {% csrf_token %}
             <input type="hidden" name="type" value="{{ customer_request.type }}">
+            <input type="hidden" name="national_number" value="{{ customer_request.cif }}">
 
             <div class="control-group">
                 <div class="row controls">
@@ -59,9 +60,9 @@
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="father_name"
                                value="{{ customer_info.father_name }}"
-                        required
-                        data-validation-required-message="وارد کردن این فیلد الزامی است"
-                        />
+                               required
+                               data-validation-required-message="وارد کردن این فیلد الزامی است"
+                                />
                     </div>
 
                     <div class="col-xs-2">
@@ -88,7 +89,8 @@
                         کد ملی
                     </div>
                     <div class="col-xs-3">
-                        <input type="text" class="form-control" name="national_number" disabled="disabled" readonly="readonly"
+                        <input type="text" class="form-control" name="national_number" disabled="disabled"
+                               readonly="readonly"
                                value="{{ customer_request.cif }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
@@ -100,7 +102,8 @@
                         محل صدور شناسنامه
                     </div>
                     <div class="col-xs-3">
-                        <select id="bc_place" name="bc_place_id" value="{{ customer_info.bc_place.id }}" style="width: 100%; padding-bottom:10px; ">
+                        <select id="bc_place" name="bc_place_id" value="{{ customer_info.bc_place.id }}"
+                                style="width: 100%; padding-bottom:10px; ">
                             {% for town in all_towns %}
                                 <option value="{{ town.id }}">{{ town.local_name }}</option>
                             {% endfor %}
@@ -123,7 +126,8 @@
                     </div>
                     <div class="col-xs-3">
 
-                          <select id="birth_place" name="birth_place_id" value="{{ customer_info.birth_place.id }}" style="width: 100%; padding-bottom:10px; ">
+                        <select id="birth_place" name="birth_place_id" value="{{ customer_info.birth_place.id }}"
+                                style="width: 100%; padding-bottom:10px; ">
                             {% for town in all_towns %}
                                 <option value="{{ town.id }}">{{ town.local_name }}</option>
                             {% endfor %}
