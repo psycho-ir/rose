@@ -8,8 +8,10 @@ from django.template import loader, RequestContext
 from django.views.generic import View
 from rose_config.response import *
 from start_grant.models import Request
-from assign.models import EnquiryAction, EnquiryAssign, EnquiryAssignResponse, EnquiryActionResponse
+from assign.models import EnquiryAction, EnquiryAssign, EnquiryAssignResponse, EnquiryActionResponse, \
+    AssignHistoryItemInstance
 from utils.date_utils import greg_date_from_shamsi
+from datetime import datetime
 
 
 class EnquiryAssignView(View):
@@ -20,7 +22,7 @@ class EnquiryAssignView(View):
         customer_request = Request.objects.get(id=request_id)
         existed_enquiry_assign = EnquiryAssign.objects.filter(request__id=1).count() > 0
 
-        #Currently every request should have just one enquiry assign
+        # Currently every request should have just one enquiry assign
         if existed_enquiry_assign:
             return HttpResponseRedirect('superior:tasks')
 
@@ -81,6 +83,11 @@ class EnquiryResponseView(View):
         if assign.status == 'done':
             return HttpResponseRedirect(reverse('notification:list'))
         if not hasattr(assign, 'response'):
+            history_item = AssignHistoryItemInstance()
+            history_item.history_item_id = "see"
+            history_item.issue_date = datetime.now()
+            assign.history.items.add(history_item)
+
             response = EnquiryAssignResponse()
             response.enquiry_assign = assign
             response.save()
