@@ -73,6 +73,11 @@ class Request(models.Model):
         else:
             raise Exception("customer type is not ok, it is: " + customer.type)
 
+    def is_editable(self):
+        if self.status == 'checklist_completed':
+            return False
+        return True
+
     @staticmethod
     def from_dic(dic, user):
         haghighi_max_loan_amount = config.objects.get(pk='HAGHIGHI_MAX_LOAN_AMOUNT')
@@ -158,7 +163,7 @@ class RequestCompleteInformation(models.Model):
                                          loan_type_id=dic['loan_type_id'], refund_duration=dic['refund_duration'],
                                          refund_type_id=dic['refund_type_id'],
                                          number_of_installments=number_of_installments,
-                                         refund_period_type = dic['refund_period_type'])
+                                         refund_period_type=dic['refund_period_type'])
         return rci
 
     def save(self, *args, **kwargs):

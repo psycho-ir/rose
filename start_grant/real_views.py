@@ -19,6 +19,8 @@ class SubmitDataView(View):
         if request.user.profile.role.name == 'superior':
             readonly = True
         customer_request = Request.objects.get(id=request_id)
+        if not customer_request.is_editable():
+            readonly = True
         if customer_request.user_id != request.user.id:
             readonly = True
         customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
