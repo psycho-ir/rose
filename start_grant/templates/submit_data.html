@@ -239,11 +239,11 @@
             $('#birth_date,#birth_date_span').persianDatepicker();
             $('#bc_place').select2();
             $('#birth_place').select2();
-            var state = $('#melki').prop('checked');
+            var state = $('#melk-tejari-edari').prop('checked');
             handleSanadMelkicontainer(state);
 
 
-            $('#melki').change(function () {
+            $('#melk-tejari-edari').change(function () {
                 var state = $(this).prop('checked');
                 handleSanadMelkicontainer(state);
             });

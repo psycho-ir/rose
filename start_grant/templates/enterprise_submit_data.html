@@ -232,6 +232,14 @@
 {% block js %}
     <script src="{% static  'js/submission_utils.js' %}"></script>
     <script type="text/javascript">
+    function handleSanadMelkicontainer(state) {
+        if (state) {
+            $('#sanad-melki').show();
+        }
+        else {
+            $('#sanad-melki').hide();
+        }
+    };
     $(window).ready(function () {
         {% if readonly %}
             $('input').prop('readonly', 'readonly');
@@ -264,11 +272,18 @@
 
 
         check_for_showing_next_level();
+        var state = $('#melk-tejari-edari').prop('checked');
+        handleSanadMelkicontainer(state);
         $('#register_date,#register_date_span').persianDatepicker();
         $('#newspaper_date,#newspaper_date_span').persianDatepicker();
         $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
         $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
         $('#sign_expire_date,#sign_expire_date_span').persianDatepicker();
+
+        $('#melk-tejari-edari').change(function () {
+            var state = $(this).prop('checked');
+            handleSanadMelkicontainer(state);
+        });
 
         $('.rose-progress-bar-cell').click(function () {
             var cell = $(this)
