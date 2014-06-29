@@ -24,7 +24,8 @@ class EnterpriseSubmitDataView(View):
         register_towns = RegisterTown.objects.all()
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
-        certificate_types = JobCertificateType.objects.all()
+        certificate_types = JobCertificateType.objects.filter(type='hoghooghi',
+                                                              business_part__id=customer_request.business_part_id)
         loan_types = LoanType.objects.all()
         refund_types = loan_types.first().refund_types.all()
         board_of_directors = BoadOfDirectorRole.objects.all()

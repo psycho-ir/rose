@@ -31,8 +31,7 @@ class RegisterRealCustomerView(View):
         towns = Town.objects.filter(province_id=provinces.first().id)
         all_towns = Town.objects.all()
         job_types = JobType.objects.all()
-        certificate_types = JobCertificateType.objects.all()
-
+        certificate_types = JobCertificateType.objects.filter(type='haghighi')
         context = RequestContext(request, {'customer_type': 'haghighi',
                                            'customer': customer,
                                            'provinces': provinces,

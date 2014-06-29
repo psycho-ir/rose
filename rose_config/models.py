@@ -96,6 +96,8 @@ class JobCertificateType(models.Model):
     local_name = models.CharField(max_length=50)
     description = models.CharField(max_length=60, default="")
     enable = models.BooleanField(default=True)
+    type = models.CharField(default='haghighi', max_length=20)
+    business_part = models.ManyToManyField(BusinessPart)
 
 
 class BusinessPlace(models.Model):

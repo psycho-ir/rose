@@ -25,7 +25,8 @@ class SubmitDataView(View):
             readonly = True
         customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
         job_types = JobType.objects.all()
-        certificate_types = JobCertificateType.objects.all()
+        certificate_types = JobCertificateType.objects.filter(type='haghighi',
+                                                              business_part__id=customer_request.business_part_id)
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
         all_towns = Town.objects.all()
@@ -79,7 +80,7 @@ class ReqCompleteView(View):
 
         except ValidationException as e:
             return generate_error_response(e.message)
-        
+
         except Exception as e:
             print e
             return generate_error_response()
