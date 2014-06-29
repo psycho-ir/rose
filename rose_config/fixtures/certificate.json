@@ -1,0 +1,146 @@
+[
+    {
+        "pk": 1,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "eshteghal",
+            "local_name": "مدرک اشتغال به کار",
+            "description": "",
+            "business_part": [7]
+        }
+    },
+    {
+        "pk": 2,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "mojavez",
+            "local_name": "مجوز کسب",
+            "description": "",
+            "business_part": [7]
+        }
+    },
+    {
+        "pk": 3,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "kart-bazargani",
+            "local_name": "کارت بازرگانی",
+            "description": "",
+            "business_part": [3, 4, 5]
+        }
+    },
+    {
+        "pk": 4,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "mojavez",
+            "local_name": "مجوز فعالیت",
+            "description": "",
+            "business_part": [1, 2]
+        }
+    },
+    {
+        "pk": 5,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "mojavez-ehdas",
+            "local_name": "مجوز احداث طرح صنعتی",
+            "description": "",
+            "business_part": [1]
+        }
+    },
+    {
+        "pk": 6,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "tarh-keshavarzi",
+            "local_name": "ایجاد طرح کشاروزی",
+            "description": "",
+            "business_part": [2]
+        }
+    },
+    {
+        "pk": 7,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "haghighi",
+            "name": "shora-roosta",
+            "local_name": "شورای روستا",
+            "description": "",
+            "business_part": [7]
+        }
+    },
+    {
+        "pk": 8,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "mojavez-hoghooghi",
+            "local_name": "مجوز فعالیت",
+            "description": "",
+            "business_part": [1, 2, 7]
+        }
+    },
+    {
+        "pk": 9,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "kart-bazargani-hogohoghi",
+            "local_name": "کارت بازرگانی",
+            "description": "",
+            "business_part": [3, 4, 5]
+        }
+    },
+    {
+        "pk": 10,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "mojavez-sakht",
+            "local_name": "مجوز ساخت",
+            "description": "",
+            "business_part": [6]
+        }
+    },
+    {
+        "pk": 11,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "parvaneh-behdashti",
+            "local_name": "پروانه بهداشتی",
+            "description": "",
+            "business_part": [2]
+        }
+    },
+    {
+        "pk": 12,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "mojavez-ehdas",
+            "local_name": "مجوز احداث",
+            "description": "",
+            "business_part": [1, 2]
+        }
+    },
+    {
+        "pk": 13,
+        "model": "rose_config.jobcertificatetype",
+        "fields": {
+            "type": "hoghooghi",
+            "name": "mojavez-peimankari",
+            "local_name": "مجوز پیمانکاری",
+            "description": "",
+            "business_part": [1, 6, 7]
+        }
+    }
+
+]
