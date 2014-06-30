@@ -11,11 +11,10 @@
                 <div class="row" style="margin-bottom: 0px; padding-top: 5px; padding-bottom: 5px; text-align: center">
                     <div class="col-xs-4"></div>
                     <div class="col-xs-2">
-                        کد ملی
+                       کد شرکت
                     </div>
                     <div class="col-xs-2">
-                        <input minlength="10" maxlength="10" pattern="^[0-9]*$" name="customer_id" id="customer_id"
-                               class="form-control"/>
+                        <input  pattern="^[0-9]*$" name="customer_id" id="customer_id" class="form-control"/>
                     </div>
                     <div class="col-xs-3"></div>
                 </div>
@@ -129,20 +128,6 @@
                 </div>
             </div>
         </div>
-        {% if next_level %}
-            <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-                <form action="{{ next_level }}" method="post">
-                    {% csrf_token %}
-                    <div class="col-xs-12" style="text-align: center;">
-                        <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
-                            اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
-                        </button>
-
-                    </div>
-                </form>
-            </div>
-        {% endif %}
-
         <div id="submit_forms" class="form-group">
             <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
                 <div class="rose-submit-container" id="customer_info_container">

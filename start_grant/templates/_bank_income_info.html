@@ -10,6 +10,7 @@
             {% csrf_token %}
             <input type="hidden" name="customer_id" value="{{ customer_request.cif }}"/>
             <input type="hidden" name="request_id" value="{{ customer_request.id }}"/>
+            <input type="hidden" name="no_income" value="true"/>
 
             <div class="control-group">
                 <div class="row">
@@ -28,18 +29,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-2">
-                        درآمد ماهیانه
-                    </div>
-                    <div class="col-xs-3">
-                        <input role="amount" class="form-control" name="income"
-                               value="{{ customer_info.bank_income_info.income }}"
-                               required
-                               data-validation-required-message="وارد کردن این فیلد الزامی است"
-                                />
-                    </div>
-                </div>
+{#                <div class="row">#}
+{#                    <div class="col-xs-2">#}
+{#                        درآمد ماهیانه#}
+{#                    </div>#}
+{#                    <div class="col-xs-3">#}
+{#                        <input role="amount" class="form-control" name="income"#}
+{#                               value="{{ customer_info.bank_income_info.income }}"#}
+{#                               required#}
+{#                               data-validation-required-message="وارد کردن این فیلد الزامی است"#}
+{#                                />#}
+{#                    </div>#}
+{#                </div>#}
                 <div class="row">
                     <div class="col-xs-2">
                         وثایق پیشنهادی

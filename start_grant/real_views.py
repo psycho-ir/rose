@@ -24,12 +24,12 @@ class SubmitDataView(View):
         if customer_request.user_id != request.user.id:
             readonly = True
         customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
-        job_types = JobType.objects.all()
-        certificate_types = JobCertificateType.objects.filter(type='haghighi',
-                                                              business_part__id=customer_request.business_part_id)
+        # job_types = JobType.objects.all()
+        # certificate_types = JobCertificateType.objects.filter(type='haghighi',
+        #                                                       business_part__id=customer_request.business_part_id)
         provinces = Province.objects.all()
-        towns = Town.objects.filter(province_id=provinces.first().id)
-        all_towns = Town.objects.all()
+        # towns = Town.objects.filter(province_id=provinces.first().id)
+        # all_towns = Town.objects.all()
         loan_types = LoanType.objects.all()
         refund_types = loan_types.first().refund_types.all()
         banks = Bank.objects.all()
@@ -42,15 +42,16 @@ class SubmitDataView(View):
                                      'customer_info': customer_information,
                                      'customer_request': customer_request,
                                      'provinces': provinces,
-                                     'towns': towns,
-                                     'job_types': job_types,
-                                     'certificate_types': certificate_types,
+                                     # 'towns': towns,
+                                     # 'job_types': job_types,
+                                     # 'certificate_types': certificate_types,
                                      'loan_types': loan_types,
                                      'refund_types': refund_types,
                                      'banks': banks,
                                      'vasighe_types': vasighe_types,
-                                     'business_places': business_places,
-                                     'all_towns': all_towns})
+                                     'business_places': business_places
+                                     # 'all_towns': all_towns
+                                 })
         return HttpResponse(template.render(context))
 
     def post(self, request, request_id):

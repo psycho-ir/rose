@@ -50,10 +50,13 @@ class StartView(View):
         request.save()
 
         if request.type == 'haghighi':
-            return HttpResponseRedirect(reverse('grant:submit', args=(request.id,)))
+            return HttpResponseRedirect(
+                reverse('customer:real_register') + '?customer_id=' + request.cif + '&next=' + reverse('grant:submit',
+                                                                                                       args=(
+                                                                                                       request.id,)))
 
         if request.type == 'hoghooghi':
-            return HttpResponseRedirect(reverse('grant:enterprise_submit', args=(request.id,)))
+            return HttpResponseRedirect(reverse('customer:enterprise', args=(request.cif,)))
 
         return HttpResponse("Fatal Error %s" % request.type)
 

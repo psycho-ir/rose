@@ -16,6 +16,43 @@ class RegisterRealCustomerView(View):
     def get(self, request):
 
         customer_id = request.GET.get('customer_id')
+        next_level = request.GET.get('next', None)
+        customer = None
+        message = None
+        if customer_id is not None and customer_id != '':
+            try:
+                if len(find_customer(customer_id)) == 0:
+                    message = 'customer does not exist'
+                customer = RealCustomerInformation.objects.get(pk=customer_id)
+
+            except ObjectDoesNotExist as e:
+                print e
+
+        provinces = Province.objects.all()
+        towns = Town.objects.filter(province_id=provinces.first().id)
+        all_towns = Town.objects.all()
+        job_types = JobType.objects.all()
+        certificate_types = JobCertificateType.objects.filter(type='haghighi')
+        context = RequestContext(request, {'customer_type': 'haghighi',
+                                           'customer': customer,
+                                           'provinces': provinces,
+                                           'towns': towns,
+                                           'job_types': job_types,
+                                           'certificate_types': certificate_types,
+                                           'customer_id': customer_id,
+                                           'message': message,
+                                           'all_towns': all_towns,
+                                           'next_level': next_level
+        })
+
+        template = loader.get_template('register_customer.html')
+
+        return HttpResponse(template.render(context))
+
+
+class RegisterEnterpriseCustomerView(View):
+    def get(self, request):
+        customer_id = request.GET.get('customer_id')
         customer = None
         message = None
         if customer_id is not None and customer_id != '':
@@ -43,7 +80,7 @@ class RegisterRealCustomerView(View):
                                            'all_towns': all_towns
         })
 
-        template = loader.get_template('register_customer.html')
+        template = loader.get_template('register_enterprise_customer.html')
 
         return HttpResponse(template.render(context))
 
