@@ -5,8 +5,10 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import View
 from core_connection.customer_repository import find_customer
+from customer.models import EnterpriseCustomerInformation, RegisterTown, BoadOfDirectorRole
 from rose_config.exceptions import ValidationException
 from django.utils.translation import ugettext as _
+from rose_config.models import CompanyType
 from rose_config.response import generate_error_response, generate_ok_response
 from start_grant.models import BankVasigheInformation, SanadMelkiInformation
 from customer.models.real_models import *
@@ -53,31 +55,40 @@ class RegisterRealCustomerView(View):
 class RegisterEnterpriseCustomerView(View):
     def get(self, request):
         customer_id = request.GET.get('customer_id')
+        next_level = request.GET.get('next', None)
         customer = None
         message = None
         if customer_id is not None and customer_id != '':
             try:
                 if len(find_customer(customer_id)) == 0:
                     message = 'customer does not exist'
-                customer = RealCustomerInformation.objects.get(pk=customer_id)
+                customer = EnterpriseCustomerInformation.objects.get(pk=customer_id)
 
             except ObjectDoesNotExist as e:
                 print e
 
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
+        register_towns = RegisterTown.objects.all()
+        company_types = CompanyType.objects.all()
         all_towns = Town.objects.all()
         job_types = JobType.objects.all()
-        certificate_types = JobCertificateType.objects.filter(type='haghighi')
+        board_of_directors = BoadOfDirectorRole.objects.all()
+        certificate_types = JobCertificateType.objects.filter(type='hoghooghi')
+
         context = RequestContext(request, {'customer_type': 'haghighi',
-                                           'customer': customer,
+                                           'customer_info': customer,
                                            'provinces': provinces,
+                                           'company_types': company_types,
+                                           'register_towns': register_towns,
                                            'towns': towns,
                                            'job_types': job_types,
                                            'certificate_types': certificate_types,
                                            'customer_id': customer_id,
                                            'message': message,
-                                           'all_towns': all_towns
+                                           'all_towns': all_towns,
+                                           'board_of_directors': board_of_directors,
+                                           'next_level': next_level
         })
 
         template = loader.get_template('register_enterprise_customer.html')

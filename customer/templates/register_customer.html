@@ -131,7 +131,7 @@
         </div>
         {% if next_level %}
             <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
-                <form action="{{ next_level }}" method="post">
+                <form action="{{ next_level }}" method="get">
                     {% csrf_token %}
                     <div class="col-xs-12" style="text-align: center;">
                         <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">

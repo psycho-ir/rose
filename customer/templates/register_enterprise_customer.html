@@ -5,16 +5,16 @@
 {% block content %}
     <div style="border: 1px solid #dddddd;border-radius: 5px;"
          class="form-group">
-        <form method="get" action="{% url 'customer:real_register' %}" novalidate>
+        <form method="get" action="{% url 'customer:enterprise_register' %}" novalidate>
             <div class="row control-group"
                  style="background-color: #f5e79e; margin-bottom: 0px; margin-left: 0px;margin-right: 0px; padding-bottom: 20px;">
                 <div class="row" style="margin-bottom: 0px; padding-top: 5px; padding-bottom: 5px; text-align: center">
                     <div class="col-xs-4"></div>
                     <div class="col-xs-2">
-                       کد شرکت
+                        کد شرکت
                     </div>
                     <div class="col-xs-2">
-                        <input  pattern="^[0-9]*$" name="customer_id" id="customer_id" class="form-control"/>
+                        <input pattern="^[0-9]*$" name="customer_id" id="customer_id" class="form-control"/>
                     </div>
                     <div class="col-xs-3"></div>
                 </div>
@@ -30,41 +30,66 @@
         <div class="row rose-progress-bar" style="padding-top:0px;padding-bottom:15px; margin:0px;">
 
             <div class="col-xs-3
-            {% if customer %}
+            {% if customer_info %}
             completed
             {% else %}
             pending
             {% endif %}
             rose-progress-bar-cell" id="customer_info">
-                <div class="row">
-                    <div class="col-xs-8">
-                        اطلاعات شخصی
-                    </div>
-                    <div id="customer_info_state" class="col-xs-1">
+                <div class="col-xs-8">
+                    اطلاعات ثبتی شرکت
+                </div>
+                <div id="customer_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;
                                  display: none;
 
                                 "></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if  not customer %}
+                                {% if  not customer_info %}
                                     display: none;
                                 {% endif %}
                                 "></span>
-                    </div>
-                    <div id="customer_info_loader" class="col-xs-1">
+                </div>
+                <div id="customer_info_loader" class="col-xs-1">
 
-                    </div>
                 </div>
             </div>
-            <div class="col-xs-3
+            <div class="col-xs-2
 
-             {% if customer.contact_info %}
+             {% if customer_info.director_set %}
                 completed
              {% else %}
                 pending
              {% endif %}
 
-             rose-progress-bar-cell" id="contact_info">
+              rose-progress-bar-cell" id="director_info">
+                <div class="row">
+                    <div class="col-xs-8">
+                        اعضا هیات مدیره
+                    </div>
+                    <div id="board_of_director_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;
+                                 display: none;
+
+                                "></span>
+                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                {% if  not customer_info.director_set %}
+                                    display: none;
+                                {% endif %}
+                                "></span>
+                    </div>
+                    <div id="board_of_director_loader" class="col-xs-1">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2
+             {% if customer_info.contact_info %}
+                completed
+             {% else %}
+                pending
+             {% endif %}
+              rose-progress-bar-cell" id="contact_info">
                 <div class="row">
                     <div class="col-xs-8">
                         اطلاعات تماس
@@ -72,7 +97,7 @@
                     <div id="contact_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer.contact_info %}
+                                {% if not customer_info.contact_info %}
                                     display: none;"></span>
                                 {% endif %}
                     </div>
@@ -80,68 +105,87 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3
-             {% if customer.job_info %}
-                completed
-             {% else %}
-                pending
-             {% endif %}
-             rose-progress-bar-cell" id="job_info">
-                <div class="row">
-                    <div class="col-xs-8">
-                        اطلاعات شغلی
-                    </div>
-                    <div id="job_info_state" class="col-xs-1">
-                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
-                        <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer.job_info %}
-                                    display: none;
-                                {% endif %}
-                                "></span>
-                    </div>
-                    <div id="job_info_loader" class="col-xs-1">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-3
-             {% if customer.bank_income_info %}
+            <div class="col-xs-2
+             {% if customer_info.activity_info %}
              completed
              {% else %}
              pending
              {% endif %}
 
-             rose-progress-bar-cell" id="bank_income_info">
+            rose-progress-bar-cell" id="activity_info">
                 <div class="row">
-                    <div class="col-xs-9">
-                        درآمد
+                    <div class="col-xs-8">
+                        زمینه فعالیت
                     </div>
-                    <div id="bank_income_state" class="col-xs-1">
+                    <div id="activity_info_state" class="col-xs-1">
                         <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
                         <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
-                                {% if not customer.bank_income_info %}
+                                {% if customer_info.activity_info.count == 0 %}
                                     display: none;
-                                {% endif %}
-                                "></span>
+                                {% endif %}"></span>
                     </div>
-                    <div id="bank_income_loader" class="col-xs-1">
+                    <div id="activity_info_loader" class="col-xs-1">
                     </div>
                 </div>
             </div>
+            <div class="col-xs-3
+                 {% if customer_info.asset_info %}
+                 completed
+                 {% else %}
+                 pending
+                 {% endif %}
+                 rose-progress-bar-cell" id="asset_info" style="padding-right: 0px;">
+                <div class="row">
+                    <div class="col-xs-9">
+                        دارایی ها و بدهی ها
+                    </div>
+                    <div id="asset_info_state" class="col-xs-1">
+                        <span id="failed" class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+                            <span id="ok" class="glyphicon glyphicon-ok" style="color: green;
+                                    {% if not customer_info.asset_info %}
+                                        display: none;
+                                    {% endif %}
+                                    "></span>
+                    </div>
+                    <div id="asset_info_loader" class="col-xs-1">
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        {% if next_level %}
+            <div class="row" id="next_level" style="display: none; padding-bottom: 1%;">
+                <form action="{{ next_level }}" method="get">
+                    {% csrf_token %}
+                    <div class="col-xs-12" style="text-align: center;">
+                        <button type="submit" style=" width: 90%;" id="contact_info_button" class="btn btn-success">
+                            اکنون با کلیک بر روی این بخش می توانید مراحل بعدی اعطای تسهیلات را انجام دهید
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+
         <div id="submit_forms" class="form-group">
             <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
                 <div class="rose-submit-container" id="customer_info_container">
-                    {% include '_guarantor_customer_info.html' %}
+                    {% include '_enterprise_customer_info.html' %}
+                </div>
+                <div class="rose-submit-container collapse" id="director_info_container">
+                    {% include '_enterprise_board_of_directors.html' %}
                 </div>
                 <div class="rose-submit-container collapse" id="contact_info_container">
-                    {% include '_guarantor_contact_info.html' %}
+                    {% include '_enterprise_contact_info.html' %}
                 </div>
-                <div class="rose-submit-container collapse" id="job_info_container">
-                    {% include '_guarantor_job_info.html' %}
+                <div class="rose-submit-container collapse" id="activity_info_container">
+                    {% include '_enterprise_activity_info.html' %}
                 </div>
-                <div class="rose-submit-container collapse" id="bank_income_info_container">
-                    {% include '_guarantor_bank_income_info.html' %}
+                <div class="rose-submit-container collapse" id="asset_info_container">
+                    {% include '_enterprise_asset_info.html' %}
                 </div>
+
             </div>
         </div>
     </div>
@@ -152,122 +196,332 @@
     <script src="{% static 'js/select2.min.js' %}"></script>
     <script src="{% static  'js/submission_utils.js' %}"></script>
     <script type="text/javascript">
-        function check_for_showing_next_level() {
-            if ($('.pending').length == 0) {
-                $('#next_level').show('slow');
+    function check_for_showing_next_level() {
+        if ($('.pending').length == 0) {
+            $('#next_level').show('slow');
 
-            }
         }
-        $(window).ready(function () {
-            $('#bc_place').select2();
-            $('#birth_place').select2();
+    }
 
-            $("input[role=amount]").maskMoney({
-                allowZero: true, // Prevent users from inputing zero
-                allowNegative: false, // Prevent users from inputing negative values
-                defaultZero: true, // when the user enters the field, it sets a default mask using zero
-                thousands: ',', // The thousands separator
-                decimal: '.', // The decimal separator
-                precision: 0, // How many decimal places are allowed
-                affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
-                symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
-            }); //
-
-            {% if customer_id != None and message == None %}
-                $('#customer_id').val('{{ customer_id }}');
-                $('#customer_id').attr('disabled', 'disabled');
-            {% endif %}
+    function after_request() {
+        $('#director_table').dataTable().fnReloadAjax();
+        $('#activity_table').dataTable().fnReloadAjax();
+    }
+    $(window).ready(function () {
+        $('#register_date,#register_date_span').persianDatepicker();
+        $('#newspaper_date,#newspaper_date_span').persianDatepicker();
+        $('#certificate_start_date,#certificate_start_date_span').persianDatepicker();
+        $('#certificate_expire_date,#certificate_expire_date_span').persianDatepicker();
+        $('#sign_expire_date,#sign_expire_date_span').persianDatepicker();
 
 
-            {% if message %}
-                alertBar('{% trans message %}');
-            {% endif %}
-
-            check_for_showing_next_level();
-
-
-            $('#birth_date,#birth_date_span').persianDatepicker();
-            $('.rose-progress-bar-cell').click(function () {
-                var cell = $(this)
-                var container = $('#' + $(this).attr('id') + '_container');
-                $('.rose-progress-bar-cell').removeClass('selected');
-                $(this).addClass('selected');
-                $(".rose-submit-container").hide();
-                container.show();
-            });
-
-            /* form submission ajax */
-            initialize_form_validation({
-                ajaxLoaderSource: '{% static "image/ajax-loader.gif" %}',
-                afterSuccess: check_for_showing_next_level
-            });
-
-            $('#loan_type').change(function () {
-                var depend_id = '#' + $(this).attr('depend');
-                var loan_type_id = $(this).val();
-                $.ajax({
-                    url: function () {
-                        return '{% url 'config:refund_type' '' %}' + loan_type_id
-                    }()
-                }).done(function (data) {
-                    var result = JSON.parse(data);
-                    $(depend_id).empty();
-                    for (var _item in result) {
-                        var item = result[_item]
-                        if ((typeof (item) == 'object')) {
-                            $(depend_id).append($('<option>', {
-                                value: item.pk,
-                                text: item.fields.local_name
-                            }));
-                        }
-                    }
-                })
-            })
-
-            $('.province').change(function () {
-                var depend_id = '#' + $(this).attr('depend');
-                var province_id = $(this).val();
-                $.ajax({
-                    url: function () {
-                        return '{% url 'config:town' ''%}' + province_id;
-                    }(),
-                    complete: function () {
-                        {#                        $('#request_description_loader').empty();#}
-                    }
-
-                }).done(function (data) {
-                    var result = JSON.parse(data);
-                    $(depend_id).empty();
-                    for (var _item in result) {
-                        var item = result[_item]
-                        if ((typeof (item) == 'object')) {
-                            $(depend_id).append($('<option>', {
-                                value: item.pk,
-                                text: item.fields.local_name
-                            }));
-                        }
-                    }
-                    var value = $(depend_id).attr('value');
-                    console.log(depend_id);
-                    if (value) {
-                        $(depend_id).val(value);
-                        $(depend_id).change();
-                    }
-
-                });
-            });
-
-            $('select').each(function () {
-                var value = $(this).attr('value');
-                if (value) {
-                    $(this).val(value);
-                    $(this).change();
+        $('.province').change(function () {
+            var depend_id = '#' + $(this).attr('depend');
+            var province_id = $(this).val();
+            $.ajax({
+                url: function () {
+                    return '{% url 'config:town' ''%}' + province_id;
+                }(),
+                complete: function () {
+                    {#                        $('#request_description_loader').empty();#}
                 }
+
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                $(depend_id).empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $(depend_id).append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
+                }
+                var value = $(depend_id).attr('value');
+                if (value) {
+                    $(depend_id).val(value);
+                    $(depend_id).change();
+                }
+
             });
+        });
+
+        $('select').each(function () {
+            var value = $(this).attr('value');
+            {#                alert($(this).attr('id'));#}
+            if (value) {
+                $(this).val(value);
+                $(this).change();
+            }
+        });
+        $(document).on('click', '.edit_director', function () {
+            var item = $(this);
+            var sign_enough = item.attr('sign_enough');
+            var sign_permission = item.attr('sign_permission');
+            var customer_code = item.attr('customer_code');
+            var role_id = item.attr('role_id');
+            var sign_expire_date = item.attr('sign_expire_date');
+
+            $('#director_id').val(customer_code);
+            $('#role_id').val(role_id);
+            $('#sign_permission').prop('checked', sign_permission == 'True');
+            $('#sign_enough').prop('checked', sign_enough == 'True');
+            $('#sign_expire_date').val(sign_expire_date)
 
 
+        });
+
+        $.fn.dataTableExt.oApi.fnReloadAjax = function (oSettings, sNewSource, fnCallback, bStandingRedraw) {
+            if (sNewSource !== undefined && sNewSource !== null) {
+                oSettings.sAjaxSource = sNewSource;
+            }
+
+            // Server-side processing should just call fnDraw
+            if (oSettings.oFeatures.bServerSide) {
+                this.fnDraw();
+                return;
+            }
+
+            this.oApi._fnProcessingDisplay(oSettings, true);
+            var that = this;
+            var iStart = oSettings._iDisplayStart;
+            var aData = [];
+
+            this.oApi._fnServerParams(oSettings, aData);
+
+            oSettings.fnServerData.call(oSettings.oInstance, oSettings.sAjaxSource, aData, function (json) {
+                /* Clear the old information from the table */
+                that.oApi._fnClearTable(oSettings);
+
+                /* Got the data - add it to the table */
+                var aData = (oSettings.sAjaxDataProp !== "") ?
+                        that.oApi._fnGetObjectDataFn(oSettings.sAjaxDataProp)(json) : json;
+
+                for (var i = 0; i < aData.length; i++) {
+                    that.oApi._fnAddData(oSettings, aData[i]);
+                }
+
+                oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+
+                that.fnDraw();
+
+                if (bStandingRedraw === true) {
+                    oSettings._iDisplayStart = iStart;
+                    that.oApi._fnCalculateEnd(oSettings);
+                    that.fnDraw(false);
+                }
+
+                that.oApi._fnProcessingDisplay(oSettings, false);
+
+                /* Callback user function - for event handlers etc */
+                if (typeof fnCallback == 'function' && fnCallback !== null) {
+                    fnCallback(oSettings);
+                }
+            }, oSettings);
+        };
+
+        $('#director_table').dataTable({
+            "oLanguage": {
+                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',
+                sProcessing: 'در حال به روز رسانی'
+            },
+            "sAjaxSource": "{% url 'customer:director_list' %}?company_id={{ customer_info.customer_code }}",
+            "sAjaxDataProp": "",
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false,
+
+            aoColumns: [
+                {"mData": "national_number"},
+                {"mData": "name"},
+                {"mData": "last_name"},
+                {"mData": "role"},
+                {"mData": "sign_permission",
+                    "fnRender": function (a) {
+                        v = a.aData.sign_permission;
+                        if (v) {
+                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';
+                        }
+                        else {
+                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';
+                        }
+                    }
+                },
+                {
+                    "mData": "sign_enough",
+                    "fnRender": function (a) {
+                        v = a.aData.sign_enough;
+                        if (v) {
+                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';
+                        }
+                        else {
+                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';
+                        }
+                    }
+                },
+                {   "mData": "role_id",
+                    "fnRender": function (a) {
+                        result = '<a href="#" class="edit_director"  sign_expire_date="' + a.aData.sign_expire_date + '"' +
+                                ' role_id = "' + a.aData.role_id + '"' +
+                                ' customer_code = "' + a.aData.national_number + '" > ویرایش </a > ';
+
+                        return result;
+                    }}
+            ]
+        });
+
+        $('#activity_table').dataTable({
+            "bProcessing": true,
+            "oLanguage": {
+                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',
+                sProcessing: 'در حال به روز رسانی'
+            },
+            "sAjaxSource": "{% url 'customer:enterprise_activity_list' %}?company_id={{ customer_info.customer_code }}",
+            "sAjaxDataProp": "",
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false,
+            aoColumns: [
+                {"mData": "activity_type"},
+                {"mData": "certificate_name"},
+                {"mData": "certificate_number"},
+                {"mData": "register_date"},
+                {"mData": "expire_date"},
+                {
+                    "mData": "company_id",
+                    "fnRender": function (a) {
+                        var url = "{% url 'customer:enterprise_activity_delete' %}";
+                        return  '<a class="delete_activity"  href="#" url="' + url + '?activity_id=' + a.aData.activity_id + '&company_id=' + a.aData.company_id + '">حذف</a>';
+                    }
+                },
+                {   "bVisible": false,
+                    "mData": "company_id"},
+                {
+                    "bVisible": false,
+                    "mData": "activity_id"}
+
+            ]
+        });
+
+
+        $(document).on('click', '.delete_activity', function () {
+            alert('here');
+            var url = $(this).attr('url');
+            $.ajax({
+                url: url
+            }).done(function (data) {
+                $('#activity_table').dataTable().fnReloadAjax();
+            });
+        });
+
+        $("input[role=amount]").maskMoney({
+            allowZero: true, // Prevent users from inputing zero
+            allowNegative: false, // Prevent users from inputing negative values
+            defaultZero: true, // when the user enters the field, it sets a default mask using zero
+            thousands: ',', // The thousands separator
+            decimal: '.', // The decimal separator
+            precision: 0, // How many decimal places are allowed
+            affixesStay: true, // set if the symbol will stay in the field after the user exits the field.
+            symbolPosition: 'left' // use this setting to position the symbol at the left or right side of the value. default 'left'
+        }); //
+
+        {% if customer_id != None and message == None %}
+            $('#customer_id').val('{{ customer_id }}');
+            $('#customer_id').attr('disabled', 'disabled');
+        {% endif %}
+
+
+        {% if message %}
+            alertBar('{% trans message %}');
+        {% endif %}
+
+        check_for_showing_next_level();
+
+
+        $('#birth_date,#birth_date_span').persianDatepicker();
+        $('.rose-progress-bar-cell').click(function () {
+            var cell = $(this)
+            var container = $('#' + $(this).attr('id') + '_container');
+            $('.rose-progress-bar-cell').removeClass('selected');
+            $(this).addClass('selected');
+            $(".rose-submit-container").hide();
+            container.show();
+        });
+
+        /* form submission ajax */
+        initialize_form_validation({
+            ajaxLoaderSource: '{% static "image/ajax-loader.gif" %}',
+            afterRquest: after_request,
+            afterSuccess: check_for_showing_next_level
+        });
+
+        $('#loan_type').change(function () {
+            var depend_id = '#' + $(this).attr('depend');
+            var loan_type_id = $(this).val();
+            $.ajax({
+                url: function () {
+                    return '{% url 'config:refund_type' '' %}' + loan_type_id
+                }()
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                $(depend_id).empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $(depend_id).append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
+                }
+            })
         })
-        ;
+
+        $('.province').change(function () {
+            var depend_id = '#' + $(this).attr('depend');
+            var province_id = $(this).val();
+            $.ajax({
+                url: function () {
+                    return '{% url 'config:town' ''%}' + province_id;
+                }(),
+                complete: function () {
+                    {#                        $('#request_description_loader').empty();#}
+                }
+
+            }).done(function (data) {
+                var result = JSON.parse(data);
+                $(depend_id).empty();
+                for (var _item in result) {
+                    var item = result[_item]
+                    if ((typeof (item) == 'object')) {
+                        $(depend_id).append($('<option>', {
+                            value: item.pk,
+                            text: item.fields.local_name
+                        }));
+                    }
+                }
+                var value = $(depend_id).attr('value');
+                console.log(depend_id);
+                if (value) {
+                    $(depend_id).val(value);
+                    $(depend_id).change();
+                }
+
+            });
+        });
+
+        $('select').each(function () {
+            var value = $(this).attr('value');
+            if (value) {
+                $(this).val(value);
+                $(this).change();
+            }
+        });
+
+
+    })
+    ;
     </script>
 {% endblock %}
 

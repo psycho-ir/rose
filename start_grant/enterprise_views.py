@@ -20,7 +20,7 @@ class EnterpriseSubmitDataView(View):
             readonly = True
 
         customer_information = EnterpriseCustomerInformation.objects.filter(pk=customer_request.cif).first()
-        company_types = CompanyType.objects.all()
+        # company_types = CompanyType.objects.all()
         register_towns = RegisterTown.objects.all()
         provinces = Province.objects.all()
         towns = Town.objects.filter(province_id=provinces.first().id)
@@ -38,7 +38,6 @@ class EnterpriseSubmitDataView(View):
                                      'readonly': readonly,
                                      'customer_info': customer_information,
                                      'customer_request': customer_request,
-                                     'company_types': company_types,
                                      'register_towns': register_towns,
                                      'provinces': provinces,
                                      'towns': towns,

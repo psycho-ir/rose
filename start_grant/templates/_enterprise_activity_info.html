@@ -8,7 +8,7 @@
         <form id="activity_info_form" name="activity_info_form" method="post"
               action="{% url 'customer:enterprise_activity_info' %}" novalidate>
             {% csrf_token %}
-            <input type="hidden" name="company_id" value="{{ customer_request.cif }}">
+            <input type="hidden" name="company_id" value="{{ customer_info.customer_code }}">
 
             <div class="control-group">
                 <div class="row controls">

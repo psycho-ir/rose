@@ -8,7 +8,7 @@
         <form id="board_of_director_form" name="board_of_director_form" method="post"
               action="{% url 'customer:board_of_director' %}" novalidate>
             {% csrf_token %}
-            <input type="hidden" name="company_id" value="{{ customer_request.cif }}">
+            <input type="hidden" name="company_id" value="{{ customer_info.customer_code }}">
 
             <div class="control-group">
                 <div class="row controls">
@@ -121,7 +121,8 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#" class="edit_director"  sign_expire_date="{{ director.get_persian_sign_expire_date }}"
+                            <a href="#" class="edit_director"
+                               sign_expire_date="{{ director.get_persian_sign_expire_date }}"
                                sign_permission="{{ director.sign_permission }}" sign_enough="{{ director.sign_enough }}"
                                role_id="{{ director.role.id }}" customer_code="{{ director.customer.customer_code }}">ویرایش</a>
                         </td>
