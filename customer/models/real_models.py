@@ -70,7 +70,7 @@ class ContactInformation(models.Model):
         c = ContactInformation(
             customer_id=dic["customer_id"],
             phone_number=dic["phone_number"], cell_number=dic["cell_number"], email=dic["email"],
-            address=dic["email"], town_id=dic['town_id'], province_id=dic['province_id'],
+            address=dic["address"], town_id=dic['town_id'], province_id=dic['province_id'],
             postal_code=dic['postal_code'])
         return c
 
