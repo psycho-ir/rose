@@ -86,6 +86,7 @@ class EnquiryResponseView(View):
             history_item = AssignHistoryItemInstance()
             history_item.history_item_id = "see"
             history_item.issue_date = datetime.now()
+            history_item.save()
             assign.history.items.add(history_item)
 
             response = EnquiryAssignResponse()
