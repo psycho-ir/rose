@@ -23,7 +23,11 @@ class SubmitDataView(View):
             readonly = True
         if customer_request.user_id != request.user.id:
             readonly = True
-        customer_information = RealCustomerInformation.objects.filter(pk=customer_request.cif).first()
+        customer_information = RealCustomerInformation.objects.get(pk=customer_request.cif)
+        if not customer_information.is_information_completed():
+            return HttpResponse("Data koosh?")
+        
+
         # job_types = JobType.objects.all()
         # certificate_types = JobCertificateType.objects.filter(type='haghighi',
         #                                                       business_part__id=customer_request.business_part_id)

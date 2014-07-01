@@ -37,21 +37,25 @@
                     <td>{{ request.business_part.local_name }}</td>
                     <td>{{ request.request_description.local_name }}</td>
                     <td>{% if request.status == 'intro' %}
-                        {%  trans request.status %}
+                        {% trans request.status %}
                         <span style="padding-right: 3px;">
                         {% if request.type == 'haghighi' %}
-                            <a href="{% url 'grant:submit'  request.id %}">ادامه ثبت اطلاعات</a>
+                            <a href="{% url 'customer:real_register' %}?customer_id={{ request.cif }}&next={% url 'grant:submit' request.id %}">ادامه
+                                ثبت اطلاعات</a>
                         {% else %}
-                            <a href="{% url 'grant:enterprise_submit'  request.id %}">ادامه ثبت اطلاعات</a>
+                            <a href="{% url 'customer:enterprise_register' %}?customer_id={{ request.cif }}&next={% url 'grant:enterprise_submit' request.id %}">ادامه
+                                ثبت اطلاعات</a>
                         {% endif %}
                         </span>
                     {% elif request.status == 'req_info_completed' %}
                         {% trans request.status %}
                         <span style="padding-right: 3px;">
                           {% if request.type == 'haghighi' %}
-                              <a href="{% url 'grant:submit'  request.id %}">ویرایش اطلاعات</a>
+                              <a href="{% url 'customer:real_register' %}?customer_id={{ request.cif }}&next={% url 'grant:submit' request.id %}">ویرایش
+                                  اطلاعات</a>
                           {% else %}
-                              <a href="{% url 'grant:enterprise_submit'  request.id %}">ویرایش اطلاعات</a>
+                              <a href="{% url 'customer:enterprise_register' %}?customer_id={{ request.cif }}&next={% url 'grant:enterprise_submit' request.id %}">ویرایش
+                                  اطلاعات</a>
                           {% endif %}
                         </span>
                     {% elif request.status == 'ready_for_checklist' %}

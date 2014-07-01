@@ -49,6 +49,11 @@ class EnterpriseCustomerInformation(Customer):
     def get_persian_newspaper_date(self):
         return jalali_datetime.fromgregorian(datetime=self.newspaper_date).strftime('%Y/%m/%d')
 
+    def is_information_completed(self):
+        if hasattr(self, 'contact_info') and hasattr(self, 'asset_info') and hasattr(self, 'activity_info'):
+            return True
+        return False
+
     @staticmethod
     def from_dic(dic):
         register_date = greg_date_from_shamsi(dic['register_date'], '/')

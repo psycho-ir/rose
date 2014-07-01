@@ -26,6 +26,11 @@ class RealCustomerInformation(Customer):
     def get_persian_birth_date(self):
         return jalali_datetime.fromgregorian(datetime=self.birth_date).strftime('%Y/%m/%d')
 
+    def is_information_completed(self):
+        if hasattr(self, 'contact_info') and hasattr(self, 'asset_info') and hasattr(self, 'bank_income_info'):
+            return True
+        return False
+
     @staticmethod
     def from_dic(dic):
         from utils.date_utils import greg_date_from_shamsi

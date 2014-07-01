@@ -20,6 +20,8 @@ class EnterpriseSubmitDataView(View):
             readonly = True
 
         customer_information = EnterpriseCustomerInformation.objects.filter(pk=customer_request.cif).first()
+        if not customer_information.is_information_completed():
+            return HttpResponse("Data koosh?")
         # company_types = CompanyType.objects.all()
         register_towns = RegisterTown.objects.all()
         provinces = Province.objects.all()
