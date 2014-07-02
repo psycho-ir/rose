@@ -108,7 +108,7 @@ class BoardOfDirector(models.Model):
         sign_expire_date = greg_date_from_shamsi(dic['sign_expire_date'], '/')
         if datetime.now() > sign_expire_date:
             raise ValidationException("Sign expire date should be more than one month")
-        if datetime.now().month > sign_expire_date.month:
+        if datetime.now().year == sign_expire_date.year and datetime.now().month >= sign_expire_date.month:
             raise ValidationException("Sign expire date should be more than one month")
 
         if BoardOfDirector.objects.filter(company_id=dic['company_id'], customer_id=dic['customer_id']).exists():
