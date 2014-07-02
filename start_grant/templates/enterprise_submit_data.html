@@ -135,6 +135,7 @@
 
         check_for_showing_next_level();
         var state = $('#melk-tejari-edari').prop('checked');
+        alert(state);
         handleSanadMelkicontainer(state);
         $('#register_date,#register_date_span').persianDatepicker();
         $('#newspaper_date,#newspaper_date_span').persianDatepicker();
@@ -282,148 +283,148 @@
 
         });
 
-{#        $.fn.dataTableExt.oApi.fnReloadAjax = function (oSettings, sNewSource, fnCallback, bStandingRedraw) {#}
-{#            if (sNewSource !== undefined && sNewSource !== null) {#}
-{#                oSettings.sAjaxSource = sNewSource;#}
-{#            }#}
-{##}
-{#            // Server-side processing should just call fnDraw#}
-{#            if (oSettings.oFeatures.bServerSide) {#}
-{#                this.fnDraw();#}
-{#                return;#}
-{#            }#}
-{##}
-{#            this.oApi._fnProcessingDisplay(oSettings, true);#}
-{#            var that = this;#}
-{#            var iStart = oSettings._iDisplayStart;#}
-{#            var aData = [];#}
-{##}
-{#            this.oApi._fnServerParams(oSettings, aData);#}
-{##}
-{#            oSettings.fnServerData.call(oSettings.oInstance, oSettings.sAjaxSource, aData, function (json) {#}
-{#                /* Clear the old information from the table */#}
-{#                that.oApi._fnClearTable(oSettings);#}
-{##}
-{#                /* Got the data - add it to the table */#}
-{#                var aData = (oSettings.sAjaxDataProp !== "") ?#}
-{#                        that.oApi._fnGetObjectDataFn(oSettings.sAjaxDataProp)(json) : json;#}
-{##}
-{#                for (var i = 0; i < aData.length; i++) {#}
-{#                    that.oApi._fnAddData(oSettings, aData[i]);#}
-{#                }#}
-{##}
-{#                oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();#}
-{##}
-{#                that.fnDraw();#}
-{##}
-{#                if (bStandingRedraw === true) {#}
-{#                    oSettings._iDisplayStart = iStart;#}
-{#                    that.oApi._fnCalculateEnd(oSettings);#}
-{#                    that.fnDraw(false);#}
-{#                }#}
-{##}
-{#                that.oApi._fnProcessingDisplay(oSettings, false);#}
-{##}
-{#                /* Callback user function - for event handlers etc */#}
-{#                if (typeof fnCallback == 'function' && fnCallback !== null) {#}
-{#                    fnCallback(oSettings);#}
-{#                }#}
-{#            }, oSettings);#}
-{#        };#}
-{##}
-{#        $('#director_table').dataTable({#}
-{#            "oLanguage": {#}
-{#                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',#}
-{#                sProcessing: 'در حال به روز رسانی'#}
-{#            },#}
-{#            "sAjaxSource": "{% url 'customer:director_list' %}?company_id={{ customer_request.cif }}",#}
-{#            "sAjaxDataProp": "",#}
-{#            bPaginate: false,#}
-{#            bFilter: false,#}
-{#            bInfo: false,#}
-{##}
-{#            aoColumns: [#}
-{#                {"mData": "national_number"},#}
-{#                {"mData": "name"},#}
-{#                {"mData": "last_name"},#}
-{#                {"mData": "role"},#}
-{#                {"mData": "sign_permission",#}
-{#                    "fnRender": function (a) {#}
-{#                        v = a.aData.sign_permission;#}
-{#                        if (v) {#}
-{#                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';#}
-{#                        }#}
-{#                        else {#}
-{#                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';#}
-{#                        }#}
-{#                    }#}
-{#                },#}
-{#                {#}
-{#                    "mData": "sign_enough",#}
-{#                    "fnRender": function (a) {#}
-{#                        v = a.aData.sign_enough;#}
-{#                        if (v) {#}
-{#                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';#}
-{#                        }#}
-{#                        else {#}
-{#                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';#}
-{#                        }#}
-{#                    }#}
-{#                },#}
-{#                {   "mData": "role_id",#}
-{#                    "fnRender": function (a) {#}
-{#                        result = '<a href="#" class="edit_director"  sign_expire_date="' + a.aData.sign_expire_date + '"' +#}
-{#                                ' role_id = "' + a.aData.role_id + '"' +#}
-{#                                ' customer_code = "' + a.aData.national_number + '" > ویرایش </a > ';#}
-{##}
-{#                        return result;#}
-{#                    }}#}
-{#            ]#}
-{#        });#}
-{##}
-{#        $('#activity_table').dataTable({#}
-{#            "bProcessing": true,#}
-{#            "oLanguage": {#}
-{#                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',#}
-{#                sProcessing: 'در حال به روز رسانی'#}
-{#            },#}
-{#            "sAjaxSource": "{% url 'customer:enterprise_activity_list' %}?company_id={{ customer_request.cif }}",#}
-{#            "sAjaxDataProp": "",#}
-{#            bPaginate: false,#}
-{#            bFilter: false,#}
-{#            bInfo: false,#}
-{#            aoColumns: [#}
-{#                {"mData": "activity_type"},#}
-{#                {"mData": "certificate_name"},#}
-{#                {"mData": "certificate_number"},#}
-{#                {"mData": "register_date"},#}
-{#                {"mData": "expire_date"},#}
-{#                {#}
-{#                    "mData": "company_id",#}
-{#                    "fnRender": function (a) {#}
-{#                        var url = "{% url 'customer:enterprise_activity_delete' %}";#}
-{#                        return  '<a class="delete_activity"  href="#" url="' + url + '?activity_id=' + a.aData.activity_id + '&company_id=' + a.aData.company_id + '">حذف</a>';#}
-{#                    }#}
-{#                },#}
-{#                {   "bVisible": false,#}
-{#                    "mData": "company_id"},#}
-{#                {#}
-{#                    "bVisible": false,#}
-{#                    "mData": "activity_id"}#}
-{##}
-{#            ]#}
-{#        });#}
-{##}
-{##}
-{#        $(document).on('click', '.delete_activity', function () {#}
-{#            alert('here');#}
-{#            var url = $(this).attr('url');#}
-{#            $.ajax({#}
-{#                url: url#}
-{#            }).done(function (data) {#}
-{#                $('#activity_table').dataTable().fnReloadAjax();#}
-{#            });#}
-{#        });#}
+        {#        $.fn.dataTableExt.oApi.fnReloadAjax = function (oSettings, sNewSource, fnCallback, bStandingRedraw) {#}
+        {#            if (sNewSource !== undefined && sNewSource !== null) {#}
+        {#                oSettings.sAjaxSource = sNewSource;#}
+        {#            }#}
+        {##}
+        {#            // Server-side processing should just call fnDraw#}
+        {#            if (oSettings.oFeatures.bServerSide) {#}
+        {#                this.fnDraw();#}
+        {#                return;#}
+        {#            }#}
+        {##}
+        {#            this.oApi._fnProcessingDisplay(oSettings, true);#}
+        {#            var that = this;#}
+        {#            var iStart = oSettings._iDisplayStart;#}
+        {#            var aData = [];#}
+        {##}
+        {#            this.oApi._fnServerParams(oSettings, aData);#}
+        {##}
+        {#            oSettings.fnServerData.call(oSettings.oInstance, oSettings.sAjaxSource, aData, function (json) {#}
+        {#                /* Clear the old information from the table */#}
+        {#                that.oApi._fnClearTable(oSettings);#}
+        {##}
+        {#                /* Got the data - add it to the table */#}
+        {#                var aData = (oSettings.sAjaxDataProp !== "") ?#}
+        {#                        that.oApi._fnGetObjectDataFn(oSettings.sAjaxDataProp)(json) : json;#}
+        {##}
+        {#                for (var i = 0; i < aData.length; i++) {#}
+        {#                    that.oApi._fnAddData(oSettings, aData[i]);#}
+        {#                }#}
+        {##}
+        {#                oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();#}
+        {##}
+        {#                that.fnDraw();#}
+        {##}
+        {#                if (bStandingRedraw === true) {#}
+        {#                    oSettings._iDisplayStart = iStart;#}
+        {#                    that.oApi._fnCalculateEnd(oSettings);#}
+        {#                    that.fnDraw(false);#}
+        {#                }#}
+        {##}
+        {#                that.oApi._fnProcessingDisplay(oSettings, false);#}
+        {##}
+        {#                /* Callback user function - for event handlers etc */#}
+        {#                if (typeof fnCallback == 'function' && fnCallback !== null) {#}
+        {#                    fnCallback(oSettings);#}
+        {#                }#}
+        {#            }, oSettings);#}
+        {#        };#}
+        {##}
+        {#        $('#director_table').dataTable({#}
+        {#            "oLanguage": {#}
+        {#                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',#}
+        {#                sProcessing: 'در حال به روز رسانی'#}
+        {#            },#}
+        {#            "sAjaxSource": "{% url 'customer:director_list' %}?company_id={{ customer_request.cif }}",#}
+        {#            "sAjaxDataProp": "",#}
+        {#            bPaginate: false,#}
+        {#            bFilter: false,#}
+        {#            bInfo: false,#}
+        {##}
+        {#            aoColumns: [#}
+        {#                {"mData": "national_number"},#}
+        {#                {"mData": "name"},#}
+        {#                {"mData": "last_name"},#}
+        {#                {"mData": "role"},#}
+        {#                {"mData": "sign_permission",#}
+        {#                    "fnRender": function (a) {#}
+        {#                        v = a.aData.sign_permission;#}
+        {#                        if (v) {#}
+        {#                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';#}
+        {#                        }#}
+        {#                        else {#}
+        {#                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';#}
+        {#                        }#}
+        {#                    }#}
+        {#                },#}
+        {#                {#}
+        {#                    "mData": "sign_enough",#}
+        {#                    "fnRender": function (a) {#}
+        {#                        v = a.aData.sign_enough;#}
+        {#                        if (v) {#}
+        {#                            return '<span class="glyphicon glyphicon-ok" style="color:green;"></span>';#}
+        {#                        }#}
+        {#                        else {#}
+        {#                            return '<span class="glyphicon glyphicon-remove" style="color:red;"></span>';#}
+        {#                        }#}
+        {#                    }#}
+        {#                },#}
+        {#                {   "mData": "role_id",#}
+        {#                    "fnRender": function (a) {#}
+        {#                        result = '<a href="#" class="edit_director"  sign_expire_date="' + a.aData.sign_expire_date + '"' +#}
+        {#                                ' role_id = "' + a.aData.role_id + '"' +#}
+        {#                                ' customer_code = "' + a.aData.national_number + '" > ویرایش </a > ';#}
+        {##}
+        {#                        return result;#}
+        {#                    }}#}
+        {#            ]#}
+        {#        });#}
+        {##}
+        {#        $('#activity_table').dataTable({#}
+        {#            "bProcessing": true,#}
+        {#            "oLanguage": {#}
+        {#                sEmptyTable: 'ضامنی برای این درخواست ثبت نشده است',#}
+        {#                sProcessing: 'در حال به روز رسانی'#}
+        {#            },#}
+        {#            "sAjaxSource": "{% url 'customer:enterprise_activity_list' %}?company_id={{ customer_request.cif }}",#}
+        {#            "sAjaxDataProp": "",#}
+        {#            bPaginate: false,#}
+        {#            bFilter: false,#}
+        {#            bInfo: false,#}
+        {#            aoColumns: [#}
+        {#                {"mData": "activity_type"},#}
+        {#                {"mData": "certificate_name"},#}
+        {#                {"mData": "certificate_number"},#}
+        {#                {"mData": "register_date"},#}
+        {#                {"mData": "expire_date"},#}
+        {#                {#}
+        {#                    "mData": "company_id",#}
+        {#                    "fnRender": function (a) {#}
+        {#                        var url = "{% url 'customer:enterprise_activity_delete' %}";#}
+        {#                        return  '<a class="delete_activity"  href="#" url="' + url + '?activity_id=' + a.aData.activity_id + '&company_id=' + a.aData.company_id + '">حذف</a>';#}
+        {#                    }#}
+        {#                },#}
+        {#                {   "bVisible": false,#}
+        {#                    "mData": "company_id"},#}
+        {#                {#}
+        {#                    "bVisible": false,#}
+        {#                    "mData": "activity_id"}#}
+        {##}
+        {#            ]#}
+        {#        });#}
+        {##}
+        {##}
+        {#        $(document).on('click', '.delete_activity', function () {#}
+        {#            alert('here');#}
+        {#            var url = $(this).attr('url');#}
+        {#            $.ajax({#}
+        {#                url: url#}
+        {#            }).done(function (data) {#}
+        {#                $('#activity_table').dataTable().fnReloadAjax();#}
+        {#            });#}
+        {#        });#}
     });
     </script>
 {% endblock %}

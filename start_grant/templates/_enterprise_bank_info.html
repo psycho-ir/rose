@@ -21,7 +21,7 @@
                         <div class="row">
                             {% for bank in banks %}
                                 <div class="col-xs-3">
-                                    <input type="checkbox" name="banks" value="{{ bank.id }}">
+                                    <input type="checkbox" name="banks" id="{{ bank.name }}" value="{{ bank.id }}">
                                     {{ bank.local_name }}
                                     </input>
                                 </div>
@@ -37,7 +37,7 @@
                         <div class="row">
                             {% for vasighe in vasighe_types %}
                                 <div class="col-xs-3">
-                                    <input type="checkbox" name="vasighe_types" value="{{ vasighe.id }}">
+                                    <input type="checkbox" name="vasighe_types" id="{{ vasighe.name }}" value="{{ vasighe.id }}">
                                     {{ vasighe.local_name }}
                                     </input>
                                 </div>

@@ -21,7 +21,7 @@
                         <div class="row">
                             {% for bank in banks %}
                                 <div class="col-xs-3">
-                                    <input type="checkbox" name="banks" value="{{ bank.id }}">
+                                    <input type="checkbox" name="banks" id="{{ bank.name }}" value="{{ bank.id }}">
                                     {{ bank.local_name }}
                                     </input>
                                 </div>
@@ -29,18 +29,18 @@
                         </div>
                     </div>
                 </div>
-{#                <div class="row">#}
-{#                    <div class="col-xs-2">#}
-{#                        درآمد ماهیانه#}
-{#                    </div>#}
-{#                    <div class="col-xs-3">#}
-{#                        <input role="amount" class="form-control" name="income"#}
-{#                               value="{{ customer_info.bank_income_info.income }}"#}
-{#                               required#}
-{#                               data-validation-required-message="وارد کردن این فیلد الزامی است"#}
-{#                                />#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="row">#}
+                {#                    <div class="col-xs-2">#}
+                {#                        درآمد ماهیانه#}
+                {#                    </div>#}
+                {#                    <div class="col-xs-3">#}
+                {#                        <input role="amount" class="form-control" name="income"#}
+                {#                               value="{{ customer_info.bank_income_info.income }}"#}
+                {#                               required#}
+                {#                               data-validation-required-message="وارد کردن این فیلد الزامی است"#}
+                {#                                />#}
+                {#                    </div>#}
+                {#                </div>#}
                 <div class="row">
                     <div class="col-xs-2">
                         وثایق پیشنهادی
@@ -49,7 +49,8 @@
                         <div class="row">
                             {% for vasighe in vasighe_types %}
                                 <div class="col-xs-3">
-                                    <input type="checkbox" id="{{ vasighe.name }}" name="vasighe_types" value="{{ vasighe.id }}">
+                                    <input type="checkbox" id="{{ vasighe.name }}" name="vasighe_types"
+                                           value="{{ vasighe.id }}">
                                     {{ vasighe.local_name }}
                                     </input>
                                 </div>
