@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="col-xs-2
-             {% if customer_info.activity_info %}
+             {% if customer_info.activity_info.count != 0 %}
              completed
              {% else %}
              pending
@@ -169,7 +169,7 @@
         {% endif %}
 
         <div id="submit_forms" class="form-group">
-            <div class="panel-group" style="padding-left: 30px;padding-right: 30px;padding-bottom: 15px;">
+            <div class="panel-group" style="padding-left: 30px;padding-right: 30px;">
                 <div class="rose-submit-container" id="customer_info_container">
                     {% include '_enterprise_customer_info.html' %}
                 </div>
