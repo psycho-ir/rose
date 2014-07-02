@@ -61,7 +61,8 @@
                         </form>
                     </div>
                     <div class="col-xs-4">
-                        <form id="form-complete-{{ response.id }}" action="{% url 'assign:enquiry_response_complete' %}">
+                        <form id="form-complete-{{ response.id }}"
+                              action="{% url 'assign:enquiry_response_complete' %}">
                             {% csrf_token %}
                             <input type="hidden" name="action_response_id" value="{{ response.id }}"/>
                             <button type="button" action-id="{{ response.id }}" style="width: 100%;"
@@ -149,7 +150,9 @@
                 var form = $('#form-start-' + action_id);
                 $.post(form.attr('action'), form.serialize(), function (data, state) {
                     if (state == 'success') {
-                        if (data == 'True') {
+                        obj = JSON.parse(data);
+                        console.log(obj);
+                        if (obj.status== true) {
                             $('#action-' + action_id + ' input').prop('readonly', null);
                             $('#action-' + action_id + ' select').prop('disabled', null);
                             $('#action-' + action_id + ' textarea').prop('disabled', null);
@@ -170,7 +173,8 @@
                 var form = $('#form-stop-' + action_id);
                 $.post(form.attr('action'), form.serialize(), function (data, state) {
                     if (state == 'success') {
-                        if (data == 'True') {
+                        obj = JSON.parse(data);
+                        if (obj.status == true) {
                             $('#action-' + action_id + ' input').prop('readonly', 'readonly');
                             $('#action-' + action_id + ' select').prop('disabled', 'disabled');
                             $('#action-' + action_id + ' textarea').prop('disabled', 'disabled');
@@ -196,7 +200,8 @@
 
                 $.post(form.attr('action'), form.serialize() + '&' + input_data + '&' + select_data + '&' + textarea_data, function (data, state) {
                     if (state == 'success') {
-                        if (data == 'True') {
+                        obj = JSON.parse(data);
+                        if (obj.status == true) {
                             $('#action-' + action_id + ' input').prop('readonly', 'readonly');
                             $('#action-' + action_id + ' select').prop('disabled', 'disabled');
                             $('#action-' + action_id + ' textarea').prop('disabled', 'disabled');
