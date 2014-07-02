@@ -9,7 +9,7 @@
               action="{% url 'customer:enterprise_customer_info' %}" novalidate>
             {% csrf_token %}
 
-            <input type="hidden" name="company_id" value="{{ customer_request.cif }}"/>
+            <input type="hidden" name="company_id" value="{{ customer_id }}"/>
 
             <div class="control-group">
                 <div class="row controls">
@@ -31,6 +31,7 @@
                                value="{{ customer_info.register_number }}"
                                required
                                 />
+                    </div>
                     </div>
                 </div>
                 <div class="row">

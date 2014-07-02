@@ -8,7 +8,7 @@
 <form id="asset_info_form" name="asset_info_form" method="post" action="{% url 'customer:enterprise_asset_info' %}"
       novalidate>
 {% csrf_token %}
-<input type="hidden" name="company_id" value="{{ customer_info.customer_code }}">
+<input type="hidden" name="company_id" value="{{ customer_id }}">
 
 <div class="control-group">
 <div class="row">
@@ -22,7 +22,7 @@
     </div>
     <div class="col-xs-3">
         <input role="amount" class="form-control" name="cash"
-               value="{{ customer_info.asset_info.cash }}"
+               value="{{ customer.asset_info.cash }}"
                required
                data-validation-required-message="وارد کردن این فیلد الزامی است"
                 />

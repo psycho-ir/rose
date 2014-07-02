@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input type="text" class="form-control" name="cash" id="cash" role="amount"
-                               value="{{ customer_info.asset_info.cash }}"
+                               value="{{ customer.asset_info.cash }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input class="form-control" name="account" role="amount"
-                               value="{{ customer_info.asset_info.account }}"
+                               value="{{ customer.asset_info.account }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select style="width: 100%;" name="business_place_id"
-                                value="{{ customer_info.asset_info.business_place_id }}">
+                                value="{{ customer.asset_info.business_place_id }}">
                             {% for place in business_places %}
                                 <option value="{{ place.id }}">{{ place.local_name }}</option>
                             {% endfor %}
@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input class="form-control" name="business_place_value" role="amount"
-                               value="{{ customer_info.asset_info.business_place_value }}"
+                               value="{{ customer.asset_info.business_place_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input class="form-control" name="individual_credit_amount" value="
-{{ customer_info.asset_info.individual_credit_amount }}" role="amount"
+{{ customer.asset_info.individual_credit_amount }}" role="amount"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="company_credit_amount"
-                               value="{{ customer_info.asset_info.company_credit_amount }}"
+                               value="{{ customer.asset_info.company_credit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="manghool_value"
-                               value="{{ customer_info.asset_info.manghool_value }}"
+                               value="{{ customer.asset_info.manghool_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="no_manghool_value"
-                               value="{{ customer_info.asset_info.no_manghool_value }}"
+                               value="{{ customer.asset_info.no_manghool_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="vehicles_value"
-                               value="{{ customer_info.asset_info.vehicles_value }}"
+                               value="{{ customer.asset_info.vehicles_value }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
                     </div>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="individual_debit_amount"
-                               value="{{ customer_info.asset_info.individual_debit_amount }}"
+                               value="{{ customer.asset_info.individual_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="company_debit_amount"
-                               value="{{ customer_info.asset_info.company_debit_amount }}"
+                               value="{{ customer.asset_info.company_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"/>
                     </div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="col-xs-3">
                         <input role="amount" class="form-control" name="bank_debit_amount"
-                               value="{{ customer_info.asset_info.bank_debit_amount }}"
+                               value="{{ customer.asset_info.bank_debit_amount }}"
                                required
                                data-validation-required-message="وارد کردن این فیلد الزامی است"
                                 />

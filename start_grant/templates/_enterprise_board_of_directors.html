@@ -8,7 +8,7 @@
         <form id="board_of_director_form" name="board_of_director_form" method="post"
               action="{% url 'customer:board_of_director' %}" novalidate>
             {% csrf_token %}
-            <input type="hidden" name="company_id" value="{{ customer_info.customer_code }}">
+            <input type="hidden" name="company_id" value="{{ customer_id }}">
 
             <div class="control-group">
                 <div class="row controls">
@@ -16,7 +16,8 @@
                         کد ملی عضو هیات مدیره
                     </div>
                     <div class="col-xs-3">
-                        <input type="number" class="form-control" name="customer_id"
+                        <input class="form-control" name="customer_id"
+                               pattern="^[0-9]*$"
                                id="director_id"
                                required
                                 />
