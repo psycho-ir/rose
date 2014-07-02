@@ -23,6 +23,9 @@ class BusinessPart(models.Model):
     description = models.CharField(max_length=60, default="")
     enable = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return self.local_name
+
 
 class RequestDescription(models.Model):
     name = models.CharField(max_length=50)
@@ -31,6 +34,9 @@ class RequestDescription(models.Model):
     enable = models.BooleanField(default=True)
     business_parts = models.ManyToManyField(to=BusinessPart, db_constraint=True,
                                             related_name='request_descriptions')
+
+    def __unicode__(self):
+        return self.local_name
 
 
 class RefundType(models.Model):

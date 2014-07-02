@@ -1,3 +1,5 @@
 from django.contrib import admin
+from rose_config.models import BusinessPart, RequestDescription
 
-# Register your models here.
+admin.site.register(BusinessPart)
+admin.site.register(RequestDescription)
