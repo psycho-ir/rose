@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.views.generic import View
 from rose_config.response import *
@@ -12,10 +10,11 @@ from assign.models import EnquiryAction, EnquiryAssign, EnquiryAssignResponse, E
     AssignHistoryItemInstance
 from utils.date_utils import greg_date_from_shamsi
 from datetime import datetime
+from django.utils.translation import ugettext as _
 
 
 class EnquiryAssignView(View):
-    def get(self, request, request_id):
+    def get(self, request, request_id, msg=None):
         if request.user.profile.role.name != 'superior':
             return HttpResponse('No Access')
 
@@ -45,7 +44,8 @@ class EnquiryAssignView(View):
                                            'special_actions': special_actions,
                                            'target_users': candidate_target_users,
                                            'guarantor_action': guarantor_action,
-                                           'account_related_action': account_related_action})
+                                           'account_related_action': account_related_action,
+                                           'error_message': msg})
         return HttpResponse(template.render(context))
 
 
@@ -55,6 +55,9 @@ class EnquiryAssignView(View):
 
         customer_request = Request.objects.get(id=request_id)
         expire_date = greg_date_from_shamsi(request.POST['expire_date'], '/')
+        if expire_date < datetime.now():
+            return self.get(request, request_id, msg=_("Expire date cannot be less than today"))
+
         assign = EnquiryAssign()
         assign.source_id = request.user.id
         assign.target_id = request.POST['target_user']

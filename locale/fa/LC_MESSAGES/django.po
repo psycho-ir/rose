@@ -3027,3 +3027,6 @@ msgstr "حداقل یک نوع وثیقه می بایست انتخاب شود"
 
 msgid "There is no selected bank"
 msgstr "حداقل یک بانک می بایست انتخاب شود"
+
+msgid "Expire date cannot be less than today"
+msgstr "تاریخ انقضا نمی تواند قبل از امروز باشد"
